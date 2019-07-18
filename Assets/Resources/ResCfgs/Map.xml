@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<item ID="1000">
+		<mapName>town</mapName>
+		<sceneName>SceneMain</sceneName>
+		<mainCamPos>26.72,-0.34,-50.34</mainCamPos>
+		<mainCamRote>-10.309,126.129,0</mainCamRote>
+		<playerBornPos>16.5980,-5.40,-45.92</playerBornPos>
+		<playerBornRote>0,0,0</playerBornRote>
+	</item>
+	<item ID="1001">
+		<mapName>town</mapName>
+		<sceneName>SceneMain</sceneName>
+	</item>
+</root>
