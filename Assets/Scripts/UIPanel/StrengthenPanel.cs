@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class StrengthenPanel : ManulPanel
+public class StrengthenPanel : HandleablePanel
 {
     public Image ImgCurPos;
     public Text TxtStarLv;

@@ -41,7 +41,7 @@ public class NetSvc : MonoBehaviour
             }
         );
         CommonTool.Log("NetSvc Connected");
-        client.StartAsClient(SvcCfg.svcIP, SvcCfg.svcPort);
+        client.StartAsClient(SrvCfg.srvIP, SrvCfg.srvPort);
     }
 
     public void AddNetMsg(GameMsg msg)
@@ -113,6 +113,9 @@ public class NetSvc : MonoBehaviour
                 break;
             case CMD.RspStrengthen:
                 PlayerOprateSys.Instance.RspStrengthen(msg);
+                break;
+            case CMD.PshChat:
+                PlayerOprateSys.Instance.PshChat(msg);
                 break;
         }
 

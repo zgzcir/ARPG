@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class DialogPanel : ManulPanel
+public class DialogPanel : HandleablePanel
 {
     public Text txtDialog;
     public GameObject partClick;

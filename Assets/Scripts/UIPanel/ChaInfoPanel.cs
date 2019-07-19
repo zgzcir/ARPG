@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class ChaInfoPanel : ManulPanel
+public class ChaInfoPanel : HandleablePanel
 {
     [FormerlySerializedAs("ImgChar")] public RawImage ImgCha;
 

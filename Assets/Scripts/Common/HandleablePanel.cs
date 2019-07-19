@@ -2,12 +2,10 @@
  using System.Collections.Generic;
  using UnityEngine;
  
- public class ManulPanel : BasePanel
+ public class HandleablePanel : BasePanel
  {
      public GameObject HandleBar;
      public GameObject MoveablePart;
- 
- 
  
      private void DefaultUiEventsRegister()
      {
@@ -19,7 +17,6 @@
                  MoveablePart.transform.position = evtData.position;
              });
          }
-
          if (MoveablePart != null)
          {
              OnClickDown(MoveablePart.gameObject, evtData => { AdjustToTop(); });

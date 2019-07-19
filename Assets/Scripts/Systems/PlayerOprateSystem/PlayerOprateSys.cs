@@ -16,13 +16,15 @@ public class PlayerOprateSys : BaseSystem
     public MainPanel MainPanel;
     public DialogPanel DialogPanel;
     public StrengthenPanel StrengthenPanel;
+    public TransactionsPanel TransactionsPanel;
+    public ChatPanel ChatPanel;
     private bool isChaInfoOpen;
     private bool isTasksopen;
     private PlayerController playerController;
     private CameraController cameraController;
     private CharacterController characterController;
     private Transform chaCameraTrans;
-    private int nowOpenPOPanel;
+    private int nowOpenCursorPanel;
     private Vector3 chaCameraRotationOrigin;
     private Vector3 chaCameraPositionOrigin;
  
@@ -50,9 +52,9 @@ public class PlayerOprateSys : BaseSystem
     {
         if (panel.IsOpen)
         {
-            nowOpenPOPanel--;
+            nowOpenCursorPanel--;
             panel.SetPanelState(false);
-            if (nowOpenPOPanel == 0)
+            if (nowOpenCursorPanel == 0)
             {
                 SetMainCamreraRotateState();
                 ViewSvc.Instance.SetCursorState(false);
@@ -60,7 +62,7 @@ public class PlayerOprateSys : BaseSystem
         }
         else
         {
-            nowOpenPOPanel++;
+            nowOpenCursorPanel++;
             panel.SetPanelState();
             SetMainCamreraRotateState(false);
             ViewSvc.Instance.SetCursorState();
@@ -89,6 +91,18 @@ public class PlayerOprateSys : BaseSystem
             {
                 SwitchPanel(StrengthenPanel);
             }
+
+            if (Input.GetKeyDown(PlayerCfg.TranscationsPanelPower))
+            {
+                SwitchPanel(TransactionsPanel);
+                TransactionsPanel.SetType(0);
+            }
+            if (Input.GetKeyDown(PlayerCfg.TranscationsPanelCoin))
+            {
+                SwitchPanel(TransactionsPanel);
+                TransactionsPanel.SetType(1);
+            }
+            
         }
 
         if (isNavigate)
@@ -245,6 +259,7 @@ public class PlayerOprateSys : BaseSystem
     {
         IsPlayerControll = true;
         MainPanel.SetPanelState();
+        ChatPanel.SetPanelState();
         InitDefault();
         EnablePlayerControl();
         ViewSvc.Instance.SetCursorState(false);
@@ -272,4 +287,15 @@ public class PlayerOprateSys : BaseSystem
         GameRoot.AddTips(Constans.Color("战斗力",TxtColor.Green)+"提升了"+Constans.Color((combatPowerNow-combatPowerPre).ToString(),TxtColor.White));
         
     }
+
+    #region chat
+
+    public void PshChat(GameMsg msg)
+    {
+        ChatPanel.AddChatMsg(msg);
+        
+    }
+    
+
+    #endregion
 }

@@ -14,7 +14,7 @@ public class BasePanel : MonoBehaviour
    public Canvas Canvas;
    public bool IsOpen;
 
-    public void SetPanelState(bool isOpen = true)
+    public virtual void SetPanelState(bool isOpen = true)
     {
         this.IsOpen = isOpen;
         if (gameObject.activeSelf != isOpen)
@@ -32,11 +32,14 @@ public class BasePanel : MonoBehaviour
         }
     }
 
+ 
     protected virtual void OnOpen()
     {
         resSvc = ResSvc.Instance;
         audioSvc = AudioSvc.Instance;
         netSvc = NetSvc.Instance;
+        RegisterUIEvents();
+
     }
 
     protected virtual void OnClose()
@@ -51,6 +54,7 @@ public class BasePanel : MonoBehaviour
         netSvc = null;
     }
 
+    
     protected void AdjustToTop()
     {
         if (Canvas == null)
@@ -165,6 +169,17 @@ public class BasePanel : MonoBehaviour
 
     #endregion
 
+    protected void SetTextColor(Text txt, string color)
+    {
+            if (ColorUtility.TryParseHtmlString(color, out Color c))
+            {
+                txt.color = c;
+            }
+            else
+            {
+                Debug.LogError("TryParseHtmlString Wrong");
+            }
+    }
     protected void SetSprite(Image img, string path)
     {
         Sprite sp = resSvc.LoadSprite(path);

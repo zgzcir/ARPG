@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Constans
 {
@@ -71,12 +72,18 @@ public const string BGCityHappy = "bgCityHappy";
 //public const string SidelineTaskColor = "#
 public const string StrenStarDarkColor = "#A6A6A6";
 public const string StrenStarLightColor = "#0063FF";
+public const string ChatPanelTypeNonSelected = "#3DA8FF";
+public const string ChatPanelTypeSelected = "#01f901";
 
 
+
+/// <summary>
+/// string color
+/// </summary>
 private const string ColorRed = "<color=#ba574e>";
 private const string ColorWhite = "<color=#00ff00ff>";
 private const string ColorBlue = "<color=#76b9ed>";
-private const string ColorGreed = "<color=#00b4fff>";
+private const string ColorGreen = "<color=#59DE3E>";
 private const string ColorEnd = "</color>";
 
 public static string Color(string str, TxtColor c)
@@ -91,7 +98,7 @@ public static string Color(string str, TxtColor c)
    result = ColorBlue + str + ColorEnd;
    break;
   case TxtColor.Green:
-   result =  ColorGreed+ str + ColorEnd;
+   result =  ColorGreen+ str + ColorEnd;
    break;  case TxtColor.White:
    result = ColorWhite + str + ColorEnd;
    break;

@@ -16,7 +16,7 @@ public class MainPanel : BasePanel
     public Text txtHp;
     public Text txtName;
     public Transform expPrgsTrans;
-
+    
     private Vector2 startPos;
     private Vector2 defaultPos;
     private float pointDis;

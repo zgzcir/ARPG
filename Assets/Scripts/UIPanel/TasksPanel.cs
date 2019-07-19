@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TasksPanel : ManulPanel
+public class TasksPanel : HandleablePanel
 {
     public Transform TaskItemParent;
     private List<TaskItem> taItems = new List<TaskItem>();
