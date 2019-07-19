@@ -95,6 +95,9 @@ public class NetSvc : MonoBehaviour
                 case ErrCode.LackLevel:
                     GameRoot.AddTips("等级不足");
                     break;
+                case ErrCode.LackDiamond:
+                    GameRoot.AddTips("钻石不足");
+                    break;
             }
 
             return;
@@ -117,6 +120,9 @@ public class NetSvc : MonoBehaviour
             case CMD.PshChat:
                 PlayerOprateSys.Instance.PshChat(msg);
                 break;
+                    case CMD.RspTranscation:
+                        PlayerOprateSys.Instance.RspTranscation(msg);
+                        break;
         }
 
         ;

@@ -40,7 +40,6 @@ public class GameRoot : MonoBehaviour
         entoScene.InitSys();
         login.EnterLogin();
     }
-
     private void CleanUIRoot()
     {
         Transform canvas = transform.Find("Canvas");
@@ -81,13 +80,19 @@ public class GameRoot : MonoBehaviour
     }
 
     public void SetPlayerDataByStrengthen(RspStrengthen data)
+                   {
+                       playerData.coin = data.coin;
+                       playerData.crystal = data.crystal;
+                       playerData.pa = data.pa;
+                       playerData.pd = data.pd;
+                       playerData.sa = data.sa;
+                       playerData.sd = data.sd;
+                       playerData.strenarr = data.strenarr;
+                   }
+    public void SetPlayerDataByTranscation(RspTranscation data)
     {
         playerData.coin = data.coin;
-        playerData.crystal = data.crystal;
-        playerData.pa = data.pa;
-        playerData.pd = data.pd;
-        playerData.sa = data.sa;
-        playerData.sd = data.sd;
-        playerData.strenarr = data.strenarr;
+        playerData.diamond = data.diamond;
+        playerData.power = data.power;
     }
 }

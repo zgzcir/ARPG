@@ -44,7 +44,7 @@ public class ChaInfoPanel : HandleablePanel
         PlayerOprateSys.Instance.OnSwitchChaInfoPanel(false);
         PlayerOprateSys.Instance.ResetChaCameraTrans();
     }
-    private void FreshPanel()
+    public void FreshPanel()
     {
         PlayerData pd = GameRoot.Instance.PlayerData;
         SetText(TxtInfo, pd.level + " " + pd.name);

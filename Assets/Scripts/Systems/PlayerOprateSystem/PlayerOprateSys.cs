@@ -27,7 +27,7 @@ public class PlayerOprateSys : BaseSystem
     private int nowOpenCursorPanel;
     private Vector3 chaCameraRotationOrigin;
     private Vector3 chaCameraPositionOrigin;
- 
+
     private GuideCfg curGuideData;
 
     private NavMeshAgent navMeshAgent;
@@ -87,22 +87,23 @@ public class PlayerOprateSys : BaseSystem
             {
                 SwitchPanel(TasksPanel);
             }
+
             if (Input.GetKeyDown(PlayerCfg.StrengthenPanel))
             {
                 SwitchPanel(StrengthenPanel);
             }
 
             if (Input.GetKeyDown(PlayerCfg.TranscationsPanelPower))
-            {
+            {                    TransactionsPanel.SetType(0);
+
                 SwitchPanel(TransactionsPanel);
-                TransactionsPanel.SetType(0);
             }
+
             if (Input.GetKeyDown(PlayerCfg.TranscationsPanelCoin))
-            {
+            {                    TransactionsPanel.SetType(1);
+
                 SwitchPanel(TransactionsPanel);
-                TransactionsPanel.SetType(1);
             }
-            
         }
 
         if (isNavigate)
@@ -255,6 +256,7 @@ public class PlayerOprateSys : BaseSystem
                 break;
         }
     }
+
     public void EntoPLayerControll()
     {
         IsPlayerControll = true;
@@ -267,10 +269,10 @@ public class PlayerOprateSys : BaseSystem
 
         FreshMapBaseInfo();
         //读取地图信息     TODO || Temp
-       audioSvc.PlayBgAudio(Constans.BGCityHappy, true);
+        audioSvc.PlayBgAudio(Constans.BGCityHappy, true);
     }
 
-    
+
     public GuideCfg GetCurMainLineData()
     {
         return curGuideData;
@@ -284,8 +286,8 @@ public class PlayerOprateSys : BaseSystem
         StrengthenPanel.FreshPanel();
         MainPanel.FreshPanel();
         audioSvc.PlayUIAudio(Constans.UISsuccess);
-        GameRoot.AddTips(Constans.Color("战斗力",TxtColor.Green)+"提升了"+Constans.Color((combatPowerNow-combatPowerPre).ToString(),TxtColor.White));
-        
+        GameRoot.AddTips(Constans.Color("战斗力", TxtColor.Green) + "提升了" +
+                         Constans.Color((combatPowerNow - combatPowerPre).ToString(), TxtColor.White));
     }
 
     #region chat
@@ -293,9 +295,17 @@ public class PlayerOprateSys : BaseSystem
     public void PshChat(GameMsg msg)
     {
         ChatPanel.AddChatMsg(msg);
-        
     }
-    
+
+    public void RspTranscation(GameMsg msg)
+    {
+        GameRoot.AddTips("购买成功!");
+        GameRoot.Instance.SetPlayerDataByTranscation(msg.RspTranscation);
+        TransactionsPanel.btnSure.interactable = true;
+        ChaInfoPanel.FreshPanel();
+        StrengthenPanel.FreshPanel();
+    }
+
 
     #endregion
 }

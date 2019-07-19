@@ -31,16 +31,26 @@ public class StrengthenPanel : HandleablePanel
     private int currentIndex;
     private PlayerData playerData;
     private StrengthenCfg nextSc;
+
     protected override void OnOpen()
     {
         base.OnOpen();
-        playerData = GameRoot.Instance.PlayerData;
+        if (playerData == null)
+        {
+            playerData = GameRoot.Instance.PlayerData;
+        }
+
         RegisterUIEvents();
         ClickPosItem(0);
     }
 
     public void FreshPanel()
     {
+        if (playerData == null)
+        {
+            playerData = GameRoot.Instance.PlayerData;
+        }
+
         SetText(TxtCoin, playerData.coin);
         switch (currentIndex)
         {
@@ -89,7 +99,7 @@ public class StrengthenPanel : HandleablePanel
         SetText(TxtDef1, "防御+" + sumAddDefen);
 
         int nextStarlv = curStarlv + 1;
-         nextSc = resSvc.GetStrengthenCfg(currentIndex, nextStarlv);
+        nextSc = resSvc.GetStrengthenCfg(currentIndex, nextStarlv);
         if (nextSc != null)
         {
             SetActive(TxtHp2);
@@ -103,7 +113,7 @@ public class StrengthenPanel : HandleablePanel
             SetText(TxtDef2, "          +" + nextSc.adddef);
             SetText(TxtNeedLv, nextSc.minlv);
             SetText(TxtCostCoin, nextSc.coin);
-            SetText(TxtCostCrystal, nextSc.crystal + "/"+playerData.crystal);
+            SetText(TxtCostCrystal, nextSc.crystal + "/" + playerData.crystal);
         }
         else
         {
@@ -115,7 +125,7 @@ public class StrengthenPanel : HandleablePanel
         }
     }
 
- 
+
     protected override void RegisterUIEvents()
     {
         ImgPoss = new Image[PosBtnTrans.childCount];
@@ -176,9 +186,10 @@ public class StrengthenPanel : HandleablePanel
                 GameRoot.AddTips("金币不足");
                 return;
             }
+
             netSvc.SendMsg(new GameMsg()
             {
-                cmd = (int)CMD.ReqStrengthen,
+                cmd = (int) CMD.ReqStrengthen,
                 ReqStrengthen = new ReqStrengthen()
                 {
                     pos = currentIndex
@@ -189,7 +200,5 @@ public class StrengthenPanel : HandleablePanel
         {
             GameRoot.AddTips("满级啦");
         }
-        
     }
-        
 }

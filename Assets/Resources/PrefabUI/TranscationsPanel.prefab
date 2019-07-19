@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: -10.099976}
-  m_SizeDelta: {x: -1356.9, y: -992.5}
+  m_AnchoredPosition: {x: 0, y: 1.3}
+  m_SizeDelta: {x: -845.9, y: -1015.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1658624100997014683
 CanvasRenderer:
@@ -212,7 +212,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Canvas: {fileID: 0}
   IsOpen: 0
-  txtInfo: {fileID: 3031824444931002370}
+  txtInfo: {fileID: 0}
+  btnSure: {fileID: 9005725316598873671}
 --- !u!1 &4653582130673400817
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,7 +408,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8397319852615748921}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9177175498413825638}
+        m_MethodName: OnClickSureBtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &6506192073271207267
