@@ -31,6 +31,11 @@ public const string BGCityHappy = "bgCityHappy";
  /// </summary>
  public const int ScreenStandardWidth = 1920;
  public const int ScreenStandardHeight = 1080;
+
+
+ 
+ public static float GloableScreenRate=> 1.0f * Constans.ScreenStandardHeight / Screen.height;
+ 
  public const int ScreenOPDis = 140;
 
  /// <summary>

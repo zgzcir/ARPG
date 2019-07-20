@@ -541,6 +541,7 @@ GameObject:
   - component: {fileID: 1194118193}
   - component: {fileID: 1194118194}
   - component: {fileID: 1194118195}
+  - component: {fileID: 1194118196}
   m_Layer: 0
   m_Name: GameRoot
   m_TagString: Untagged
@@ -680,6 +681,18 @@ MonoBehaviour:
   StrengthenPanel: {fileID: 363682003}
   TransactionsPanel: {fileID: 1652515681}
   ChatPanel: {fileID: 1996719479}
+--- !u!114 &1194118196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194118186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 397a28b15d757874cace92d0c702402d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1299647296
 GameObject:
   m_ObjectHideFlags: 0

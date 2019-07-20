@@ -18,7 +18,7 @@ public class MainPanel : BasePanel
     public Transform expPrgsTrans;
     public Image impPower;
     public Text txtPower;
-    
+
     private Vector2 startPos;
     private Vector2 defaultPos;
     private float pointDis;
@@ -27,7 +27,6 @@ public class MainPanel : BasePanel
     {
         base.Init();
         RegisterUIEvents();
-
     }
 
     protected override void OnOpen()
@@ -43,14 +42,16 @@ public class MainPanel : BasePanel
     public void FreshPanel()
     {
         PlayerData playerData = GameRoot.Instance.PlayerData;
-        float totalHp = playerData.hp;
-        float nowHp = playerData.hp - 50.36f;
-        SetText(txtHp, (nowHp / totalHp).ToString("P"));
+        float totalHp = 800;
+        int nowHp = playerData.hp;
+//        SetText(txtHp, (nowHp / totalHp));
+SetText(txtHp,nowHp+"/"+totalHp);
         imgHp.fillAmount = nowHp / totalHp;
         var maxPower = CommonTool.GetPowerLimit(playerData.level);
-        impPower.fillAmount = 1.0f*playerData.power / maxPower;
-        SetText(txtPower,playerData.power+"/"+maxPower);
-        float posX = -(imgHp.fillAmount * imgHp.GetComponent<RectTransform>().sizeDelta.x);
+        impPower.fillAmount = 1.0f * playerData.power / maxPower;
+        SetText(txtPower, playerData.power + "/" + maxPower);
+        float posX = imgHp.fillAmount * imgHp.GetComponent<RectTransform>().sizeDelta.x;
+     
         txtHp.GetComponent<RectTransform>().anchoredPosition = new Vector2(posX, 0);
         SetText(txtLv, "Lv:" + playerData.level);
         SetText(txtName, playerData.name);
@@ -74,11 +75,12 @@ public class MainPanel : BasePanel
             }
         }
 
-        float globalRate = 1.0f * Constans.ScreenStandardHeight / Screen.height;
-        float width = Screen.width * globalRate;
+//        float globalRate = 1.0f * Constans.ScreenStandardHeight / Screen.height;
+        float width = Screen.width * Constans.GloableScreenRate;
         GridLayoutGroup gridLayoutGroup = expPrgsTrans.GetComponent<GridLayoutGroup>();
         gridLayoutGroup.cellSize = new Vector2((width - 10 * 9) / 10f, 18);
     }
+
     protected override void RegisterUIEvents()
     {
         OnClickDown(imgTouch.gameObject, eventDate =>

@@ -88,6 +88,7 @@ public class GameRoot : MonoBehaviour
     public void SetPlayerDataByStrengthen(RspStrengthen data)
     {
         playerData.coin = data.coin;
+        playerData.hp = data.hp;
         playerData.crystal = data.crystal;
         playerData.pa = data.pa;
         playerData.pd = data.pd;
