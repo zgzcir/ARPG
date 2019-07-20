@@ -29,11 +29,15 @@ public class ChaInfoPanel : HandleablePanel
     private Vector2 endPos;
 
 
+    public override void Init()
+    {
+        base.Init();
+        RegisterUIEvents();
+    }
 
     protected override void OnOpen()
     {
         base.OnOpen();
-        RegisterUIEvents();
         PlayerOprateSys.Instance.OnSwitchChaInfoPanel(true);
         FreshPanel();
     }

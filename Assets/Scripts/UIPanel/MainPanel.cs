@@ -21,13 +21,19 @@ public class MainPanel : BasePanel
     private Vector2 defaultPos;
     private float pointDis;
 
+    public override void Init()
+    {
+        base.Init();
+        RegisterUIEvents();
+
+    }
+
     protected override void OnOpen()
     {
         base.OnOpen();
         pointDis = Screen.height * 1.0f / Constans.ScreenStandardHeight * Constans.ScreenOPDis;
         defaultPos = imgDirBg.transform.position;
         SetActive(imgDirHandle, false);
-        RegisterUIEvents();
         FreshPanel();
     }
 

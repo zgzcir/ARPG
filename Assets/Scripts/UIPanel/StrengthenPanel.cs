@@ -32,24 +32,23 @@ public class StrengthenPanel : HandleablePanel
     private PlayerData playerData;
     private StrengthenCfg nextSc;
 
+    public override void Init()
+    {
+        base.Init();
+        playerData = GameRoot.Instance.PlayerData;
+        RegisterUIEvents();
+    }
+
     protected override void OnOpen()
     {
         base.OnOpen();
-        if (playerData == null)
-        {
-            playerData = GameRoot.Instance.PlayerData;
-        }
-
-        RegisterUIEvents();
+ 
         ClickPosItem(0);
     }
 
     public void FreshPanel()
     {
-        if (playerData == null)
-        {
-            playerData = GameRoot.Instance.PlayerData;
-        }
+        playerData = GameRoot.Instance.PlayerData;
 
         SetText(TxtCoin, playerData.coin);
         switch (currentIndex)

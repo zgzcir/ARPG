@@ -20,6 +20,8 @@ public class TransactionsPanel : BasePanel
         this.type = type;
     }
 
+
+
     protected override void OnOpen()
     {
         base.OnOpen();

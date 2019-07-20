@@ -15,7 +15,6 @@ public class GameRoot : MonoBehaviour
     {
         Instance = this;
         DontDestroyOnLoad(this);
-        CleanUIRoot();
         CommonTool.Log("Link Start!");
         Init();
     }
@@ -30,7 +29,8 @@ public class GameRoot : MonoBehaviour
         audio.InitSvc();
         ViewSvc view = GetComponent<ViewSvc>();
         view.InitSvc();
-
+        TimerSvc timer = GetComponent<TimerSvc>();
+        timer.InitSvc();
 
         LoginSys login = GetComponent<LoginSys>();
         login.InitSys();
@@ -38,16 +38,23 @@ public class GameRoot : MonoBehaviour
         playerOpratete.InitSys();
         EntoSceneSys entoScene = GetComponent<EntoSceneSys>();
         entoScene.InitSys();
+        
+        
+        InitUIRoot();
         login.EnterLogin();
+
     }
-    private void CleanUIRoot()
+
+    private void InitUIRoot()
     {
         Transform canvas = transform.Find("Canvas");
         for (int i = 0; i < canvas.childCount; i++)
         {
-            canvas.GetChild(i).gameObject.SetActive(false);
+            var basePanel = canvas.GetChild(i).GetComponent<BasePanel>();
+            basePanel.gameObject.SetActive(false);
+            basePanel.IsOpen = false;
+            basePanel.Init();
         }
-
         DynamicPanel.SetPanelState();
     }
 
@@ -76,19 +83,19 @@ public class GameRoot : MonoBehaviour
         playerData.guideid = data.id;
         playerData.level = data.lv;
         playerData.exp = data.exp;
-
     }
 
     public void SetPlayerDataByStrengthen(RspStrengthen data)
-                   {
-                       playerData.coin = data.coin;
-                       playerData.crystal = data.crystal;
-                       playerData.pa = data.pa;
-                       playerData.pd = data.pd;
-                       playerData.sa = data.sa;
-                       playerData.sd = data.sd;
-                       playerData.strenarr = data.strenarr;
-                   }
+    {
+        playerData.coin = data.coin;
+        playerData.crystal = data.crystal;
+        playerData.pa = data.pa;
+        playerData.pd = data.pd;
+        playerData.sa = data.sa;
+        playerData.sd = data.sd;
+        playerData.strenarr = data.strenarr;
+    }
+
     public void SetPlayerDataByTranscation(RspTranscation data)
     {
         playerData.coin = data.coin;

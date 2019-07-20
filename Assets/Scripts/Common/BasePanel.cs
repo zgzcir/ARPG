@@ -32,14 +32,17 @@ public class BasePanel : MonoBehaviour
         }
     }
 
- 
-    protected virtual void OnOpen()
+    public virtual void Init()
     {
         resSvc = ResSvc.Instance;
         audioSvc = AudioSvc.Instance;
-        netSvc = NetSvc.Instance;
-        RegisterUIEvents();
+        netSvc = NetSvc.Instance;    
+    }
+ 
 
+    protected virtual void OnOpen()
+    {
+        RegisterUIEvents();
     }
 
     protected virtual void OnClose()
@@ -49,9 +52,9 @@ public class BasePanel : MonoBehaviour
 
     protected void ClearPanel()
     {
-        resSvc = null;
-        audioSvc = null;
-        netSvc = null;
+//        resSvc = null;
+//        audioSvc = null;
+//        netSvc = null;
     }
 
     

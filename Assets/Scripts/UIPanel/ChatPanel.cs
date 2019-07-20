@@ -18,6 +18,7 @@ public class ChatPanel : BasePanel
     private int chatType;
     private List<string> chatList = new List<string>();
 
+    private bool canSend=true;
     protected override void OnOpen()
     {
         base.OnOpen();
@@ -76,29 +77,44 @@ public class ChatPanel : BasePanel
     {
         iptChat.onEndEdit.AddListener(s =>
             {
-                if (iptChat.text != null && !string.IsNullOrEmpty(iptChat.text))
+                if (!canSend)
                 {
-                    if (iptChat.text.Length > 12)
+                    GameRoot.AddTips("频率过高，请稍后");
+                    return;
+                }
+                {
+
+                    if (iptChat.text != null && !string.IsNullOrEmpty(iptChat.text))
                     {
-                        GameRoot.AddTips("more than 12");
-                    }
-                    else
-                    {
-                        netSvc.SendMsg( new GameMsg
+                        if (iptChat.text.Length > 12)
                         {
-                            cmd = (int) CMD.SndChat,
-                            SndChat = new SndChat()
+                            GameRoot.AddTips("more than 12");
+                        }
+                        else
+                        {
+                            netSvc.SendMsg(new GameMsg
                             {
-                                msg = s
-                            }
-                        });
-                        iptChat.text = "";
+                                cmd = (int) CMD.SndChat,
+                                SndChat = new SndChat()
+                                {
+                                    msg = s
+                                }
+                            });
+                            iptChat.text = "";
+                            canSend = false;
+
+                            StartCoroutine(MsgTimer());
+                        }
                     }
                 }
             }
         );
     }
-
+    IEnumerator MsgTimer()
+    {
+        yield return new  WaitForSeconds(1.0f);
+        canSend = true;
+    }
     private void AssemblyChatMsg(int type)
     {
         StringBuilder chatMsgBuilder = new StringBuilder();
