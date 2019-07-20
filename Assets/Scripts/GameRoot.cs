@@ -102,4 +102,8 @@ public class GameRoot : MonoBehaviour
         playerData.diamond = data.diamond;
         playerData.power = data.power;
     }
+    public void SetPlayerDataByPower(PshPower data)
+    {
+        playerData.power = data.power;
+    }
 }

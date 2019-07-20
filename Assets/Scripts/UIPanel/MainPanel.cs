@@ -16,6 +16,8 @@ public class MainPanel : BasePanel
     public Text txtHp;
     public Text txtName;
     public Transform expPrgsTrans;
+    public Image impPower;
+    public Text txtPower;
     
     private Vector2 startPos;
     private Vector2 defaultPos;
@@ -45,6 +47,9 @@ public class MainPanel : BasePanel
         float nowHp = playerData.hp - 50.36f;
         SetText(txtHp, (nowHp / totalHp).ToString("P"));
         imgHp.fillAmount = nowHp / totalHp;
+        var maxPower = CommonTool.GetPowerLimit(playerData.level);
+        impPower.fillAmount = 1.0f*playerData.power / maxPower;
+        SetText(txtPower,playerData.power+"/"+maxPower);
         float posX = -(imgHp.fillAmount * imgHp.GetComponent<RectTransform>().sizeDelta.x);
         txtHp.GetComponent<RectTransform>().anchoredPosition = new Vector2(posX, 0);
         SetText(txtLv, "Lv:" + playerData.level);

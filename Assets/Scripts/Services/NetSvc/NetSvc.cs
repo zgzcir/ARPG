@@ -123,6 +123,9 @@ public class NetSvc : MonoBehaviour
                     case CMD.RspTranscation:
                         PlayerOprateSys.Instance.RspTranscation(msg);
                         break;
+                    case CMD.PshPower:
+                        PlayerOprateSys.Instance.PshPower(msg);
+                        break;
         }
 
         ;

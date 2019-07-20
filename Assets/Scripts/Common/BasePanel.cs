@@ -11,6 +11,7 @@ public class BasePanel : MonoBehaviour
     protected ResSvc resSvc;
     protected AudioSvc audioSvc;
     protected NetSvc netSvc;
+    protected TimerSvc timerSvc;
    public Canvas Canvas;
    public bool IsOpen;
 
@@ -37,6 +38,7 @@ public class BasePanel : MonoBehaviour
         resSvc = ResSvc.Instance;
         audioSvc = AudioSvc.Instance;
         netSvc = NetSvc.Instance;    
+        timerSvc=TimerSvc.Instance;
     }
  
 

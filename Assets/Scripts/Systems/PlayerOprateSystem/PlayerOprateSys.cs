@@ -308,4 +308,15 @@ public class PlayerOprateSys : BaseSystem
 
 
     #endregion
+
+    #region power
+
+    public void PshPower(GameMsg msg)
+    {
+        GameRoot.Instance.SetPlayerDataByPower(msg.PshPower);
+        MainPanel.FreshPanel();
+    }
+    
+
+    #endregion
 }

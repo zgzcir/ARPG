@@ -16,12 +16,10 @@
          timer.SetLog(info => { CommonTool.Log(info); });
          CommonTool.Log("TimerSvc Connected");
      }
- 
      private void Update()
      {
          timer.Update();
      }
- 
      public int AddTimeTask(Action<int> callback, double delay, TimeUnit timeunit = TimeUnit.Millisecond, int count = 1)
      {
          return timer.AddTimeTask(callback, delay, timeunit, count);

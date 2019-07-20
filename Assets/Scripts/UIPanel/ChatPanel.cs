@@ -18,7 +18,8 @@ public class ChatPanel : BasePanel
     private int chatType;
     private List<string> chatList = new List<string>();
 
-    private bool canSend=true;
+    private bool canSend = true;
+
     protected override void OnOpen()
     {
         base.OnOpen();
@@ -82,8 +83,8 @@ public class ChatPanel : BasePanel
                     GameRoot.AddTips("频率过高，请稍后");
                     return;
                 }
-                {
 
+                {
                     if (iptChat.text != null && !string.IsNullOrEmpty(iptChat.text))
                     {
                         if (iptChat.text.Length > 12)
@@ -102,19 +103,19 @@ public class ChatPanel : BasePanel
                             });
                             iptChat.text = "";
                             canSend = false;
-
-                            StartCoroutine(MsgTimer());
+                            timerSvc.AddTimeTask(tid => { canSend = true; }, 1.0f, TimeUnit.Second);
                         }
                     }
                 }
             }
         );
     }
-    IEnumerator MsgTimer()
-    {
-        yield return new  WaitForSeconds(1.0f);
-        canSend = true;
-    }
+
+//    IEnumerator MsgTimer()
+//    {
+//        yield return new  WaitForSeconds(1.0f);
+//        canSend = true;
+//    }
     private void AssemblyChatMsg(int type)
     {
         StringBuilder chatMsgBuilder = new StringBuilder();
@@ -125,16 +126,17 @@ public class ChatPanel : BasePanel
         }
 
         SetText(txtChat, chatMsgBuilder.ToString());
-    } 
+    }
 
     public void AddChatMsg(GameMsg msg)
     {
         var data = msg.PshChat;
-        chatList.Add(Constans.Color(data.name+":",TxtColor.Blue)+data.msg);
+        chatList.Add(Constans.Color(data.name + ":", TxtColor.Blue) + data.msg);
         if (chatList.Count > 9)
         {
             chatList.RemoveAt(0);
         }
+
         if (IsOpen)
         {
             FreshPanel();
