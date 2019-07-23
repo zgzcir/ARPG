@@ -41,7 +41,7 @@ public const string BGCityHappy = "bgCityHappy";
  /// <summary>
  /// move speed
  /// </summary>
- public const int PLyerMoveSpeed = 30;
+ public const int PLyerMoveSpeed =10;
  public const float PlayerJumpHeight = 20f;
  public const int MonsterMoveSpeed = 3;
  public const int CamRotateSpeed = 15;

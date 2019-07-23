@@ -50,7 +50,7 @@ public class StrengthenPanel : HandleablePanel
     {
         playerData = GameRoot.Instance.PlayerData;
 
-        SetText(TxtCoin, playerData.coin);
+        SetText(TxtCoin, playerData.Coin);
         switch (currentIndex)
         {
             case 0:
@@ -73,8 +73,8 @@ public class StrengthenPanel : HandleablePanel
                 break;
         }
 
-        SetText(TxtStarLv, playerData.strenarr[currentIndex] + "星");
-        int curStarlv = playerData.strenarr[currentIndex];
+        SetText(TxtStarLv, playerData.StrenArr[currentIndex] + "星");
+        int curStarlv = playerData.StrenArr[currentIndex];
         for (int i = 0; i < StarTransGrp.childCount; i++)
         {
             Image image = StarTransGrp.GetChild(i).GetComponent<Image>();
@@ -107,12 +107,12 @@ public class StrengthenPanel : HandleablePanel
             SetActive(TransCost);
             SetActive(BtnStren.gameObject);
 
-            SetText(TxtHp2, "强化后+" + nextSc.addhp);
-            SetText(TxtHurt2, "          +" + nextSc.addhurt);
-            SetText(TxtDef2, "          +" + nextSc.adddef);
-            SetText(TxtNeedLv, nextSc.minlv);
-            SetText(TxtCostCoin, nextSc.coin);
-            SetText(TxtCostCrystal, nextSc.crystal + "/" + playerData.crystal);
+            SetText(TxtHp2, "强化后+" + nextSc.AddHP);
+            SetText(TxtHurt2, "          +" + nextSc.AddHurt);
+            SetText(TxtDef2, "          +" + nextSc.AddDef);
+            SetText(TxtNeedLv, nextSc.MinLv);
+            SetText(TxtCostCoin, nextSc.Coin);
+            SetText(TxtCostCrystal, nextSc.Crystal + "/" + playerData.Crystal);
         }
         else
         {
@@ -166,21 +166,21 @@ public class StrengthenPanel : HandleablePanel
     public void ClickStrenButton()
     {
         audioSvc.PlayUIAudio(Constans.UIClickBtn);
-        if (playerData.strenarr[currentIndex] < 10)
+        if (playerData.StrenArr[currentIndex] < 10)
         {
-            if (playerData.level < nextSc.minlv)
+            if (playerData.Level < nextSc.MinLv)
             {
                 GameRoot.AddTips("角色等级不足");
                 return;
             }
 
-            if (playerData.crystal < nextSc.crystal)
+            if (playerData.Crystal < nextSc.Crystal)
             {
                 GameRoot.AddTips("水晶不足");
                 return;
             }
 
-            if (playerData.coin < nextSc.coin)
+            if (playerData.Coin< nextSc.Coin)
             {
                 GameRoot.AddTips("金币不足");
                 return;

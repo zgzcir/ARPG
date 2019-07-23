@@ -183,10 +183,10 @@ public class PlayerOprateSys : BaseSystem
         }
 
         navMeshAgent.enabled = true;
-        if (curGuideData.npcid != -1)
+        if (curGuideData.NpcID != -1)
         {
             float dis = Vector3.Distance(playerController.transform.position,
-                curMapBaseInfo.NpcPosTrans[cfg.npcid].position);
+                curMapBaseInfo.NpcPosTrans[cfg.NpcID].position);
             if (dis <= 0.5f)
             {
                 isNavigate = false;
@@ -196,7 +196,7 @@ public class PlayerOprateSys : BaseSystem
                 characterController.enabled = false;
                 isNavigate = true;
                 navMeshAgent.speed = Constans.PLyerMoveSpeed;
-                navMeshAgent.SetDestination(curMapBaseInfo.NpcPosTrans[cfg.npcid].position);
+                navMeshAgent.SetDestination(curMapBaseInfo.NpcPosTrans[cfg.NpcID].position);
             }
         }
     }
@@ -212,7 +212,7 @@ public class PlayerOprateSys : BaseSystem
     private void DetectIsArriveNavPos()
     {
         float dis = Vector3.Distance(playerController.transform.position,
-            curMapBaseInfo.NpcPosTrans[curGuideData.npcid].position);
+            curMapBaseInfo.NpcPosTrans[curGuideData.NpcID].position);
         if (dis <= 0.5f)
         {
             StopNavSet();
@@ -237,10 +237,10 @@ public class PlayerOprateSys : BaseSystem
     {
         RspGuide data = msg.RspGuide;
         GameRoot.AddTips(Constans.Color("金币+", TxtColor.Red)
-                         + curGuideData.coin + "  经验+" + curGuideData.exp);
+                         + curGuideData.Coin + "  经验+" + curGuideData.Exp);
         GameRoot.Instance.SetPlayerDataByGuide(data);
         MainPanel.FreshPanel();
-        switch (curGuideData.actid)
+        switch (curGuideData.ActID)
         {
             case 0:
                 break;

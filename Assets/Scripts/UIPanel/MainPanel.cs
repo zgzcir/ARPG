@@ -43,20 +43,20 @@ public class MainPanel : BasePanel
     {
         PlayerData playerData = GameRoot.Instance.PlayerData;
         float totalHp = 800;
-        int nowHp = playerData.hp;
+        int nowHp = playerData.HP;
 //        SetText(txtHp, (nowHp / totalHp));
 SetText(txtHp,nowHp+"/"+totalHp);
         imgHp.fillAmount = nowHp / totalHp;
-        var maxPower = CommonTool.GetPowerLimit(playerData.level);
-        impPower.fillAmount = 1.0f * playerData.power / maxPower;
-        SetText(txtPower, playerData.power + "/" + maxPower);
+        var maxPower = CommonTool.GetPowerLimit(playerData.Level);
+        impPower.fillAmount = 1.0f * playerData.Power / maxPower;
+        SetText(txtPower, playerData.Power + "/" + maxPower);
         float posX = imgHp.fillAmount * imgHp.GetComponent<RectTransform>().sizeDelta.x;
      
         txtHp.GetComponent<RectTransform>().anchoredPosition = new Vector2(posX, 0);
-        SetText(txtLv, "Lv:" + playerData.level);
-        SetText(txtName, playerData.name);
+        SetText(txtLv, "Lv:" + playerData.Level);
+        SetText(txtName, playerData.Name);
         //exp
-        float expPrgVal = playerData.exp * 1.0f / CommonTool.GetExpUpValue(playerData.level) * 100;
+        float expPrgVal = playerData.Exp * 1.0f / CommonTool.GetExpUpValue(playerData.Level) * 100;
         int index = (int) expPrgVal / 10;
         for (int i = 0; i < expPrgsTrans.childCount; i++)
         {

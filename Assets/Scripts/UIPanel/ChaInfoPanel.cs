@@ -51,15 +51,15 @@ public class ChaInfoPanel : HandleablePanel
     public void FreshPanel()
     {
         PlayerData pd = GameRoot.Instance.PlayerData;
-        SetText(TxtInfo, pd.level + " " + pd.name);
-        SetText(TxtExp, pd.exp);
-        SetText(TxtJob, pd.hp);
-        SetText(TxtHp, pd.hp);
-        SetText(TxtPd, pd.pd);
-        SetText(TxtSd, pd.sd);
-        SetText(TxtPa, pd.pa);
-        SetText(TxtSa, pd.sa);
-        SetText(TxtDs, pd.pierce);
+        SetText(TxtInfo, pd.Level + " " + pd.Name);
+        SetText(TxtExp, pd.Exp);
+        SetText(TxtJob, pd.HP);
+        SetText(TxtHp, pd.HP);
+        SetText(TxtPd, pd.PD);
+        SetText(TxtSd, pd.SD);
+        SetText(TxtPa, pd.PA);
+        SetText(TxtSa, pd.SA);
+        SetText(TxtDs, pd.Pierce);
         //dodge
         //critical
     }

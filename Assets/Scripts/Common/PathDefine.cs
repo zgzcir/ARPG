@@ -8,6 +8,7 @@
         public const string MapCfg="ResCfgs/Map";
         public const string GuideCfg="ResCfgs/Guide";
         public const string StrenghtenCfg="ResCfgs/strengthen";
+        public const string TaskRewardCfg="ResCfgs/taskreward";
 
 
         /// <summary>
@@ -16,7 +17,7 @@
         public const string PlayerCity = "PrefabPlayer/PlayerCity";
 
 
-        public const string TaskItem = "PrefabUI/Item/taItem";
+        public const string TaskRewardItem = "PrefabUI/Item/taItem";
 
         /// <summary>
         /// StrngthenPanel

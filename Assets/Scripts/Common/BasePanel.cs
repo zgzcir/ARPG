@@ -203,5 +203,18 @@ public class BasePanel : MonoBehaviour
         }
     }
 
+    
     #endregion
+
+    protected Transform GetTrans(Transform parentTrans, string name)
+    {
+        if (parentTrans != null)
+        {
+            return parentTrans.Find(name);
+        }
+        else
+        {
+         return   transform.Find(name);
+        }
+    }
 }

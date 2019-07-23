@@ -74,37 +74,37 @@ public class GameRoot : MonoBehaviour
 
     public void SetPlayerName(string name)
     {
-        playerData.name = name;
+        playerData.Name = name;
     }
 
     public void SetPlayerDataByGuide(RspGuide data)
     {
-        playerData.coin = data.coin;
-        playerData.guideid = data.id;
-        playerData.level = data.lv;
-        playerData.exp = data.exp;
+        playerData.Coin = data.coin;
+        playerData.GuideID= data.id;
+        playerData.Level= data.lv;
+        playerData.Exp= data.exp;
     }
 
     public void SetPlayerDataByStrengthen(RspStrengthen data)
     {
-        playerData.coin = data.coin;
-        playerData.hp = data.hp;
-        playerData.crystal = data.crystal;
-        playerData.pa = data.pa;
-        playerData.pd = data.pd;
-        playerData.sa = data.sa;
-        playerData.sd = data.sd;
-        playerData.strenarr = data.strenarr;
+        playerData.Coin= data.coin;
+        playerData.HP = data.hp;
+        playerData.Crystal = data.crystal;
+        playerData.PA = data.pa;
+        playerData.PD = data.pd;
+        playerData.SA = data.sa;
+        playerData.SD = data.sd;
+        playerData.StrenArr= data.strenarr;
     }
 
     public void SetPlayerDataByTranscation(RspTranscation data)
     {
-        playerData.coin = data.coin;
-        playerData.diamond = data.diamond;
-        playerData.power = data.power;
+        playerData.Coin= data.coin;
+        playerData.Diamond = data.diamond;
+        playerData.Power= data.power;
     }
     public void SetPlayerDataByPower(PshPower data)
     {
-        playerData.power = data.power;
+        playerData.Power = data.power;
     }
 }

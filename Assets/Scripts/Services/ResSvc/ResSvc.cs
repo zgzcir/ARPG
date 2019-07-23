@@ -20,6 +20,7 @@ public class ResSvc : MonoBehaviour
         InitMapCfg(PathDefine.MapCfg);
         InitGuideCfg(PathDefine.GuideCfg);
         InitStrengthenCfg(PathDefine.StrenghtenCfg);
+        InitTaskRewardCfgDic(PathDefine.TaskRewardCfg);
         CommonTool.Log("ResSvc Connected");
     }
 
@@ -38,7 +39,7 @@ public class ResSvc : MonoBehaviour
                 if (loaded != null)
                 {
                     loaded();
-                }
+                }  
 
                 prgCB = null;
                 sceneAsync = null;
@@ -193,36 +194,36 @@ public class ResSvc : MonoBehaviour
                     switch (e.Name)
                     {
                         case "mapName":
-                            mc.mapname = e.InnerText;
+                            mc.MapName = e.InnerText;
                             break;
                         case "sceneName":
-                            mc.scenename = e.InnerText;
+                            mc.SceneName = e.InnerText;
                             break;
                         case "mainCamPos":
                         {
                             string[] varArr = e.InnerText.Split(',');
-                            mc.maincampos = new Vector3(float.Parse(varArr[0]), float.Parse(varArr[1]),
+                            mc.MainCamPos = new Vector3(float.Parse(varArr[0]), float.Parse(varArr[1]),
                                 float.Parse(varArr[2]));
                         }
                             break;
                         case "mainCamRote":
                         {
                             string[] varArr = e.InnerText.Split(',');
-                            mc.maincamrote = new Vector3(float.Parse(varArr[0]), float.Parse(varArr[1]),
+                            mc.MainCamRote = new Vector3(float.Parse(varArr[0]), float.Parse(varArr[1]),
                                 float.Parse(varArr[2]));
                         }
                             break;
                         case "playerBornPos":
                         {
                             string[] varArr = e.InnerText.Split(',');
-                            mc.playerbornpos = new Vector3(float.Parse(varArr[0]), float.Parse(varArr[1]),
+                            mc.PlayerBornPos = new Vector3(float.Parse(varArr[0]), float.Parse(varArr[1]),
                                 float.Parse(varArr[2]));
                         }
                             break;
                         case "playerBornRote":
                         {
                             string[] varArr = e.InnerText.Split(',');
-                            mc.playerbornrote = new Vector3(float.Parse(varArr[0]), float.Parse(varArr[1]),
+                            mc.PlayerBornRote = new Vector3(float.Parse(varArr[0]), float.Parse(varArr[1]),
                                 float.Parse(varArr[2]));
                         }
                             break;
@@ -247,7 +248,6 @@ public class ResSvc : MonoBehaviour
 
     #endregion
 
-    #endregion
 
     #region tasks
 
@@ -283,19 +283,19 @@ public class ResSvc : MonoBehaviour
                     switch (e.Name)
                     {
                         case "npcID":
-                            guideCfg.npcid = int.Parse(e.InnerText);
+                            guideCfg.NpcID = int.Parse(e.InnerText);
                             break;
                         case "dilogArr":
-                            guideCfg.dilogarr = e.InnerText;
+                            guideCfg.DialoArr = e.InnerText;
                             break;
                         case "actID":
-                            guideCfg.actid = int.Parse(e.InnerText);
+                            guideCfg.ActID = int.Parse(e.InnerText);
                             break;
                         case "coin":
-                            guideCfg.coin = int.Parse(e.InnerText);
+                            guideCfg.Coin = int.Parse(e.InnerText);
                             break;
                         case "exp":
-                            guideCfg.exp = int.Parse(e.InnerText);
+                            guideCfg.Exp = int.Parse(e.InnerText);
                             break;
                     }
                 }
@@ -393,42 +393,42 @@ public class ResSvc : MonoBehaviour
                     switch (e.Name)
                     {
                         case "pos":
-                            sd.pos = value;
+                            sd.Pos = value;
                             break;
                         case "starlv":
-                            sd.starlv = value;
+                            sd.StarLv = value;
                             break;
                         case "addhp":
-                            sd.addhp = value;
+                            sd.AddHP = value;
                             break;
                         case "addhurt":
-                            sd.addhurt = value;
+                            sd.AddHurt = value;
                             break;
                         case "adddef":
-                            sd.adddef = value;
+                            sd.AddDef = value;
                             break;
                         case "minlv":
-                            sd.minlv = value;
+                            sd.MinLv = value;
                             break;
                         case "coin":
-                            sd.coin = value;
+                            sd.Coin = value;
                             break;
                         case "crystal":
-                            sd.crystal = value;
+                            sd.Crystal = value;
                             break;
                     }
                 }
 
                 Dictionary<int, StrengthenCfg> dic = null;
-                if (StrengthenCfgDic.TryGetValue(sd.pos, out dic))
+                if (StrengthenCfgDic.TryGetValue(sd.Pos, out dic))
                 {
-                    dic.Add(sd.starlv, sd);
+                    dic.Add(sd.StarLv, sd);
                 }
                 else
                 {
                     dic = new Dictionary<int, StrengthenCfg>();
-                    dic.Add(sd.starlv, sd);
-                    StrengthenCfgDic.Add(sd.pos, dic);
+                    dic.Add(sd.StarLv, sd);
+                    StrengthenCfgDic.Add(sd.Pos, dic);
                 }
             }
         }
@@ -462,14 +462,14 @@ public class ResSvc : MonoBehaviour
                     switch (type)
                     {
                         case 1:
-                            val += sc.addhp;
+                            val += sc.AddHP;
 
                             break;
                         case 2:
-                            val += sc.addhurt;
+                            val += sc.AddHurt;
                             break;
                         case 3:
-                            val += sc.adddef;
+                            val += sc.AddDef;
                             break;
                     }
                 }
@@ -481,6 +481,73 @@ public class ResSvc : MonoBehaviour
 
     #endregion
 
+    #region task
+
+    private Dictionary<int, TaskRewardCfg> TaskRewardCfgDic = new Dictionary<int, TaskRewardCfg>();
+
+    private void InitTaskRewardCfgDic(string path)
+    {
+        TextAsset xml = Resources.Load<TextAsset>(path);
+        if (!xml)
+        {
+            CommonTool.Log("xml file:" + path + "not exits", LogType.Error);
+        }
+        else
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xml.text);
+            XmlNodeList nodeLst = doc.SelectSingleNode("root")?.ChildNodes;
+            for (int i = 0; i < nodeLst?.Count; i++)
+            {
+                XmlElement ele = nodeLst[i] as XmlElement;
+                if (ele.GetAttributeNode("ID") == null)
+                {
+                    continue;
+                }
+
+                int id = Convert.ToInt32(ele.GetAttributeNode("ID")?.InnerText);
+                TaskRewardCfg taskRewardCfg = new TaskRewardCfg()
+                {
+                    id = id
+                };
+                foreach (XmlElement e in ele.ChildNodes)
+                {
+                    switch (e.Name)
+                    {
+                        case "taskName":
+                            taskRewardCfg.TaskName = e.InnerText;
+                            break;
+                        case "count":
+                            taskRewardCfg.Count = int.Parse(e.InnerText);
+                            break;
+                        case "exp":
+                            taskRewardCfg.Exp = int.Parse(e.InnerText);
+                            break;
+                        case "coin":
+                            taskRewardCfg.Coin = int.Parse(e.InnerText);
+                            break;
+                    }
+                }
+
+                TaskRewardCfgDic.Add(id, taskRewardCfg);
+            }
+
+            CommonTool.Log("TaskRewardCfgDic Done");
+        }
+    }
+
+    public TaskRewardCfg GetTaskRewardCfg(int id)
+    {
+        TaskRewardCfg data;
+        if (TaskRewardCfgDic.TryGetValue(id, out data))
+        {
+            return data;
+        }
+        return null;
+    }
+    #endregion
+    
+    #endregion
     private void Update()
     {
         if (prgCB != null)

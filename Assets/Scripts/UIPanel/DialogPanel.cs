@@ -25,7 +25,7 @@ public class DialogPanel : HandleablePanel
         RegisterUIEvents();
         pd = GameRoot.Instance.PlayerData;
         curTaskData = PlayerOprateSys.Instance.GetCurMainLineData();
-        dialogArr = curTaskData.dilogarr.Split('#');
+        dialogArr = curTaskData.DialoArr.Split('#');
         maxIndex = dialogArr.Length - 1;
         index = 1;
         SetDialogContent();
@@ -35,7 +35,7 @@ public class DialogPanel : HandleablePanel
     private void SetDialogContent()
     {
         string[] arr = dialogArr[index].Split('|');
-        SetText(txtDialog, arr[1].Replace("$name", pd.name));
+        SetText(txtDialog, arr[1].Replace("$name", pd.Name));
         //设置头像使用pathDefine  
         if (arr[0] == "0")
         {

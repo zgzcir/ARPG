@@ -39,7 +39,7 @@ public class LoginSys : BaseSystem
     public void RspLogin(GameMsg msg)
     {
         GameRoot.Instance.SetPlayerData(msg.RspLogin);
-        if (msg.RspLogin.PlayerData.name == "")
+        if (msg.RspLogin.PlayerData.Name== "")
         {
             CreatePanel.SetPanelState();
             loginPanel.SetPanelState(false);
@@ -50,7 +50,6 @@ public class LoginSys : BaseSystem
             PlayerOprateSys.Instance.EntoPLayerControll();
         }
     }
-
 
     public void RspReName(GameMsg msg)
     {
@@ -64,10 +63,10 @@ public class LoginSys : BaseSystem
         p = resSvc.LoadPrefab(PathDefine.PlayerCity);
         PlayerOprateSys.Instance.InjectPOSysThings(p.GetComponent<PlayerController>(),Camera.main.GetComponent<CameraController>());
         PlayerOprateSys.Instance.DisablePlayerControl();
-        p.transform.position = mapData.playerbornpos;
-        p.transform.localEulerAngles = mapData.playerbornrote;
+        p.transform.position = mapData.PlayerBornPos;
+        p.transform.localEulerAngles = mapData.PlayerBornRote;
         var transform1 = Camera.main.transform;
-        transform1.position = mapData.maincampos;
-        transform1.eulerAngles = mapData.maincamrote;
+        transform1.position = mapData.MainCamPos;
+        transform1.eulerAngles = mapData.MainCamRote;
     }
 }
