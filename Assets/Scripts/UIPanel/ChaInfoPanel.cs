@@ -65,7 +65,6 @@ public class ChaInfoPanel : HandleablePanel
     }
     protected override void RegisterUIEvents()
     {
-        BtnClose.onClick.AddListener(() => { PlayerOprateSys.Instance.SwitchPanel(this); });
         OnClickDown(ImgCha.gameObject, (eventData) => { startPos = eventData.position; });
         OnClickDrag(ImgCha.gameObject, evtData =>
         {
