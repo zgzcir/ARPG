@@ -24,7 +24,7 @@ public class DialogPanel : HandleablePanel
         base.OnOpen();
         RegisterUIEvents();
         pd = GameRoot.Instance.PlayerData;
-        curTaskData = PlayerOprateSys.Instance.GetCurGuideData();
+        curTaskData = MainCitySys.Instance.GetCurGuideData();
         dialogArr = curTaskData.DialoArr.Split('#');
         maxIndex = dialogArr.Length - 1;
         index = 1;
@@ -67,7 +67,7 @@ public class DialogPanel : HandleablePanel
                     }
                 };
                 netSvc.SendMsg(msg);
-                PlayerOprateSys.Instance.SwitchPanel(this);
+                MainCitySys.Instance.SwitchPanel(this);
             }
         });
     }

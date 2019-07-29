@@ -34,7 +34,7 @@ public class GameRoot : MonoBehaviour
 
         LoginSys login = GetComponent<LoginSys>();
         login.InitSys();
-        PlayerOprateSys playerOpratete = GetComponent<PlayerOprateSys>();
+        MainCitySys playerOpratete = GetComponent<MainCitySys>();
         playerOpratete.InitSys();
         EntoSceneSys entoScene = GetComponent<EntoSceneSys>();
         entoScene.InitSys();
@@ -125,5 +125,10 @@ public class GameRoot : MonoBehaviour
     public void SetPlayerDataByTaskPrgs(PshTaskPrgs data)
     {
         playerData.TaskRewardArr = data.TaskRewardArr;
+    }
+
+    public void SetPlayerDataByMissionStart(RspMission data)
+    {
+        playerData.Power = data.Power;
     }
 }

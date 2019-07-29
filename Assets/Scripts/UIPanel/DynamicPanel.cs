@@ -40,7 +40,8 @@ public class DynamicPanel : BasePanel
     }
 
     private void SetTips(string tips)
-    {
+    {        AdjustToTop();
+
         SetActive(txtTips);
         SetText(txtTips, tips);
 
@@ -51,7 +52,6 @@ public class DynamicPanel : BasePanel
             SetActive(txtTips, false);
             isTipsShow = false;
         }));
-        AdjustToTop();
     }
 
     private IEnumerator AniPlayDone(float sec, Action cb)

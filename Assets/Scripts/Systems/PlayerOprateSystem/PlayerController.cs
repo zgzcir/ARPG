@@ -91,9 +91,9 @@ public class PlayerController : MonoBehaviour
         InputDir  = input.normalized;
         if (isMove)
         {
-            if (PlayerOprateSys.Instance.IsNavigate)
+            if (MainCitySys.Instance.IsNavigate)
             {
-             PlayerOprateSys.Instance.CancelNavGuide();
+             MainCitySys.Instance.CancelNavGuide();
             }
             SetBlend(Constans.BlendRun);
             SetDir();
@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
         {
             SetBlend(Constans.BlendIdle);
         }
-        if (PlayerOprateSys.Instance.IsNavigate)
+        if (MainCitySys.Instance.IsNavigate)
         {
             SetBlend(Constans.BlendRun);
         }

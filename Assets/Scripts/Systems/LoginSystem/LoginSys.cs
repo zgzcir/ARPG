@@ -47,7 +47,7 @@ public class LoginSys : BaseSystem
         else
         {
             loginPanel.SetPanelState(false);
-            PlayerOprateSys.Instance.EnterPlayerOprate();
+            MainCitySys.Instance.EnterPlayerOprate();
         }
     }
 
@@ -55,15 +55,15 @@ public class LoginSys : BaseSystem
     {
         GameRoot.Instance.SetPlayerName(msg.RspReName.Name);
         CreatePanel.SetPanelState(false);
-        PlayerOprateSys.Instance.EnterPlayerOprate();
+        MainCitySys.Instance.EnterPlayerOprate();
     }
 
     private void LoadPlayer(MapCfg mapData)
     {
         player = resSvc.LoadPrefab(PathDefine.PlayerCity);
-        PlayerOprateSys.Instance.InjectPOSysThings(player.GetComponent<PlayerController>(),
+        MainCitySys.Instance.InjectPOSysThings(player.GetComponent<PlayerController>(),
             Camera.main.GetComponent<CameraController>());
-        PlayerOprateSys.Instance.DisablePlayerControl();
+        MainCitySys.Instance.DisablePlayerControl();
         player.transform.position = mapData.PlayerBornPos;
         player.transform.localEulerAngles = mapData.PlayerBornRote;
         var transform1 = Camera.main.transform;

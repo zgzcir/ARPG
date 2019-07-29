@@ -23,10 +23,10 @@ public class MissionPanel : BasePanel
         int mission = pd.Mission;
         for (int i = 0; i < btnArr.Length; i++)
         {
-            if (i <= mission % 100 - 1)
+            if (i <= mission % 1000 - 1)
             {
                 SetActive(btnArr[i].gameObject);
-                if (i == mission % 100 - 1)
+                if (i == mission % 1000 - 1)
                 {
                     pointerTrans.SetParent(btnArr[i].transform);
                     pointerTrans.localPosition = new Vector3(0, -350, 0);
@@ -42,7 +42,21 @@ public class MissionPanel : BasePanel
     public void OnMissionBtnClick(int mid)
     {
         audioSvc.PlayUIAudio(Constans.UIClickBtn);
-        
-        
+        int power = resSvc.GetMapCfgData(mid).Power;
+        if (power > pd.Power)
+        {
+            GameRoot.AddTips("体力值不足");
+        }
+        else
+        {
+            netSvc.SendMsg(new GameMsg()
+            {
+                cmd = (int) CMD.ReqMission,
+                ReqMission = new ReqMission()
+                {
+                    MID = mid
+                }
+            });
+        }
     }
 }

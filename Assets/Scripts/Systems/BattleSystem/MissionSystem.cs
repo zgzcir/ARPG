@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Protocol;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -12,9 +13,6 @@ public class MissionSystem : BaseSystem
     {
         base.InitSys();
         Instance = this;
-
-
-        
         CommonTool.Log("BattleSystem Connected");
     }
     public void EnterMission()
@@ -30,4 +28,11 @@ public class MissionSystem : BaseSystem
     {        IsIn = false;
         MissionPanel.SetPanelState(false);
     }
-}
+    public void RspMission(GameMsg msg)
+    {
+        var data = msg.RspMission;
+        GameRoot.Instance.SetPlayerDataByMissionStart(data);
+        
+        MainCitySys.Instance.MainPanel.SetPanelState(false);
+    }
+ }

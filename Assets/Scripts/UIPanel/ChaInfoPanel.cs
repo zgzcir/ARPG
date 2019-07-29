@@ -38,15 +38,15 @@ public class ChaInfoPanel : HandleablePanel
     protected override void OnOpen()
     {
         base.OnOpen();
-        PlayerOprateSys.Instance.OnSwitchChaInfoPanel(true);
+        MainCitySys.Instance.OnSwitchChaInfoPanel(true);
         FreshPanel();
     }
 
     protected override void OnClose()
     {
         base.OnClose();
-        PlayerOprateSys.Instance.OnSwitchChaInfoPanel(false);
-        PlayerOprateSys.Instance.ResetChaCameraTrans();
+        MainCitySys.Instance.OnSwitchChaInfoPanel(false);
+        MainCitySys.Instance.ResetChaCameraTrans();
     }
     public void FreshPanel()
     {
@@ -69,7 +69,7 @@ public class ChaInfoPanel : HandleablePanel
         OnClickDrag(ImgCha.gameObject, evtData =>
         {
             float rotate = evtData.position.x - startPos.x;
-            PlayerOprateSys.Instance.SetChaCameraRotate(rotate * Time.deltaTime * Constans.ChaInFoPanelRotateSpeed);
+            MainCitySys.Instance.SetChaCameraRotate(rotate * Time.deltaTime * Constans.ChaInFoPanelRotateSpeed);
         });
 
 

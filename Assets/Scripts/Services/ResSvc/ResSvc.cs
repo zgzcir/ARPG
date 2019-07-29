@@ -27,7 +27,7 @@ public class ResSvc : MonoBehaviour
     private Action prgCB = null;
 
     public void AsyncLoadScene(string sceneName, Action loaded)
-    {
+    { 
         GameRoot.Instance.LoadingPanel.SetPanelState();
         AsyncOperation sceneAsync = SceneManager.LoadSceneAsync(sceneName);
         prgCB = () =>
@@ -198,6 +198,9 @@ public class ResSvc : MonoBehaviour
                             break;
                         case "sceneName":
                             mc.SceneName = e.InnerText;
+                            break;
+                        case "power":
+                            mc.Power =int.Parse( e.InnerText);
                             break;
                         case "mainCamPos":
                         {

@@ -7,9 +7,9 @@ using UnityEngine.AI;
 using UnityEngine.Experimental.PlayerLoop;
 using UnityEngine.Serialization;
 
-public class PlayerOprateSys : BaseSystem
+public class MainCitySys : BaseSystem
 {
-    public static PlayerOprateSys Instance;
+    public static MainCitySys Instance;
     public bool IsPlayerControll;
     public ChaInfoPanel ChaInfoPanel;
     public TasksPanel TasksPanel;
@@ -20,6 +20,7 @@ public class PlayerOprateSys : BaseSystem
     public ChatPanel ChatPanel;
     private bool isChaInfoOpen;
     private bool isTasksopen;
+    
     private PlayerController playerController;
     private CameraController cameraController;
     private CharacterController characterController;
@@ -31,8 +32,6 @@ public class PlayerOprateSys : BaseSystem
     private GuideCfg curGuideData;
 
     private NavMeshAgent navMeshAgent;
-
-
     public void InjectPOSysThings(PlayerController pc, CameraController cc)
     {
         playerController = pc;
@@ -45,7 +44,7 @@ public class PlayerOprateSys : BaseSystem
     {
         base.InitSys();
         Instance = this;
-        CommonTool.Log("PlayerOperateSys Connected");
+        CommonTool.Log("MainCitySys Connected");
     }
 
     public void SwitchPanel(BasePanel panel, int force = 0)

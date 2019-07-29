@@ -102,6 +102,9 @@ public class NetSvc : MonoBehaviour
                 case ErrCode.LackDiamond:
                     GameRoot.AddTips("钻石不足");
                     break;
+                case ErrCode.LackPower:
+                    GameRoot.AddTips("体力不足");
+                    break;
             }
 
             return;
@@ -116,25 +119,28 @@ public class NetSvc : MonoBehaviour
                 LoginSys.Instance.RspReName(msg);
                 break;
             case CMD.RspGuide:
-                PlayerOprateSys.Instance.RspGuide(msg);
+                MainCitySys.Instance.RspGuide(msg);
                 break;
             case CMD.RspStrengthen:
-                PlayerOprateSys.Instance.RspStrengthen(msg);
+                MainCitySys.Instance.RspStrengthen(msg);
                 break;
             case CMD.PshChat:
-                PlayerOprateSys.Instance.PshChat(msg);
+                MainCitySys.Instance.PshChat(msg);
                 break;
             case CMD.RspTranscation:
-                PlayerOprateSys.Instance.RspTranscation(msg);
+                MainCitySys.Instance.RspTranscation(msg);
                 break;
             case CMD.PshPower:
-                PlayerOprateSys.Instance.PshPower(msg);
+                MainCitySys.Instance.PshPower(msg);
                 break;
             case CMD.RspTakeTaskReward:
-                PlayerOprateSys.Instance.RspTakeTaskReward(msg);
+                MainCitySys.Instance.RspTakeTaskReward(msg);
                 break;
             case CMD.PshTaskPrgs:
-                PlayerOprateSys.Instance.PshTaskPrgs(msg);
+                MainCitySys.Instance.PshTaskPrgs(msg);
+                break;
+            case CMD.RspMission:
+                MissionSystem.Instance.RspMission(msg);
                 break;
         }
 

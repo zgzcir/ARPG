@@ -121,7 +121,7 @@ public class TasksPanel : HandleablePanel
         curGuideCfg =  resSvc.GetGuideCfg(pd.GuideID);
         if (curGuideCfg != null)
         {
-            PlayerOprateSys.Instance.NavGuide(curGuideCfg);
+            MainCitySys.Instance.NavGuide(curGuideCfg);
         }
     }
 

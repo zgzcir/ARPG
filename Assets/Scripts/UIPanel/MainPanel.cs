@@ -94,7 +94,7 @@ SetText(txtHp,nowHp+"/"+totalHp);
             imgDirBg.transform.position = defaultPos;
             SetActive(imgDirHandle, false);
             imgDirHandle.transform.localPosition = Vector2.zero;
-            PlayerOprateSys.Instance.SetPlayerMoveMobile(Vector2.zero);
+            MainCitySys.Instance.SetPlayerMoveMobile(Vector2.zero);
         });
         OnClickDrag(imgTouch.gameObject, eventData =>
         {
@@ -102,7 +102,7 @@ SetText(txtHp,nowHp+"/"+totalHp);
             float len = dir.magnitude;
             Vector2 clampDir = Vector2.ClampMagnitude(dir, pointDis);
             imgDirHandle.transform.position = startPos + clampDir;
-            PlayerOprateSys.Instance.SetPlayerMoveMobile(dir);
+            MainCitySys.Instance.SetPlayerMoveMobile(dir);
         });
     }
 }

@@ -12,7 +12,6 @@ public class Constans
 
  public const int MainCityMapPreId = 1000;
  public const int MainCityMapPlayId = 1001;
-
 /// <summary>
 /// 背景音乐
 /// </summary>
