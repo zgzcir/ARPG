@@ -10,6 +10,7 @@ public class PlayerCfg
     public static KeyCode StrengthenPanel = KeyCode.T;
     public static KeyCode TranscationsPanelPower = KeyCode.P;
     public static KeyCode TranscationsPanelCoin = KeyCode.O;
+    public static KeyCode EntoMission= KeyCode.M;
 
     public static KeyCode Jump = KeyCode.Space;
 

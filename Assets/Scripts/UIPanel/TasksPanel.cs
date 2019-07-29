@@ -21,12 +21,14 @@ public class TasksPanel : HandleablePanel
     protected override void OnOpen()
     {
         base.OnOpen();
-        pd = pd ?? GameRoot.Instance.PlayerData;
-        FreshUI();
+ 
+           pd = pd ?? GameRoot.Instance.PlayerData;
+        FreshPanel();
     }
 
-    private void FreshUI()
+    public void FreshPanel()
     {
+     
         trdList.Clear();
         List<TaskRewardData> todoLst = new List<TaskRewardData>();
         List<TaskRewardData> doneLst = new List<TaskRewardData>();
@@ -37,9 +39,9 @@ public class TasksPanel : HandleablePanel
             {
                 id = int.Parse(taskInfoArr[0]),
                 Prgs = int.Parse(taskInfoArr[1]),
-                Taked = taskInfoArr[2].Equals("1")
+                IsTaked = taskInfoArr[2].Equals("1")
             };
-            if (trd.Taked)
+            if (trd.IsTaked)
             {
                 doneLst.Add(trd);
             }
@@ -51,13 +53,26 @@ public class TasksPanel : HandleablePanel
 
         trdList.AddRange(todoLst);
         trdList.AddRange(doneLst);
+
         for (int i = 0; i < trdList.Count; i++)
         {
-            GameObject go = resSvc.LoadPrefab(PathDefine.TaskRewardItem);
+            GameObject go;
+
+            if (TaskRewardItemParent.childCount > i + 1)
+            {
+                go = TaskRewardItemParent.GetChild(i + 1).gameObject;
+            }
+            else
+            {
+                go = resSvc.LoadPrefab(PathDefine.TaskRewardItem);
+            }
+
             go.transform.SetParent(TaskRewardItemParent);
-            go.transform.localPosition = Vector3.zero;
-            go.transform.localScale = Vector3.one;
+//            go.transform.localPosition = Vector3.zero;
+
+               go.transform.localScale = Vector3.one;
             go.name = "taskItem_" + i;
+
             TaskRewardData trd = trdList[i];
             TaskRewardCfg trf = resSvc.GetTaskRewardCfg(trd.id);
 
@@ -69,26 +84,48 @@ public class TasksPanel : HandleablePanel
             var prgVal = 1.0f * trd.Prgs / trf.Count;
             Image imgPrgVal = GetTrans(go.transform, "imgPrgBar/imgPrgVal").GetComponent<Image>();
             imgPrgVal.fillAmount = prgVal;
+            GetTrans(go.transform, "txtTaken").gameObject.SetActive(trd.IsTaked);
             Button btnTake = GetTrans(go.transform, "btnTake").GetComponent<Button>();
-            btnTake.onClick.AddListener(() => 
+            btnTake.interactable = trd.Prgs == trf.Count;
+          btnTake.gameObject.SetActive(!trd.IsTaked);
+            var i1 = i;
+              btnTake.onClick.RemoveAllListeners(); 
+            btnTake.onClick.AddListener(() =>
             {
-              Debug.Log(go.name);
+                for (int j = 0; j < btnTake.onClick.GetPersistentEventCount(); j++)
+                {
+                    Debug.Log(btnTake.onClick.GetPersistentMethodName(j));
+                }
+     
+                btnTake.interactable = false;
+                netSvc.SendMsg(new GameMsg()
+                {    
+                    cmd = (int) CMD.ReqTakeTaskReward,
+                    ReqTakeTaskReward = new ReqTakeTaskReward()
+                    {
+                        ID = trdList[i1].id
+                    }
+                });
+//                TaskRewardCfg trc = resSvc.GetTaskRewardCfg(trdList[index].id);
+//                int coin = trc.Coin;
+//                int exp = trc.Exp;
+//                GameRoot.AddTips(coin + "  " + exp);
             });
         }
     }
 
-//    public void OnNavButtonClick()
-//    {
-//        if (curMainLineData != null)
-//        {
-//            PlayerOprateSys.Instance.NavGuide(curMainLineData);
-//        }
-//    }
+    private GuideCfg curGuideCfg;
 
-    private void ClickTakeBtn()
+    public void OnNavButtonClick()
     {
-        
+        curGuideCfg =  resSvc.GetGuideCfg(pd.GuideID);
+        if (curGuideCfg != null)
+        {
+            PlayerOprateSys.Instance.NavGuide(curGuideCfg);
+        }
     }
+
+
 
     private void SetTaskBar(GuideCfg guideCfg)
     {

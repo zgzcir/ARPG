@@ -4,6 +4,7 @@ public class MapCfg : BaseData<MapCfg>
 {
     public string MapName;
     public string SceneName;
+    public int Power;
     public Vector3 MainCamPos;
     public Vector3 MainCamRote;
     public Vector3 PlayerBornPos;
@@ -30,6 +31,7 @@ public class StrengthenCfg : BaseData<StrengthenCfg>
     public int Coin;
     public int Crystal;
 }
+
 public class TaskRewardCfg : BaseData<TaskRewardCfg>
 {
     public string TaskName;
@@ -41,8 +43,9 @@ public class TaskRewardCfg : BaseData<TaskRewardCfg>
 public class TaskRewardData : BaseData<TaskRewardData>
 {
     public int Prgs;
-    public bool Taked;
+    public bool IsTaked;
 }
+
 public class BaseData<T>
 {
     public int id;

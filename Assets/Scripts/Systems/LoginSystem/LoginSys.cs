@@ -8,7 +8,7 @@ public class LoginSys : BaseSystem
     public static LoginSys Instance;
     public LoginPanel loginPanel;
     public CreatePanel CreatePanel;
-    private GameObject p;
+    private GameObject player;
 
     public override void InitSys()
     {
@@ -21,7 +21,7 @@ public class LoginSys : BaseSystem
 
     public void EnterLogin()
     {
-     resSvc.AsyncLoadScene(Constans.SceneMain, () =>
+        resSvc.AsyncLoadScene(Constans.SceneMain, () =>
             {
                 CameraController cameraController = Camera.main.GetComponent<CameraController>();
                 cameraController.enabled = false;
@@ -30,7 +30,7 @@ public class LoginSys : BaseSystem
 
                 ViewSvc.Instance.AdjustDepthFieldFL(60f);
                 loginPanel.SetPanelState();
-             audioSvc.PlayBgAudio(Constans.BGLogin, true);
+                audioSvc.PlayBgAudio(Constans.BGLogin, true);
                 GameRoot.AddTips("欢迎回来");
             }
         );
@@ -39,7 +39,7 @@ public class LoginSys : BaseSystem
     public void RspLogin(GameMsg msg)
     {
         GameRoot.Instance.SetPlayerData(msg.RspLogin);
-        if (msg.RspLogin.PlayerData.Name== "")
+        if (msg.RspLogin.PlayerData.Name == "")
         {
             CreatePanel.SetPanelState();
             loginPanel.SetPanelState(false);
@@ -47,7 +47,7 @@ public class LoginSys : BaseSystem
         else
         {
             loginPanel.SetPanelState(false);
-            PlayerOprateSys.Instance.EntoPLayerControll();
+            PlayerOprateSys.Instance.EnterPlayerOprate();
         }
     }
 
@@ -55,16 +55,17 @@ public class LoginSys : BaseSystem
     {
         GameRoot.Instance.SetPlayerName(msg.RspReName.Name);
         CreatePanel.SetPanelState(false);
-        PlayerOprateSys.Instance.EntoPLayerControll();
+        PlayerOprateSys.Instance.EnterPlayerOprate();
     }
 
     private void LoadPlayer(MapCfg mapData)
     {
-        p = resSvc.LoadPrefab(PathDefine.PlayerCity);
-        PlayerOprateSys.Instance.InjectPOSysThings(p.GetComponent<PlayerController>(),Camera.main.GetComponent<CameraController>());
+        player = resSvc.LoadPrefab(PathDefine.PlayerCity);
+        PlayerOprateSys.Instance.InjectPOSysThings(player.GetComponent<PlayerController>(),
+            Camera.main.GetComponent<CameraController>());
         PlayerOprateSys.Instance.DisablePlayerControl();
-        p.transform.position = mapData.PlayerBornPos;
-        p.transform.localEulerAngles = mapData.PlayerBornRote;
+        player.transform.position = mapData.PlayerBornPos;
+        player.transform.localEulerAngles = mapData.PlayerBornRote;
         var transform1 = Camera.main.transform;
         transform1.position = mapData.MainCamPos;
         transform1.eulerAngles = mapData.MainCamRote;

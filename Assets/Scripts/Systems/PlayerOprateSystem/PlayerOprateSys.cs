@@ -48,8 +48,18 @@ public class PlayerOprateSys : BaseSystem
         CommonTool.Log("PlayerOperateSys Connected");
     }
 
-    public void SwitchPanel(BasePanel panel)
+    public void SwitchPanel(BasePanel panel, int force = 0)
     {
+        if (force == 1 && panel.IsOpen)
+        {
+            return;
+        }
+
+        if (force == 2 && !panel.IsOpen)
+        {
+            return;
+        }
+
         if (panel.IsOpen)
         {
             nowOpenCursorPanel--;
@@ -94,23 +104,31 @@ public class PlayerOprateSys : BaseSystem
             }
 
             if (Input.GetKeyDown(PlayerCfg.TranscationsPanelPower))
-            {                    TransactionsPanel.SetType(0);
+            {
+                TransactionsPanel.SetType(0);
 
                 SwitchPanel(TransactionsPanel);
             }
 
             if (Input.GetKeyDown(PlayerCfg.TranscationsPanelCoin))
-            {                    TransactionsPanel.SetType(1);
+            {
+                TransactionsPanel.SetType(1);
 
                 SwitchPanel(TransactionsPanel);
             }
-        }
 
+         
+        }
+        if (Input.GetKeyDown(PlayerCfg.EntoMission))
+        {
+            SwitchMissionSystem();
+        }
         if (isNavigate)
         {
             DetectIsArriveNavPos();
         }
     }
+
 
     public void SetMainCamreraRotateState(bool can = true)
     {
@@ -119,12 +137,16 @@ public class PlayerOprateSys : BaseSystem
 
     public void DisablePlayerControl()
     {
+        IsPlayerControll = false;
+
         playerController.enabled = false;
         cameraController.enabled = false;
     }
 
     public void EnablePlayerControl()
     {
+        IsPlayerControll = true;
+
         playerController.enabled = true;
         cameraController.enabled = true;
     }
@@ -233,6 +255,38 @@ public class PlayerOprateSys : BaseSystem
         curMapBaseInfo = GameObject.FindWithTag("MapRoot").GetComponent<MapBaseInfo>();
     }
 
+    private void SwitchMissionSystem(int force = 0)
+    {
+        if (isNavigate)
+        {
+            CancelNavGuide();
+        }
+
+        MissionSystem missionSystem = MissionSystem.Instance;
+        if (force == 1 && missionSystem.IsIn)
+        {
+            return;
+        }
+
+        if (force == 2 && !!missionSystem.IsIn)
+        {
+            return;
+        }
+
+        if (MissionSystem.Instance.IsIn)
+        {
+            EnablePlayerControl();
+            ViewSvc.Instance.SetCursorState(false);
+            missionSystem.ExitMission();
+        }
+        else
+        {
+            DisablePlayerControl();
+            ViewSvc.Instance.SetCursorState(true);
+            missionSystem.EnterMission();
+        }
+    }
+
     public void RspGuide(GameMsg msg)
     {
         RspGuide data = msg.RspGuide;
@@ -245,19 +299,26 @@ public class PlayerOprateSys : BaseSystem
             case 0:
                 break;
             case 1:
+                SwitchMissionSystem(1);
                 break;
             case 2:
+                SwitchPanel(StrengthenPanel,1);
                 break;
             case 3:
+                TransactionsPanel.SetType(0);
+                SwitchPanel(TransactionsPanel,1);
                 break;
             case 4:
+                TransactionsPanel.SetType(1);
+                SwitchPanel(TransactionsPanel,1);
                 break;
             case 5:
+                SwitchPanel(ChatPanel,1);
                 break;
         }
     }
 
-    public void EntoPLayerControll()
+    public void EnterPlayerOprate()
     {
         IsPlayerControll = true;
         MainPanel.SetPanelState();
@@ -272,8 +333,7 @@ public class PlayerOprateSys : BaseSystem
         audioSvc.PlayBgAudio(Constans.BGCityHappy, true);
     }
 
-
-    public GuideCfg GetCurMainLineData()
+    public GuideCfg GetCurGuideData()
     {
         return curGuideData;
     }
@@ -304,8 +364,13 @@ public class PlayerOprateSys : BaseSystem
         TransactionsPanel.btnSure.interactable = true;
         ChaInfoPanel.FreshPanel();
         StrengthenPanel.FreshPanel();
-    }
+        MainPanel.FreshPanel();
 
+        if (msg.PshTaskPrgs != null)
+        {
+            PshTaskPrgs(msg);
+        }
+    }
 
     #endregion
 
@@ -316,7 +381,27 @@ public class PlayerOprateSys : BaseSystem
         GameRoot.Instance.SetPlayerDataByPower(msg.PshPower);
         MainPanel.FreshPanel();
     }
-    
+
+    #endregion
+
+    #region task
+
+    public void RspTakeTaskReward(GameMsg msg)
+    {
+        var data = msg.RspTakeTaskReward;
+        GameRoot.Instance.SetPlayerDataByTask(data);
+        TasksPanel.FreshPanel();
+        MainPanel.FreshPanel();
+    }
+
+    public void PshTaskPrgs(GameMsg msg)
+    {
+        var data = msg.PshTaskPrgs;
+        GameRoot.Instance.SetPlayerDataByTaskPrgs(data);
+
+        if (TasksPanel.IsOpen)
+            TasksPanel.FreshPanel();
+    }
 
     #endregion
 }

@@ -38,11 +38,14 @@ public class GameRoot : MonoBehaviour
         playerOpratete.InitSys();
         EntoSceneSys entoScene = GetComponent<EntoSceneSys>();
         entoScene.InitSys();
-        
-        
+
+
+        MissionSystem mission = GetComponent<MissionSystem>();
+        mission.InitSys();
+
+
         InitUIRoot();
         login.EnterLogin();
-
     }
 
     private void InitUIRoot()
@@ -55,6 +58,7 @@ public class GameRoot : MonoBehaviour
             basePanel.IsOpen = false;
             basePanel.Init();
         }
+
         DynamicPanel.SetPanelState();
     }
 
@@ -80,31 +84,46 @@ public class GameRoot : MonoBehaviour
     public void SetPlayerDataByGuide(RspGuide data)
     {
         playerData.Coin = data.coin;
-        playerData.GuideID= data.id;
-        playerData.Level= data.lv;
-        playerData.Exp= data.exp;
+        playerData.GuideID = data.id;
+        playerData.Level = data.lv;
+        playerData.Exp = data.exp;
     }
 
     public void SetPlayerDataByStrengthen(RspStrengthen data)
     {
-        playerData.Coin= data.coin;
+        playerData.Coin = data.coin;
         playerData.HP = data.hp;
         playerData.Crystal = data.crystal;
         playerData.PA = data.pa;
         playerData.PD = data.pd;
         playerData.SA = data.sa;
         playerData.SD = data.sd;
-        playerData.StrenArr= data.strenarr;
+        playerData.StrenArr = data.strenarr;
     }
 
     public void SetPlayerDataByTranscation(RspTranscation data)
     {
-        playerData.Coin= data.coin;
+        playerData.Coin = data.coin;
         playerData.Diamond = data.diamond;
-        playerData.Power= data.power;
+        playerData.Power = data.power;
     }
+
     public void SetPlayerDataByPower(PshPower data)
     {
         playerData.Power = data.power;
+    }
+
+    public void SetPlayerDataByTask(RspTakeTaskReward data)
+    {
+        playerData.Coin = data.Coin;
+        playerData.Level
+            = data.Lv;
+        playerData.Exp = data.Exp;
+        playerData.TaskRewardArr = data.TaskRewardArr;
+    }
+
+    public void SetPlayerDataByTaskPrgs(PshTaskPrgs data)
+    {
+        playerData.TaskRewardArr = data.TaskRewardArr;
     }
 }

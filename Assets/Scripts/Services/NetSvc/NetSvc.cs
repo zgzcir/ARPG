@@ -86,6 +86,10 @@ public class NetSvc : MonoBehaviour
                     CommonTool.Log("数据库更新异常", LogType.Error);
                     GameRoot.AddTips("网络不稳定，请重试");
                     break;
+                case ErrCode.ClientDataErr:
+                    CommonTool.Log("客户端数据异常", LogType.Error);
+                    GameRoot.AddTips("网络不稳定，请重试");
+                    break;
                 case ErrCode.LackCoin:
                     GameRoot.AddTips("金币不足");
                     break;
@@ -120,12 +124,18 @@ public class NetSvc : MonoBehaviour
             case CMD.PshChat:
                 PlayerOprateSys.Instance.PshChat(msg);
                 break;
-                    case CMD.RspTranscation:
-                        PlayerOprateSys.Instance.RspTranscation(msg);
-                        break;
-                    case CMD.PshPower:
-                        PlayerOprateSys.Instance.PshPower(msg);
-                        break;
+            case CMD.RspTranscation:
+                PlayerOprateSys.Instance.RspTranscation(msg);
+                break;
+            case CMD.PshPower:
+                PlayerOprateSys.Instance.PshPower(msg);
+                break;
+            case CMD.RspTakeTaskReward:
+                PlayerOprateSys.Instance.RspTakeTaskReward(msg);
+                break;
+            case CMD.PshTaskPrgs:
+                PlayerOprateSys.Instance.PshTaskPrgs(msg);
+                break;
         }
 
         ;

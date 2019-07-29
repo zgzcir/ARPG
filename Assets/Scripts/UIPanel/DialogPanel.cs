@@ -24,7 +24,7 @@ public class DialogPanel : HandleablePanel
         base.OnOpen();
         RegisterUIEvents();
         pd = GameRoot.Instance.PlayerData;
-        curTaskData = PlayerOprateSys.Instance.GetCurMainLineData();
+        curTaskData = PlayerOprateSys.Instance.GetCurGuideData();
         dialogArr = curTaskData.DialoArr.Split('#');
         maxIndex = dialogArr.Length - 1;
         index = 1;

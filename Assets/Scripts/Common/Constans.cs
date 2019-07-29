@@ -8,7 +8,7 @@ public class Constans
  /// <summary>
  /// 场景加载名字
  /// </summary>
- public const string SceneMain = "SceneMain";
+ public const string SceneMain = "SceneMainCity";
 
  public const int MainCityMapPreId = 1000;
  public const int MainCityMapPlayId = 1001;
