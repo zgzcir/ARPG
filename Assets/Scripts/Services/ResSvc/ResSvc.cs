@@ -23,9 +23,7 @@ public class ResSvc : MonoBehaviour
         InitTaskRewardCfgDic(PathDefine.TaskRewardCfg);
         CommonTool.Log("ResSvc Connected");
     }
-
     private Action prgCB = null;
-
     public void AsyncLoadScene(string sceneName, Action loaded)
     { 
         GameRoot.Instance.LoadingPanel.SetPanelState();

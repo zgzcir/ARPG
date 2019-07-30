@@ -5,7 +5,5 @@ using UnityEngine;
 public class MapBaseInfo : MonoBehaviour
 {
     public  Transform[] NpcPosTrans;
-
- 
     
 }

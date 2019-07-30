@@ -6,17 +6,17 @@
 		<power>0</power>
 		<mainCamPos>17.4,7,50</mainCamPos>
 		<mainCamRote>45,135,0</mainCamRote>
-		<playerBornPos>22,-1.1,45</playerBornPos>
+		<playerBornPos>0,-1.6,0</playerBornPos>
 		<playerBornRote>0,0,0</playerBornRote>
 	</item>
 	<item ID="1001">
-		<mapName>荒野遗迹</mapName>
-		<sceneName>SceneOrge</sceneName>
+		<mapName>方块空间</mapName>
+		<sceneName>SceneCube</sceneName>
 		<power>5</power>
-		<mainCamPos>-13.19,18.87,14.69</mainCamPos>
-		<mainCamRote>45,135,0</mainCamRote>
-		<playerBornPos>-10,13.2,11.5</playerBornPos>
-		<playerBornRote>0,145,0</playerBornRote>
+		<mainCamPos>0,0,0</mainCamPos>
+		<mainCamRote>0,0,0</mainCamRote>
+		<playerBornPos>0,0,0</playerBornPos>
+		<playerBornRote>0,0,0</playerBornRote>
 	</item>
 	<item ID="1002">
 		<mapName>荒野遗迹</mapName>

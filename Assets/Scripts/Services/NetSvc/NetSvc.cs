@@ -140,7 +140,7 @@ public class NetSvc : MonoBehaviour
                 MainCitySys.Instance.PshTaskPrgs(msg);
                 break;
             case CMD.RspMission:
-                MissionSystem.Instance.RspMission(msg);
+                MissionSys.Instance.RspMission(msg);
                 break;
         }
 

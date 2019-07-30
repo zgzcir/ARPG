@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Resources/ResScenes/GameRoot.unity
     guid: 609eb758497632d4bb11e7c8d15fdccc
   - enabled: 1
-    path: Assets/Resources/ResScenes/SceneMain.unity
+    path: Assets/Resources/ResScenes/SceneMainCity.unity
     guid: 90f06d69de97eda4c9705c7b73d4c1e7
+  - enabled: 1
+    path: Assets/Resources/ResScenes/SceneCube.unity
+    guid: a8b16dc8e151c574d8a5865691f95aec
   m_configObjects: {}

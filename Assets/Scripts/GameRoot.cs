@@ -10,7 +10,6 @@ public class GameRoot : MonoBehaviour
 
     public LodingPanel LoadingPanel;
     public DynamicPanel DynamicPanel;
-
     private void Start()
     {
         Instance = this;
@@ -18,7 +17,6 @@ public class GameRoot : MonoBehaviour
         CommonTool.Log("Link Start!");
         Init();
     }
-
     private void Init()
     {
         NetSvc net = GetComponent<NetSvc>();
@@ -39,11 +37,14 @@ public class GameRoot : MonoBehaviour
         EntoSceneSys entoScene = GetComponent<EntoSceneSys>();
         entoScene.InitSys();
 
+        
 
-        MissionSystem mission = GetComponent<MissionSystem>();
+        MissionSys mission = GetComponent<MissionSys>();
         mission.InitSys();
 
-
+        BattleSys battle = GetComponent<BattleSys>();
+        battle.InitSys();
+        
         InitUIRoot();
         login.EnterLogin();
     }
@@ -58,10 +59,11 @@ public class GameRoot : MonoBehaviour
             basePanel.IsOpen = false;
             basePanel.Init();
         }
-
         DynamicPanel.SetPanelState();
     }
 
+
+    
     public static void AddTips(string tips)
     {
         Instance.DynamicPanel.AddTips(tips);
