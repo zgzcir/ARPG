@@ -67,25 +67,25 @@ public class PlayerController : MonoBehaviour
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
         //******************************************///////////////////////////////////////////
-        float u = 0;
-      
-
-            if (CharacterController.isGrounded)
-            {
-                if (Input.GetKeyDown(PlayerCfg.Jump))
-                {                    cameraController.SetJumpState();
-                    u = Constans.PlayerJumpHeight;
-                    Ani.SetBool(IsJump, true);
-                }
-                else
-                {
-                    Ani.SetBool(IsJump, false);
-                    cameraController.SetJumpState(false);
-
-                }
-            }
-        
-        u -= Constans.Gravity * Time.deltaTime;
+//        float u = 0;
+//      
+//
+//            if (CharacterController.isGrounded)
+//            {
+//                if (Input.GetKeyDown(PlayerCfg.Jump))
+//                {                    cameraController.SetJumpState();
+//                    u = Constans.PlayerJumpHeight;
+//                    Ani.SetBool(IsJump, true);
+//                }
+//                else
+//                {
+//                    Ani.SetBool(IsJump, false);
+//                    cameraController.SetJumpState(false);
+//
+//                }
+//            }
+//        
+//        u -= Constans.Gravity * Time.deltaTime;
         //******************************************///////////////////////////////////////////
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         InputDir  = input.normalized;
@@ -103,13 +103,14 @@ public class PlayerController : MonoBehaviour
         {
             SetBlend(Constans.BlendIdle);
         }
+        
         if (MainCitySys.Instance.IsNavigate)
         {
             SetBlend(Constans.BlendRun);
         }
         else
         {
-            CharacterController.Move(new Vector3(0,u*Time.deltaTime,0));
+//            CharacterController.Move(new Vector3(0,u*Time.deltaTime,0));
         }
         if (!currentBlend.Equals(targetBlend))
         {

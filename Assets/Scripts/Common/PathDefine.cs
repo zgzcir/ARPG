@@ -15,7 +15,8 @@
         /// player
         /// </summary>
         public const string PlayerCity = "PrefabPlayer/PlayerCity";
-
+        public const string PlayerBattle = "PrefabPlayer/PlayerBattle";
+    
 
         public const string TaskRewardItem = "PrefabUI/Item/taItem";
 

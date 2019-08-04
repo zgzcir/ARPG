@@ -13,10 +13,10 @@
 		<mapName>方块空间</mapName>
 		<sceneName>SceneCube</sceneName>
 		<power>5</power>
-		<mainCamPos>0,0,0</mainCamPos>
+		<mainCamPos>0,1.1,-1</mainCamPos>
 		<mainCamRote>0,0,0</mainCamRote>
 		<playerBornPos>0,0,0</playerBornPos>
-		<playerBornRote>0,0,0</playerBornRote>
+		<playerBornRote> 0,0,0</playerBornRote>
 	</item>
 	<item ID="1002">
 		<mapName>荒野遗迹</mapName>

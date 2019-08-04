@@ -23,8 +23,8 @@ public class LoginSys : BaseSystem
     {
         resSvc.AsyncLoadScene(Constans.SceneMain, () =>
             {
-                CameraController cameraController = Camera.main.GetComponent<CameraController>();
-                cameraController.enabled = false;
+                CameraController cameraController2 = Camera.main.GetComponent<CameraController>();
+                cameraController2.enabled = false;
                 MapCfg mapData = resSvc.GetMapCfgData(Constans.MainCityMapPreId);
                 LoadPlayer(mapData);
 

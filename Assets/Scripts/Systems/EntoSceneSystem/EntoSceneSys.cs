@@ -7,7 +7,7 @@ public class EntoSceneSys : BaseSystem
     public static EntoSceneSys Instance;
     public MainPanel MainPanel;
     private PlayerController PlayerController;
-    private CameraController CameraController;
+    private CameraController cameraController;
     public Transform[] npcPosTrans;
 
     public override void InitSys()
