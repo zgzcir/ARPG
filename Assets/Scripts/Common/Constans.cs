@@ -55,7 +55,7 @@ public const string BGCityHappy = "bgCityHappy";
 /// 混合参数
 /// </summary>
  public const float BlendIdle = 0;
- public const float  BlendRun = 1;
+ public const float  BlendMove = 1;
 
  /// <summary>
  /// Cam

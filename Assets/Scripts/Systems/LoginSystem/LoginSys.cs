@@ -47,7 +47,7 @@ public class LoginSys : BaseSystem
         else
         {
             loginPanel.SetPanelState(false);
-            MainCitySys.Instance.EnterPlayerOprate();
+            MainCitySys.Instance.EnterMainCitySys();
         }
     }
 
@@ -55,7 +55,7 @@ public class LoginSys : BaseSystem
     {
         GameRoot.Instance.SetPlayerName(msg.RspReName.Name);
         CreatePanel.SetPanelState(false);
-        MainCitySys.Instance.EnterPlayerOprate();
+        MainCitySys.Instance.EnterMainCitySys();
     }
 
     private void LoadPlayer(MapCfg mapData)

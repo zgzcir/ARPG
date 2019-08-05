@@ -26,7 +26,6 @@ public class BattleSys : BaseSystem
 
         BattleManager = go.AddComponent<BattleManager>();
         BattleManager.InitManager(mapID);
-        SetBattlePanelState();
     }
 
     public void SetBattlePanelState(bool isActive = true)

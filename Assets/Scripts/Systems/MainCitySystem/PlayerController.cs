@@ -9,7 +9,6 @@ public class PlayerController : Controller
     private Transform camTrans;
     private CameraController cameraController;
     private Vector3 camOffSet;
-    [FormerlySerializedAs("Animator")] public Animator Ani;
     public CharacterController CharacterController;
 
     private float targetBlend;
@@ -18,19 +17,21 @@ public class PlayerController : Controller
     private float currentVelocity;
 
     public Transform RayCastPoint;
-    
+
     private Vector2 inputDir;
-    public GameObject CameraPivot;//改成transform
+    public GameObject CameraPivot; //改成transform
     public Transform ChaCameraRotatePivot;
+
     public Vector2 InputDir
     {
-        get => inputDir;
+        private get => inputDir;
         set
         {
             isMove = value != Vector2.zero;
             inputDir = value;
         }
     }
+
     private float targetRotation;
     private bool isMove;
 
@@ -43,15 +44,17 @@ public class PlayerController : Controller
     {
         if (Camera.main != null) camTrans = Camera.main.transform;
         cameraController = camTrans.GetComponent<CameraController>();
-        
-    }
-    private float margin = 0.1f;    
-    private bool IsGrounded()
-    {
-        return Physics.Raycast(RayCastPoint.position, -Vector3.up,  margin);    
     }
 
-    private bool isGrounded=true;
+    private float margin = 0.1f;
+
+    private bool IsGrounded()
+    {
+        return Physics.Raycast(RayCastPoint.position, -Vector3.up, margin);
+    }
+
+    private bool isGrounded = true;
+
     private void OnCollisionEnter(Collision other)
     {
         isGrounded = true;
@@ -59,57 +62,56 @@ public class PlayerController : Controller
 
     private void FixedUpdate()
     {
-   
     }
 
     private void Update()
     {
-        Debug.DrawRay(RayCastPoint.position,-Vector3.up.normalized*10,Color.blue);
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
         //******************************************///////////////////////////////////////////
-//        float u = 0;
-//      
-//
-//            if (CharacterController.isGrounded)
-//            {
-//                if (Input.GetKeyDown(PlayerCfg.Jump))
-//                {                    cameraController.SetJumpState();
-//                    u = Constans.PlayerJumpHeight;
-//                    Ani.SetBool(IsJump, true);
-//                }
-//                else
-//                {
-//                    Ani.SetBool(IsJump, false);
-//                    cameraController.SetJumpState(false);
-//
-//                }
-//            }
-//        
-//        u -= Constans.Gravity * Time.deltaTime;
+////        float u = 0;
+////      
+////
+////            if (CharacterController.isGrounded)
+////            {
+////                if (Input.GetKeyDown(PlayerCfg.Jump))
+////                {                    cameraController.SetJumpState();
+////                    u = Constans.PlayerJumpHeight;
+////                    Ani.SetBool(IsJump, true);
+////                }
+////                else
+////                {
+////                    Ani.SetBool(IsJump, false);
+////                    cameraController.SetJumpState(false);
+////
+////                }
+////            }
+////        
+////        u -= Constans.Gravity * Time.deltaTime;
         //******************************************///////////////////////////////////////////
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        InputDir  = input.normalized;
+        InputDir = input.normalized;
         if (isMove)
         {
             if (MainCitySys.Instance.IsNavigate)
             {
-             MainCitySys.Instance.CancelNavGuide();
+                MainCitySys.Instance.CancelNavGuide();
             }
-            SetBlend(Constans.BlendRun);
-            SetDir();
-            SetMove();
+//            SetBlend(Constans.BlendMove);
+//            SetDir();
+//            SetMove();
         }
         else
         {
             SetBlend(Constans.BlendIdle);
         }
-        
+
         if (MainCitySys.Instance.IsNavigate)
         {
-            SetBlend(Constans.BlendRun);
+            SetBlend(Constans.BlendMove);
         }
-        else
+
+//        else
         {
 //            CharacterController.Move(new Vector3(0,u*Time.deltaTime,0));
         }
@@ -117,7 +119,6 @@ public class PlayerController : Controller
         {
             UpdateMixBlend();
         }
-    
     }
 
     private void SetDir()
@@ -137,7 +138,7 @@ public class PlayerController : Controller
         CharacterController.Move(Time.deltaTime * Constans.PlayerJumpHeight * transform.up);
     }
 
-    public void SetBlend(float blend)
+    public override void SetBlend(float blend)
     {
         targetBlend = blend;
     }

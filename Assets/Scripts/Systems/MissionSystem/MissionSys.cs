@@ -19,6 +19,7 @@ public class MissionSys : BaseSystem
 
     public void EnterMission()
     {
+        
         IsIn = true;
         OpenMissionPanel();
     }

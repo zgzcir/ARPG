@@ -11,6 +11,7 @@ public class MainCitySys : BaseSystem
 {
     public static MainCitySys Instance;
     public bool IsPlayerControll;
+    public bool IsInMainCity;
     public ChaInfoPanel ChaInfoPanel;
     public TasksPanel TasksPanel;
     public MainPanel MainPanel;
@@ -20,7 +21,6 @@ public class MainCitySys : BaseSystem
     public ChatPanel ChatPanel;
     private bool isChaInfoOpen;
     private bool isTasksopen;
-
     private PlayerController playerController;
     private CameraController cameraController;
     private CharacterController characterController;
@@ -121,14 +121,17 @@ public class MainCitySys : BaseSystem
 
                 SwitchPanel(TransactionsPanel);
             }
+        }
+
+        if (IsInMainCity)
+        {
             
             if (Input.GetKeyDown(PlayerCfg.EntoMission))
             {
                 SwitchMissionSystem();
             }
         }
-
-
+    
         if (isNavigate)
         {
             DetectIsArriveNavPos();
@@ -178,6 +181,7 @@ public class MainCitySys : BaseSystem
     public void SetPlayerMoveMobile(Vector2 dir)
     {
         playerController.InputDir = dir;
+        
     }
 
     public void SetChaCameraRotate(float rotate)
@@ -278,9 +282,8 @@ public class MainCitySys : BaseSystem
         {
             return;
         }
-
         if (MissionSys.Instance.IsIn)
-        {
+        {Debug.Log("Ds");
             EnablePlayerControl();
             ViewSvc.Instance.SetCursorState(false);
             missionSys.ExitMission();
@@ -289,6 +292,7 @@ public class MainCitySys : BaseSystem
         {
             DisablePlayerControl();
             ViewSvc.Instance.SetCursorState(true);
+     
             missionSys.EnterMission();
         }
     }
@@ -324,8 +328,9 @@ public class MainCitySys : BaseSystem
         }
     }
 
-    public void EnterPlayerOprate()
+    public void EnterMainCitySys()
     {
+        IsInMainCity = true;
         IsPlayerControll = true;
         MainPanel.SetPanelState();
         ChatPanel.SetPanelState();
@@ -350,7 +355,7 @@ public class MainCitySys : BaseSystem
         MainPanel.SetPanelState(false);
         ChatPanel.SetPanelState(false);
         nowOpenCursorPanels.ForEach(p => p.SetPanelState(false));
-
+        IsInMainCity = false;
     }
     
     public void RspStrengthen(GameMsg msg)
