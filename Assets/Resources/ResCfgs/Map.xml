@@ -2,11 +2,11 @@
 <root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<item ID="1000">
 		<mapName>圣光主城</mapName>
-		<sceneName>SceneMainCity</sceneName>
+		<sceneName>ScenneRoom</sceneName>
 		<power>0</power>
 		<mainCamPos>17.4,7,50</mainCamPos>
 		<mainCamRote>45,135,0</mainCamRote>
-		<playerBornPos>0,-1.6,0</playerBornPos>
+		<playerBornPos>0,0,0</playerBornPos>
 		<playerBornRote>0,0,0</playerBornRote>
 	</item>
 	<item ID="1001">
