@@ -121,12 +121,13 @@ public class MainCitySys : BaseSystem
 
                 SwitchPanel(TransactionsPanel);
             }
+            
+            if (Input.GetKeyDown(PlayerCfg.EntoMission))
+            {
+                SwitchMissionSystem();
+            }
         }
 
-        if (Input.GetKeyDown(PlayerCfg.EntoMission))
-        {
-            SwitchMissionSystem();
-        }
 
         if (isNavigate)
         {
@@ -157,7 +158,7 @@ public class MainCitySys : BaseSystem
     }
 
 
-    public void InitDefault()
+    public void InitController()
     {
         //playerctrl
         playerController.Init();
@@ -328,7 +329,7 @@ public class MainCitySys : BaseSystem
         IsPlayerControll = true;
         MainPanel.SetPanelState();
         ChatPanel.SetPanelState();
-        InitDefault();
+        InitController();
         EnablePlayerControl();
         ViewSvc.Instance.SetCursorState(false);
         ViewSvc.Instance.AdjustDepthFieldFL(8f);

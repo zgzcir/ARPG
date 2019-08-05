@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BattleSys : BaseSystem
 {
     public static BattleSys Instance;
@@ -15,7 +16,6 @@ public class BattleSys : BaseSystem
         Instance = this;
         CommonTool.Log("BattleSys Connected");
     }
-
     public void EntoBattle(int mapID)
     {
         GameObject go = new GameObject()

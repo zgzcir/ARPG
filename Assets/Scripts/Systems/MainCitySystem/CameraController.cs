@@ -27,14 +27,18 @@ public class CameraController : MonoBehaviour
             targetEuler = new Vector3(pitch, yaw, 0);
             transform.eulerAngles = targetEuler;
         }
+
+//if(Target!=null)
         camMovePos = Target.position - transform.forward * camLen;
         if (isJumpState)
         {
             var pos = camMovePos;
 //            camMovePos = Vector3.Lerp(transform.position, pos, 0.01f);
         }
+
         transform.position = camMovePos;
     }
+
     public void SetJumpState(bool can = true)
     {
         isJumpState = can;
@@ -43,6 +47,7 @@ public class CameraController : MonoBehaviour
             startJumpPos = Target.position;
         }
     }
+
     public void SetRotateState(bool can = true)
     {
         canRotate = can;

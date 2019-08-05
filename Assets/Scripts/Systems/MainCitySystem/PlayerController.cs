@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Controller
 {
     private Transform camTrans;
     private CameraController cameraController;
@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Camera.main != null) camTrans = Camera.main.transform;
         cameraController = camTrans.GetComponent<CameraController>();
+        
     }
     private float margin = 0.1f;    
     private bool IsGrounded()
