@@ -1,14 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 public class BattleSys : BaseSystem
 {
     public static BattleSys Instance;
-    public BattlePanel BattlePanel;
 
     public BattleManager BattleManager;
+    public BattlePanel BattlePanel;
 
     public override void InitSys()
     {
@@ -16,14 +13,14 @@ public class BattleSys : BaseSystem
         Instance = this;
         CommonTool.Log("BattleSys Connected");
     }
+
     public void EntoBattle(int mapID)
     {
-        GameObject go = new GameObject()
+        var go = new GameObject
         {
             name = "BattleRoot"
         };
         go.transform.SetParent(GameRoot.Instance.transform);
-
         BattleManager = go.AddComponent<BattleManager>();
         BattleManager.InitManager(mapID);
     }
