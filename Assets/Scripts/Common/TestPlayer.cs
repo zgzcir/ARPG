@@ -12,6 +12,7 @@ public class TestPlayer : Controller
 
     private float targetBlend;
     private float currentBlend;
+    public GameObject EffectSkill1;
 
     private float currentVelocity;
 
@@ -159,13 +160,14 @@ public class TestPlayer : Controller
     public void CLickSkill1Button()
     {
         Ani.SetInteger(Action,1);
-
-//        StartCoroutine(Delay());
+EffectSkill1.gameObject.SetActive(true);
+       StartCoroutine(Delay());
     }
 
     IEnumerator Delay()
-    {yield return new WaitForSeconds(0.1f);
+    {yield return new WaitForSeconds(0.9f);
         Ani.SetInteger(Action,-1);
+        EffectSkill1.gameObject.SetActive(false);
 
     }
 }

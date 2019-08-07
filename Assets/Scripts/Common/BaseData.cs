@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Text;
+using UnityEngine;
 
 public class MapCfg : BaseData<MapCfg>
 {
@@ -44,6 +45,14 @@ public class TaskRewardData : BaseData<TaskRewardData>
 {
     public int Prgs;
     public bool IsTaked;
+}
+
+public class SkillCfg : BaseData<SkillCfg>
+{
+    public string Name;
+    public int Duration;
+    public int AniAction;
+    public string FX;
 }
 
 public class BaseData<T>

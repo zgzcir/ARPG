@@ -6,7 +6,11 @@ using UnityEngine;
      
      {
          Debug.Log("Init SkillManager Done");
-
      }
-     
+
+     public void AttackEffect(int skillID)
+     {
+         
+         
+     }
  }

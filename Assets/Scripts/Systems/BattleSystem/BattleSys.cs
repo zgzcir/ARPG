@@ -32,7 +32,7 @@ public class BattleSys : BaseSystem
 
     public void SetSelfPlayerMoveMobileDir(Vector2 dir)
     {
-        BattleManager.SetSelfPlayerMoveMobileDir(dir);
+        BattleManager.SetSelfPlayerMoveDir(dir);
     }
 
     public void ReqReleaseSkill(int index)

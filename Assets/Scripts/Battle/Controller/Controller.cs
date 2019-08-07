@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class Controller:MonoBehaviour
 {
     public Animator Ani;
+    
     private static readonly int Blend = Animator.StringToHash("Blend");
 
     
@@ -10,6 +11,8 @@ public abstract class Controller:MonoBehaviour
 
     
     private Vector2 inputDir;
+    private static readonly int Action = Animator.StringToHash("Action");
+
     public Vector2 InputDir
     {
         
@@ -23,6 +26,11 @@ public abstract class Controller:MonoBehaviour
     public virtual void SetBlend(float blend)
     {
         Ani.SetFloat(Blend, blend);
+    }
+
+    public virtual void SetAction(int act)
+    {
+        Ani.SetInteger(Action, act);
     }
 
     

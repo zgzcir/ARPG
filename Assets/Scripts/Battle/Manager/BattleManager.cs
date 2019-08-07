@@ -66,14 +66,14 @@ public class BattleManager : MonoBehaviour
          entitySelfplayer=new Entityplayer();
         entitySelfplayer.StateManager = stateManager;
         entitySelfplayer.Controller = playerController;
-        
+        entitySelfplayer.SkillManager = skillManager;
         
         cameraController.Target = playerController.CameraPivot.transform;
         cameraController.enabled = true;
         //
     }
 
-    public void SetSelfPlayerMoveMobileDir(Vector2 dir)
+    public void SetSelfPlayerMoveDir(Vector2 dir)
     {
         if (dir == Vector2.zero)
         {
@@ -112,7 +112,7 @@ public class BattleManager : MonoBehaviour
     
     private void ReleaseSkill1()
     {
-        entitySelfplayer.Attack();
+        entitySelfplayer.Attack(101);
         
     }
 

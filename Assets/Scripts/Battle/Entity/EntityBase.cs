@@ -5,7 +5,7 @@ public abstract  class EntityBase
     public AniState currentAniState = AniState.None;
     public StateManager StateManager;
     public Controller Controller;
-    
+    public SkillManager SkillManager;
     public void Move()
     {
         StateManager.ChangeState(this,AniState.Move);
@@ -15,9 +15,9 @@ public abstract  class EntityBase
         StateManager.ChangeState(this,AniState.Idle);
     }
 
-    public void Attack()
+    public void Attack(int skillId)
     {
-        StateManager.ChangeState(this,AniState.Attack);
+        StateManager.ChangeState(this,AniState.Attack,skillId);
     }
 public virtual void SetBlend(float blend)
     {
@@ -33,5 +33,18 @@ public virtual void SetBlend(float blend)
         {
             Controller.InputDir = dir;
         }
+    }
+
+    public virtual void SetAciton(int act)
+    {
+        if (Controller!=null)
+        {
+            Controller.SetAction(act);
+        }
+    }
+
+    public virtual void AttackEffect(int skillID)
+    {
+        SkillManager.AttackEffect(skillID);
     }
 }

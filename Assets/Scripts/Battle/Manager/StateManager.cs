@@ -15,7 +15,7 @@ public class StateManager : MonoBehaviour
     }
 
 
-    public void ChangeState(EntityBase entity, AniState targetState)
+    public void ChangeState(EntityBase entity, AniState targetState,params object[]args)
     {
         if (entity.currentAniState == targetState) return;
 
@@ -23,11 +23,10 @@ public class StateManager : MonoBehaviour
         {
             if (entity.currentAniState != AniState.None)
             {
-                fsm[entity.currentAniState].Exit(entity);
+                fsm[entity.currentAniState].Exit(entity,args);
             }
-
-            fsm[targetState].Enter(entity);
-            fsm[targetState].Process(entity);
+            fsm[targetState].Enter(entity,args);
+            fsm[targetState].Process(entity,args);
         }
     }
 }

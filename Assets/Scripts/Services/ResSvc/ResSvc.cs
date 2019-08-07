@@ -21,6 +21,8 @@ public class ResSvc : MonoBehaviour
         InitGuideCfg(PathDefine.GuideCfg);
         InitStrengthenCfg(PathDefine.StrenghtenCfg);
         InitTaskRewardCfgDic(PathDefine.TaskRewardCfg);
+        
+        InitSkillCfgDic(PathDefine.SkillCfg);
         CommonTool.Log("ResSvc Connected");
     }
     private Action prgCB = null;
@@ -547,7 +549,73 @@ public class ResSvc : MonoBehaviour
         return null;
     }
     #endregion
+
+    #region skill
+  private Dictionary<int, SkillCfg> SkillCfgDic = new Dictionary<int, SkillCfg>();
+
+    private void InitSkillCfgDic(string path)
+    {
+        TextAsset xml = Resources.Load<TextAsset>(path);
+        if (!xml)
+        {
+            CommonTool.Log("xml file:" + path + "not exits", LogType.Error);
+        }
+        else
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xml.text);
+            XmlNodeList nodeLst = doc.SelectSingleNode("root")?.ChildNodes;
+            for (int i = 0; i < nodeLst?.Count; i++)
+            {
+                XmlElement ele = nodeLst[i] as XmlElement;
+                if (ele.GetAttributeNode("ID") == null)
+                {
+                    continue;
+                }
+
+                int id = Convert.ToInt32(ele.GetAttributeNode("ID")?.InnerText);
+                SkillCfg skillCfg = new SkillCfg()
+                {
+                    id = id
+                };
+                foreach (XmlElement e in ele.ChildNodes)
+                {
+                    switch (e.Name)
+                    {
+                        case "skillName":
+                            skillCfg.Name = e.InnerText;
+                            break;
+                        case "duration":
+                            skillCfg.Duration = int.Parse(e.InnerText);
+                            break;
+                        case "aniAction":
+                            skillCfg.AniAction = int.Parse(e.InnerText);
+                            break;
+                        case "fx":
+                            skillCfg.FX = e.InnerText;
+                            break;
+                    }
+                }
+
+                SkillCfgDic.Add(id, skillCfg);
+            }
+
+            CommonTool.Log("TaskRewardCfgDic Done");
+        }
+    }
+
+    public SkillCfg GetSkillCfg(int id)
+    {
+        SkillCfg data;
+        if (SkillCfgDic.TryGetValue(id, out data))
+        {
+            return data;
+        }
+        return null;
+    }
     
+
+    #endregion
     #endregion
     private void Update()
     {
