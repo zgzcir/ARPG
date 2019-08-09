@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 public class TestPlayer : Controller
@@ -160,8 +161,8 @@ public class TestPlayer : Controller
     public void CLickSkill1Button()
     {
         Ani.SetInteger(Action,1);
-EffectSkill1.gameObject.SetActive(true);
-       StartCoroutine(Delay());
+        EffectSkill1.gameObject.SetActive(true);
+        StartCoroutine(Delay());
     }
 
     IEnumerator Delay()

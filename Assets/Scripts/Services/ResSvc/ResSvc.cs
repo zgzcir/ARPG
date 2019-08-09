@@ -23,7 +23,17 @@ public class ResSvc : MonoBehaviour
         InitTaskRewardCfgDic(PathDefine.TaskRewardCfg);
         
         InitSkillCfgDic(PathDefine.SkillCfg);
+        InitSkillMoveCfgDic(PathDefine.SkillMoveCfg);
         CommonTool.Log("ResSvc Connected");
+    }
+
+    public void Reset()
+    {
+        SkillCfgDic.Clear();
+        SkillMoveCfgDic.Clear();
+        InitSkillCfgDic(PathDefine.SkillCfg);
+        InitSkillMoveCfgDic(PathDefine.SkillMoveCfg);
+        CommonTool.Log("ResSvc ReConnected"+SkillMoveCfgDic.Count);
     }
     private Action prgCB = null;
     public void AsyncLoadScene(string sceneName, Action loaded)
@@ -250,8 +260,8 @@ public class ResSvc : MonoBehaviour
     }
 
     #endregion
-
-
+    
+    
     #region tasks
 
     private Dictionary<int, GuideCfg> GuideCfgDic = new Dictionary<int, GuideCfg>();
@@ -594,12 +604,14 @@ public class ResSvc : MonoBehaviour
                         case "fx":
                             skillCfg.FX = e.InnerText;
                             break;
+                        case "skillMove":
+                            skillCfg.SkillMove = int.Parse(e.InnerText);
+                            break;
                     }
                 }
 
                 SkillCfgDic.Add(id, skillCfg);
             }
-
             CommonTool.Log("TaskRewardCfgDic Done");
         }
     }
@@ -608,6 +620,67 @@ public class ResSvc : MonoBehaviour
     {
         SkillCfg data;
         if (SkillCfgDic.TryGetValue(id, out data))
+        {
+            return data;
+        }
+        return null;
+    }
+    
+
+    #endregion
+    
+        #region skillmove
+  private Dictionary<int, SKillMoveCfg> SkillMoveCfgDic = new Dictionary<int, SKillMoveCfg>();
+
+    private void InitSkillMoveCfgDic(string path)
+    {
+        TextAsset xml = Resources.Load<TextAsset>(path);
+        if (!xml)
+        {
+            CommonTool.Log("xml file:" + path + "not exits", LogType.Error);
+        }
+        else
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xml.text);
+            XmlNodeList nodeLst = doc.SelectSingleNode("root")?.ChildNodes;
+            for (int i = 0; i < nodeLst?.Count; i++)
+            {
+                XmlElement ele = nodeLst[i] as XmlElement;
+                if (ele.GetAttributeNode("ID") == null)
+                {
+                    continue;
+                }
+
+                int id = Convert.ToInt32(ele.GetAttributeNode("ID")?.InnerText);
+                SKillMoveCfg skillMoveCfg = new SKillMoveCfg()
+                {
+                    id = id
+                };
+                foreach (XmlElement e in ele.ChildNodes)
+                {
+                    switch (e.Name)
+                    {
+                        case "moveTime":
+                            skillMoveCfg.MoveTime =int.Parse(e.InnerText);
+                            break;
+                        case "moveDis":
+                            skillMoveCfg.MoveDis = float.Parse(e.InnerText);
+                            break;
+                    }
+                }
+
+                SkillMoveCfgDic.Add(id, skillMoveCfg);
+            }
+
+            CommonTool.Log("SkillMoveCfgDic Done");
+        }
+    }
+
+    public SKillMoveCfg GetSkillMoveCfg(int id)
+    {
+        SKillMoveCfg data;
+        if (SkillMoveCfgDic.TryGetValue(id, out data))
         {
             return data;
         }

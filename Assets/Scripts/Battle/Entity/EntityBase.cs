@@ -43,8 +43,23 @@ public virtual void SetBlend(float blend)
         }
     }
 
+    public virtual void SetFX(string name, float duration)
+    {
+        if (Controller != null)
+        {
+            Controller.SetFX(name,duration);
+        }
+    }
+
+    public virtual void SetSkillMove(bool move,float speed=0f)
+    {
+        if (Controller != null)
+        {
+            Controller.SetSkillMoveState(move,speed);
+        }
+    }
     public virtual void AttackEffect(int skillID)
     {
-        SkillManager.AttackEffect(skillID);
+        SkillManager.AttackEffect(this,skillID);
     }
 }

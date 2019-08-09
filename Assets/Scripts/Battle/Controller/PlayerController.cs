@@ -18,7 +18,7 @@ public class PlayerController : Controller
 
     public Transform RayCastPoint;
 
- 
+
     public GameObject CameraPivot; //改成transform
     public Transform ChaCameraRotatePivot;
 
@@ -41,11 +41,6 @@ public class PlayerController : Controller
     private static readonly int Blend = Animator.StringToHash("Blend");
     private static readonly int IsJump = Animator.StringToHash("IsJump");
 
-    public void Init()
-    {
-        if (Camera.main != null) camTrans = Camera.main.transform;
-        cameraController = camTrans.GetComponent<CameraController>();
-    }
 
     private float margin = 0.1f;
 
@@ -65,7 +60,15 @@ public class PlayerController : Controller
     {
     }
 
-    private void Update()
+    public override void Init()
+    {
+        base.Init();
+        timerSvc = TimerSvc.Instance;
+        if (Camera.main != null) camTrans = Camera.main.transform;
+        cameraController = camTrans.GetComponent<CameraController>();
+    }
+
+        private void Update()
     {
 
         #region kb input
@@ -126,8 +129,18 @@ public class PlayerController : Controller
         {
             UpdateMixBlend();
         }
+        if (SkillMove)
+        {
+            SetSkillMove();
+        }
+        
     }
 
+    private  void SetSkillMove()
+    {
+        CharacterController.Move(Time.deltaTime * SkillMoveSpeed * transform.forward);
+
+    }
     private void SetDir()
     {
         targetRotation = Mathf.Atan2(InputDir.x, InputDir.y) * Mathf.Rad2Deg + camTrans.eulerAngles.y;
@@ -148,6 +161,19 @@ public class PlayerController : Controller
     public override void SetBlend(float blend)
     {
         targetBlend = blend;
+    }
+
+    public override void SetFX(string name, float duration)
+    {
+        GameObject go;
+        if (fxDic.TryGetValue(name, out go))
+        {
+            go.SetActive(true);
+            timerSvc.AddTimeTask(tid =>
+            {
+                go.SetActive(false);
+            }, duration);
+        }
     }
 
     private void UpdateMixBlend()

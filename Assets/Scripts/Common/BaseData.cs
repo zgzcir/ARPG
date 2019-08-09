@@ -53,8 +53,14 @@ public class SkillCfg : BaseData<SkillCfg>
     public int Duration;
     public int AniAction;
     public string FX;
+    public int SkillMove;
 }
 
+public class SKillMoveCfg : BaseData<SKillMoveCfg>
+{
+    public int MoveTime;
+    public float MoveDis;
+}
 public class BaseData<T>
 {
     public int id;

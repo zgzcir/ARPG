@@ -124,4 +124,11 @@ public class BattlePanel : BasePanel
     {
         BattleSys.Instance.ReqReleaseSkill(3);
     }
+    
+    //Test
+    public void ClickResetCfgs()
+    {
+resSvc.Reset();
+
+    }
 }

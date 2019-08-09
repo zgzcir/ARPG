@@ -13,6 +13,7 @@
     }
     public void Exit(EntityBase entity, params object[] args)
     {
+        entity.SetAciton(Constans.ActionDefault);
         CommonTool.Log("ex atk");
     }
 }

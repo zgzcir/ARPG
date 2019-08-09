@@ -10,6 +10,7 @@
         public const string StrenghtenCfg="ResCfgs/strengthen";
         public const string TaskRewardCfg="ResCfgs/taskreward";
         public const string SkillCfg="ResCfgs/Skill";
+        public const string SkillMoveCfg="ResCfgs/SkillMove";
 
 
         /// <summary>

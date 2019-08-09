@@ -8,7 +8,6 @@ public class StateIdle : IState
          entity.currentAniState = AniState.Idle;
          entity.SetDir(Vector2.zero);
      }
- 
      public void Process(EntityBase entity, params object[] args)
  
      {

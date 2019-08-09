@@ -82,6 +82,7 @@ public class BattleManager : MonoBehaviour
         else
         {
             entitySelfplayer.Move();
+            //
             entitySelfplayer.SetDir(dir);
         }
     }

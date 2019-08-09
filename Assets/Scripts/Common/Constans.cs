@@ -52,10 +52,12 @@ public const string BGCityHappy = "bgCityHappy";
  public const float RotateSmooth = 0.05f;
  
 /// <summary>
-/// 混合参数
+/// 动画状态机参数
 /// </summary>
  public const float BlendIdle = 0;
  public const float  BlendMove = 1;
+ public const int ActionDefault = -1;
+ 
 
  /// <summary>
  /// Cam

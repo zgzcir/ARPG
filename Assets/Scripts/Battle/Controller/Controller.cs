@@ -1,18 +1,34 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Controller:MonoBehaviour
-{
+{    protected Transform camTrans;
+    protected CameraController cameraController;
+
+    
     public Animator Ani;
+    public GameObject FX1;
     
     private static readonly int Blend = Animator.StringToHash("Blend");
 
     
     protected bool isMove;
 
+
+    protected TimerSvc timerSvc;
     
     private Vector2 inputDir;
     private static readonly int Action = Animator.StringToHash("Action");
-
+    protected Dictionary<string,GameObject> fxDic=new Dictionary<string, GameObject>();
+    protected bool SkillMove=false;
+    protected float SkillMoveSpeed;
+    public virtual void Init()
+    {      
+        if (FX1 != null)
+        {
+            fxDic.Add(FX1.name,FX1);
+        }
+    }
     public Vector2 InputDir
     {
         
@@ -33,8 +49,16 @@ public abstract class Controller:MonoBehaviour
         Ani.SetInteger(Action, act);
     }
 
-    
-    
+    public virtual void SetFX(string name,float duration)
+    {
+
+    }
+
+    public  void SetSkillMoveState(bool move, float skillSpeed = 0f)
+    {
+        SkillMove = move;
+        SkillMoveSpeed = skillSpeed;
+    }
     
     
     
