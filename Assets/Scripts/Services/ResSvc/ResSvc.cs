@@ -21,7 +21,7 @@ public class ResSvc : MonoBehaviour
         InitGuideCfg(PathDefine.GuideCfg);
         InitStrengthenCfg(PathDefine.StrenghtenCfg);
         InitTaskRewardCfgDic(PathDefine.TaskRewardCfg);
-        
+
         InitSkillCfgDic(PathDefine.SkillCfg);
         InitSkillMoveCfgDic(PathDefine.SkillMoveCfg);
         CommonTool.Log("ResSvc Connected");
@@ -33,11 +33,13 @@ public class ResSvc : MonoBehaviour
         SkillMoveCfgDic.Clear();
         InitSkillCfgDic(PathDefine.SkillCfg);
         InitSkillMoveCfgDic(PathDefine.SkillMoveCfg);
-        CommonTool.Log("ResSvc ReConnected"+SkillMoveCfgDic.Count);
+        CommonTool.Log("ResSvc ReConnected");
     }
+
     private Action prgCB = null;
+
     public void AsyncLoadScene(string sceneName, Action loaded)
-    { 
+    {
         GameRoot.Instance.LoadingPanel.SetPanelState();
         AsyncOperation sceneAsync = SceneManager.LoadSceneAsync(sceneName);
         prgCB = () =>
@@ -49,7 +51,7 @@ public class ResSvc : MonoBehaviour
                 if (loaded != null)
                 {
                     loaded();
-                }  
+                }
 
                 prgCB = null;
                 sceneAsync = null;
@@ -210,7 +212,7 @@ public class ResSvc : MonoBehaviour
                             mc.SceneName = e.InnerText;
                             break;
                         case "power":
-                            mc.Power =int.Parse( e.InnerText);
+                            mc.Power = int.Parse(e.InnerText);
                             break;
                         case "mainCamPos":
                         {
@@ -260,8 +262,8 @@ public class ResSvc : MonoBehaviour
     }
 
     #endregion
-    
-    
+
+
     #region tasks
 
     private Dictionary<int, GuideCfg> GuideCfgDic = new Dictionary<int, GuideCfg>();
@@ -458,6 +460,7 @@ public class ResSvc : MonoBehaviour
                 sd = dic[starlv];
             }
         }
+
         return sd;
     }
 
@@ -556,12 +559,15 @@ public class ResSvc : MonoBehaviour
         {
             return data;
         }
+
         return null;
     }
+
     #endregion
 
     #region skill
-  private Dictionary<int, SkillCfg> SkillCfgDic = new Dictionary<int, SkillCfg>();
+
+    private Dictionary<int, SkillCfg> SkillCfgDic = new Dictionary<int, SkillCfg>();
 
     private void InitSkillCfgDic(string path)
     {
@@ -604,14 +610,22 @@ public class ResSvc : MonoBehaviour
                         case "fx":
                             skillCfg.FX = e.InnerText;
                             break;
-                        case "skillMove":
-                            skillCfg.SkillMove = int.Parse(e.InnerText);
+                        case "skillMoveLst":
+                            skillCfg.SkillMoveLst=new  List<int>();
+                            string[] skMoveArr = e.InnerText.Split('|');
+                            for (int j = 0; j < skMoveArr.Length; j++)
+                            {
+                                if (skMoveArr[i] != "")
+                                    skillCfg.SkillMoveLst.Add(int.Parse(skMoveArr[i]));
+                            }
+
                             break;
                     }
                 }
 
                 SkillCfgDic.Add(id, skillCfg);
             }
+
             CommonTool.Log("TaskRewardCfgDic Done");
         }
     }
@@ -623,14 +637,15 @@ public class ResSvc : MonoBehaviour
         {
             return data;
         }
+
         return null;
     }
-    
 
     #endregion
-    
-        #region skillmove
-  private Dictionary<int, SKillMoveCfg> SkillMoveCfgDic = new Dictionary<int, SKillMoveCfg>();
+
+    #region skillmove
+
+    private Dictionary<int, SKillMoveCfg> SkillMoveCfgDic = new Dictionary<int, SKillMoveCfg>();
 
     private void InitSkillMoveCfgDic(string path)
     {
@@ -661,8 +676,13 @@ public class ResSvc : MonoBehaviour
                 {
                     switch (e.Name)
                     {
+                        case "delayTime":
+
+                            skillMoveCfg.DelayTime =
+                                int.Parse(e.InnerText);
+                            break;
                         case "moveTime":
-                            skillMoveCfg.MoveTime =int.Parse(e.InnerText);
+                            skillMoveCfg.MoveTime = int.Parse(e.InnerText);
                             break;
                         case "moveDis":
                             skillMoveCfg.MoveDis = float.Parse(e.InnerText);
@@ -676,7 +696,6 @@ public class ResSvc : MonoBehaviour
             CommonTool.Log("SkillMoveCfgDic Done");
         }
     }
-
     public SKillMoveCfg GetSkillMoveCfg(int id)
     {
         SKillMoveCfg data;
@@ -684,12 +703,14 @@ public class ResSvc : MonoBehaviour
         {
             return data;
         }
+
         return null;
     }
-    
 
     #endregion
+
     #endregion
+
     private void Update()
     {
         if (prgCB != null)

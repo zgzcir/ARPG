@@ -23,7 +23,7 @@
         public const string TaskRewardItem = "PrefabUI/Item/taItem";
 
         /// <summary>
-        /// StrngthenPanel
+        /// StrengthenPanel
         /// </summary>
         public const string StrItemSelected="ResImgs/RoundedBorder/Rounded Filled 64px";
         public const string StrItemNonSelected="ResImgs/RoundedBorder/Rounded Outline 64px - Stroke 12px";

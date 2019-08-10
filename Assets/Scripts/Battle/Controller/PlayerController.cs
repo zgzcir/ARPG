@@ -6,8 +6,6 @@ using UnityEngine.Serialization;
 
 public class PlayerController : Controller
 {
-    private Transform camTrans;
-    private CameraController cameraController;
     private Vector3 camOffSet;
     public CharacterController CharacterController;
 

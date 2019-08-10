@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class MapCfg : BaseData<MapCfg>
@@ -53,11 +54,12 @@ public class SkillCfg : BaseData<SkillCfg>
     public int Duration;
     public int AniAction;
     public string FX;
-    public int SkillMove;
+    public List<int> SkillMoveLst;
 }
 
 public class SKillMoveCfg : BaseData<SKillMoveCfg>
 {
+    public int DelayTime;
     public int MoveTime;
     public float MoveDis;
 }

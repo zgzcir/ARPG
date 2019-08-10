@@ -51,7 +51,7 @@ public abstract class Controller:MonoBehaviour
 
     public virtual void SetFX(string name,float duration)
     {
-
+        
     }
 
     public  void SetSkillMoveState(bool move, float skillSpeed = 0f)
