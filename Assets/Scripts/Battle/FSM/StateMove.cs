@@ -13,9 +13,7 @@
      }
  
      public void Exit(EntityBase entity, params object[] args)
-
      {
          CommonTool.Log("ex move");
-
      }
  }

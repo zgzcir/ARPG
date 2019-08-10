@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BattleSys : BaseSystem
 {
     public static BattleSys Instance;
 
     public BattleManager BattleManager;
-    public BattlePanel BattlePanel;
+    [FormerlySerializedAs("BattlePanel")] public BattleControllPanel battleControllPanel;
 
     public override void InitSys()
     {
@@ -24,12 +25,10 @@ public class BattleSys : BaseSystem
         BattleManager = go.AddComponent<BattleManager>();
         BattleManager.InitManager(mapID);
     }
-
     public void SetBattlePanelState(bool isActive = true)
     {
-        BattlePanel.SetPanelState(isActive);
+        battleControllPanel.SetPanelState(isActive);
     }
-
     public void SetSelfPlayerMoveMobileDir(Vector2 dir)
     {
         BattleManager.SetSelfPlayerMoveDir(dir);
@@ -38,5 +37,10 @@ public class BattleSys : BaseSystem
     public void ReqReleaseSkill(int index)
     {
         BattleManager.ReqReleaseSkill(index);
+    }
+
+    public Vector2 GetDirInput()
+    {
+        return battleControllPanel.currentDir;
     }
 }

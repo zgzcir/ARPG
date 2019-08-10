@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Protocol;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BattlePanel : BasePanel
+public class BattleControllPanel : BasePanel
 {
     public Image imgTouch;
     public Image imgDirBg;
@@ -20,7 +21,8 @@ public class BattlePanel : BasePanel
     private Vector2 startPos;
     private Vector2 defaultPos;
     private float pointDis;
-
+    
+    public Vector2 currentDir=Vector2.zero;
     public override void Init()
     {
         base.Init();
@@ -91,7 +93,8 @@ public class BattlePanel : BasePanel
             imgDirBg.transform.position = defaultPos;
             SetActive(imgDirHandle, false);
             imgDirHandle.transform.localPosition = Vector2.zero;
-            BattleSys.Instance.SetSelfPlayerMoveMobileDir(Vector2.zero);
+            currentDir=Vector2.zero;
+            BattleSys.Instance.SetSelfPlayerMoveMobileDir(currentDir);
             //    MainCitySys.Instance.SetPlayerMoveMobile(Vector2.zero);
         });
         OnClickDrag(imgTouch.gameObject, eventData =>
@@ -100,11 +103,11 @@ public class BattlePanel : BasePanel
             float len = dir.magnitude;
             Vector2 clampDir = Vector2.ClampMagnitude(dir, pointDis);
             imgDirHandle.transform.position = startPos + clampDir;
-            BattleSys.Instance.SetSelfPlayerMoveMobileDir(dir);
+            currentDir = dir.normalized;
+            BattleSys.Instance.SetSelfPlayerMoveMobileDir(currentDir);
             //     MainCitySys.Instance.SetPlayerMoveMobile(dir);
         });
     }
-
     public void OnClickNormalAtk()
     {
         BattleSys.Instance.ReqReleaseSkill(0);
@@ -131,5 +134,14 @@ public class BattlePanel : BasePanel
         resSvc.Reset();
             TextAsset xml = Resources.Load<TextAsset>(PathDefine.SkillMoveCfg);
             Debug.Log(xml.text);
+    }
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            OnClickSkill1();
+        }
     }
 }

@@ -67,6 +67,7 @@ public class BattleManager : MonoBehaviour
         entitySelfplayer.StateManager = stateManager;
         entitySelfplayer.Controller = playerController;
         entitySelfplayer.SkillManager = skillManager;
+        entitySelfplayer.BattleManager = this;
         
         cameraController.Target = playerController.CameraPivot.transform;
         cameraController.enabled = true;
@@ -74,7 +75,7 @@ public class BattleManager : MonoBehaviour
     }
 
     public void SetSelfPlayerMoveDir(Vector2 dir)
-    {
+    {if(!entitySelfplayer.canControl)return;
         if (dir == Vector2.zero)
         {
             entitySelfplayer.Idle();
@@ -127,6 +128,11 @@ public class BattleManager : MonoBehaviour
        Debug.Log("3 Atk");
    }
 
+
+   public Vector2 GetDirInput()
+   {
+       return BattleSys.Instance.GetDirInput();
+   }
 
     
 }

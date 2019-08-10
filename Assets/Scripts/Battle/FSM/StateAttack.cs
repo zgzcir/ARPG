@@ -14,6 +14,8 @@
     public void Exit(EntityBase entity, params object[] args)
     {
         entity.SetAciton(Constans.ActionDefault);
+        entity.canControl = true;
         CommonTool.Log("ex atk");
+        
     }
 }
