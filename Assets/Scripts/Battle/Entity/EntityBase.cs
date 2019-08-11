@@ -9,6 +9,22 @@ public abstract class EntityBase
     public BattleManager BattleManager;
     public bool canControl = true;
 
+    private BattleProps battleProps;
+
+    public BattleProps BattleProps
+    {
+        get => battleProps;
+        protected set => battleProps=value;
+    }
+
+    private int hp;
+
+    public int HP
+    {
+        get => hp;
+        set => hp = value;
+    }
+
     public void Move()
     {
         StateManager.ChangeState(this, AniState.Move);
@@ -23,6 +39,14 @@ public abstract class EntityBase
     {
         StateManager.ChangeState(this, AniState.Attack, skillId);
     }
+
+    public virtual void SetBattleProps(BattleProps battleProps)
+    {
+
+        this.battleProps = battleProps;
+        HP = battleProps.HP;
+    }
+    
     public virtual void SetBlend(float blend)
     {
         if (Controller != null)
@@ -60,13 +84,25 @@ public abstract class EntityBase
             Controller.SetSkillMoveState(move, speed);
         }
     }
-    public virtual void AttackEffect(int skillID)
+    public virtual void SkillAttack(int skillID)
     {
-        SkillManager.AttackEffect(this, skillID);
+        SkillManager.SkillAttack(this, skillID);
     }
 
     public virtual Vector2 GetDirInput()
     {
         return Vector2.zero;
     }
+
+    public virtual Vector3 GetPos()
+    {
+        return Controller.transform.position;
+    }
+
+    public virtual Transform GetTrans()
+    {
+        return Controller.transform;
+    }
+
+
 }

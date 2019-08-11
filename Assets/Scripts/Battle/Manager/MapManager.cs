@@ -2,11 +2,13 @@ using UnityEngine;
  
 public class MapManager : MonoBehaviour
 {
-    public void InitManager()
+    private BattleManager battleManager;
+    private int waveIndex = 1;
+    public void InitManager(BattleManager battleManager)
     {
-
-        
-        Debug.Log("Init MapManager Done");
+        this.battleManager = battleManager;
+        battleManager.LoadMonsterByWave(waveIndex);
+        CommonTool.Log("Init MapManager Done");
 
     }
 }

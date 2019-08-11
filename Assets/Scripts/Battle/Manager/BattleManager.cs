@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Protocol;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class BattleManager : MonoBehaviour
     private ResSvc resSvc;
     private AudioSvc audioSvc;
 
+    private MapCfg mapCfg;
 
     private StateManager stateManager;
     private SkillManager skillManager;
@@ -16,7 +18,10 @@ public class BattleManager : MonoBehaviour
 
     private PlayerController playerController;
     private CameraController cameraController;
-    private Entityplayer entitySelfplayer;
+    private EntityPlayer entitySelfplayer;
+
+
+    private Dictionary<string, EntityMonster> monstersDic = new Dictionary<string, EntityMonster>();
 
     public void InitManager(int mid)
     {
@@ -26,12 +31,14 @@ public class BattleManager : MonoBehaviour
         stateManager.InitManager();
         skillManager = gameObject.AddComponent<SkillManager>();
         skillManager.InitManager();
-        MapCfg mapCfg = resSvc.GetMapCfgData(mid);
+
+
+        mapCfg = resSvc.GetMapCfgData(mid);
         resSvc.AsyncLoadScene(mapCfg.SceneName, () =>
             {
                 GameObject map = GameObject.FindGameObjectWithTag("MapRoot");
                 mapManager = map.GetComponent<MapManager>();
-
+                mapManager.InitManager(this);
                 map.transform.localPosition = Vector3.zero;
                 map.transform.localScale = Vector3.one;
 
@@ -42,6 +49,18 @@ public class BattleManager : MonoBehaviour
 
                 LoadPlayer(mapCfg);
                 entitySelfplayer.Idle();
+                PlayerData pd = GameRoot.Instance.PlayerData;
+                entitySelfplayer.SetBattleProps(new BattleProps()
+                {
+                    HP = pd.HP,
+                    pa = pd.PA,
+                    pd = pd.PD,
+                    sa = pd.SA,
+                    sd = pd.SD,
+                    pierce = pd.Pierce,
+                    dodge = pd.Dodge,
+                    critical = pd.Critical
+                });
                 GameRoot.AddTips("四风试炼场");
                 BattleSys.Instance.SetBattlePanelState();
 
@@ -64,7 +83,7 @@ public class BattleManager : MonoBehaviour
         playerController = player.GetComponent<PlayerController>();
         playerController.Init();
 
-        entitySelfplayer = new Entityplayer()
+        entitySelfplayer = new EntityPlayer()
         {
             StateManager = stateManager,
             Controller = playerController,
@@ -136,5 +155,47 @@ public class BattleManager : MonoBehaviour
     public Vector2 GetDirInput()
     {
         return BattleSys.Instance.GetDirInput();
+    }
+
+    public void LoadMonsterByWave(int wave)
+    {
+        for (int i = 0; i < mapCfg.Monsters.Count; i++)
+        {
+            MonsterData md = mapCfg.Monsters[i];
+            if (md.MWave == wave)
+            {
+                GameObject go = resSvc.LoadPrefab(md.MCfg.ResPath);
+                go.transform.localPosition = md.MBornPos;
+                go.transform.localEulerAngles = md.MBornRote;
+                go.transform.localScale = Vector3.one;
+
+                go.name = "Wave" + wave + "_monster" + md.MIndex;
+
+                MonsterController monsterController = go.GetComponent<MonsterController>();
+                monsterController.Init();
+
+                EntityMonster em = new EntityMonster()
+                {
+                    StateManager = stateManager,
+                    Controller = monsterController,
+                    SkillManager = skillManager,
+                    BattleManager = this
+                };
+
+
+                go.SetActive(false);
+            }
+        }
+    }
+
+    public List<EntityMonster> GetEntityMonsters()
+    {
+        List<EntityMonster> monsters = new List<EntityMonster>();
+        foreach (var item in monstersDic)
+        {
+            monsters.Add(item.Value);
+        }
+
+        return monsters;
     }
 }

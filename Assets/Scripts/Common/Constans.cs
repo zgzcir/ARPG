@@ -40,7 +40,7 @@ public const string BGCityHappy = "bgCityHappy";
  /// <summary>
  /// move speed
  /// </summary>
- public const int PLyerMoveSpeed =10;
+ public const int PLyerMoveSpeed =7;
  public const float PlayerJumpHeight = 20f;
  public const int MonsterMoveSpeed = 3;
  public const int CamRotateSpeed = 15;
@@ -123,3 +123,11 @@ public enum  TxtColor
  White,
  Green
 }
+
+public enum DamageType
+{
+ AD=1
+ ,
+ AP=2
+}
+

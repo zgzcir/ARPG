@@ -4,7 +4,7 @@
 		<mName>铁甲战士</mName>
 		<resPath>PrefabNPC/MonsterSoldier_1</resPath>
 	</item>
-	<item ID="2001">
+	<item ID="1002">
 		<mName>地狱魔卫</mName>
 		<resPath>PrefabNPC/MonsterBoss_1</resPath>
 	</item>

@@ -7,7 +7,6 @@ using UnityEngine.Serialization;
 public class PlayerController : Controller
 {
     private Vector3 camOffSet;
-    public CharacterController CharacterController;
 
     private float targetBlend;
     private float currentBlend;
@@ -18,6 +17,8 @@ public class PlayerController : Controller
 
     public GameObject CameraPivot; //改成transform
     public Transform ChaCameraRotatePivot;
+    public GameObject FX1;
+
 
 //    private Vector2 inputDir;
 //    public Vector2 InputDir
@@ -62,6 +63,10 @@ public class PlayerController : Controller
         timerSvc = TimerSvc.Instance;
         if (Camera.main != null) camTrans = Camera.main.transform;
         cameraController = camTrans.GetComponent<CameraController>();
+        if (FX1 != null)
+        {
+            fxDic.Add(FX1.name,FX1);
+        }
     }
 
         private void Update()

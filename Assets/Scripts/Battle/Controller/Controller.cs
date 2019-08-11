@@ -7,8 +7,8 @@ public abstract class Controller:MonoBehaviour
 
     
     public Animator Ani;
-    public GameObject FX1;
-    
+    public CharacterController CharacterController;
+
     private static readonly int Blend = Animator.StringToHash("Blend");
 
     
@@ -24,10 +24,7 @@ public abstract class Controller:MonoBehaviour
     protected float SkillMoveSpeed;
     public virtual void Init()
     {      
-        if (FX1 != null)
-        {
-            fxDic.Add(FX1.name,FX1);
-        }
+    
     }
     public Vector2 InputDir
     {

@@ -9,13 +9,12 @@
     public void Process(EntityBase entity, params object[] args)
     {
         CommonTool.Log("pr atk");
-        entity.AttackEffect((int)args[0]);
+        entity.SkillAttack((int)args[0]);
     }
     public void Exit(EntityBase entity, params object[] args)
     {
         entity.SetAciton(Constans.ActionDefault);
         entity.canControl = true;
         CommonTool.Log("ex atk");
-        
     }
 }

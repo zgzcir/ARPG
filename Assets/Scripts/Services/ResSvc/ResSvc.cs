@@ -27,6 +27,7 @@ public class ResSvc : MonoBehaviour
 
         InitSkillCfgDic(PathDefine.SkillCfg);
         InitSkillMoveCfgDic(PathDefine.SkillMoveCfg);
+        InitSkillActionCfgDic(PathDefine.SkillActionCfg);
         CommonTool.Log("ResSvc Connected");
     }
 
@@ -324,8 +325,8 @@ public class ResSvc : MonoBehaviour
                                     {
                                         ID = int.Parse(arr[0]),
                                         MWave = waveIndex,
-                                        MIndex= j,
-                                        MCfg = GetMonsterCfg(id),
+                                        MIndex = j,
+                                        MCfg = GetMonsterCfg(int.Parse(arr[0])),
                                         MBornPos = new Vector3(
                                             float.Parse(arr[1]),
                                             float.Parse(arr[2]),
@@ -336,6 +337,7 @@ public class ResSvc : MonoBehaviour
                                     mc.Monsters.Add(md);
                                 }
                             }
+
                             break;
                     }
                 }
@@ -685,7 +687,10 @@ public class ResSvc : MonoBehaviour
                 int id = Convert.ToInt32(ele.GetAttributeNode("ID")?.InnerText);
                 SkillCfg skillCfg = new SkillCfg()
                 {
-                    ID = id
+                    ID = id,
+                    SkillMoveLst = new List<int>(),
+                    SkillActionLst = new List<int>(),
+                    SkillDamageLst = new List<int>()
                 };
                 foreach (XmlElement e in ele.ChildNodes)
                 {
@@ -703,13 +708,44 @@ public class ResSvc : MonoBehaviour
                         case "fx":
                             skillCfg.FX = e.InnerText;
                             break;
+                        case "dmgType":
+                            if (e.InnerText.Equals("1"))
+                            {
+                                skillCfg.DmgType = DamageType.AD;
+                            }
+                            else if (e.InnerText.Equals("2"))
+                            {
+                                skillCfg.DmgType = DamageType.AP;
+                            }
+                            else
+                            {
+                                Debug.LogError("wrong dmgType");
+                            }
+                            break;
                         case "skillMoveLst":
-                            skillCfg.SkillMoveLst = new List<int>();
                             string[] skMoveArr = e.InnerText.Split('|');
                             for (int j = 0; j < skMoveArr.Length; j++)
                             {
                                 if (skMoveArr[i] != "")
                                     skillCfg.SkillMoveLst.Add(int.Parse(skMoveArr[i]));
+                            }
+
+                            break;
+                        case "skillActionLst":
+                            string[] skActionArr = e.InnerText.Split('|');
+                            for (int j = 0; j < skActionArr.Length; j++)
+                            {
+                                if (skActionArr[i] != "")
+                                    skillCfg.SkillActionLst.Add(int.Parse(skActionArr[i]));
+                            }
+
+                            break;
+                        case "skillDamageLst":
+                            string[] skDamageArr = e.InnerText.Split('|');
+                            for (int j = 0; j < skDamageArr.Length; j++)
+                            {
+                                if (skDamageArr[i] != "")
+                                    skillCfg.SkillDamageLst.Add(int.Parse(skDamageArr[i]));
                             }
 
                             break;
@@ -727,6 +763,72 @@ public class ResSvc : MonoBehaviour
     {
         SkillCfg data;
         if (SkillCfgDic.TryGetValue(id, out data))
+        {
+            return data;
+        }
+
+        return null;
+    }
+
+    #endregion
+
+    #region skillaction
+
+    private Dictionary<int, SkillActionCfg> SkillActionCfgDic = new Dictionary<int, SkillActionCfg>();
+
+    private void InitSkillActionCfgDic(string path)
+    {
+        TextAsset xml = Resources.Load<TextAsset>(path);
+        if (!xml)
+        {
+            CommonTool.Log("xml file:" + path + "not exits", LogType.Error);
+        }
+        else
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xml.text);
+            XmlNodeList nodeLst = doc.SelectSingleNode("root")?.ChildNodes;
+            for (int i = 0; i < nodeLst?.Count; i++)
+            {
+                XmlElement ele = nodeLst[i] as XmlElement;
+                if (ele.GetAttributeNode("ID") == null)
+                {
+                    continue;
+                }
+
+                int id = Convert.ToInt32(ele.GetAttributeNode("ID")?.InnerText);
+                SkillActionCfg sac = new SkillActionCfg()
+                {
+                    ID = id
+                };
+                foreach (XmlElement e in ele.ChildNodes)
+                {
+                    switch (e.Name)
+                    {
+                        case "delayTime":
+                            sac.DelayTime =
+                                int.Parse(e.InnerText);
+                            break;
+                        case "radius":
+                            sac.Radius = float.Parse(e.InnerText);
+                            break;
+                        case "angel":
+                            sac.Angel = int.Parse(e.InnerText);
+                            break;
+                    }
+                }
+
+                SkillActionCfgDic.Add(id, sac);
+            }
+
+            CommonTool.Log("SkillActionCfgDic Done");
+        }
+    }
+
+    public SkillActionCfg GetSkillActionCfg(int id)
+    {
+        SkillActionCfg data;
+        if (SkillActionCfgDic.TryGetValue(id, out data))
         {
             return data;
         }

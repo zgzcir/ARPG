@@ -1,6 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using UnityEditor;
 using UnityEngine;
+
+public class SkillActionCfg : BaseData<SkillActionCfg>
+{
+    public int DelayTime;
+    public float Radius;
+    public int Angel;
+}
 
 public class MonsterData:BaseData<MonsterData>
 {
@@ -71,7 +79,12 @@ public class SkillCfg : BaseData<SkillCfg>
     public int Duration;
     public int AniAction;
     public string FX;
+    public DamageType DmgType;
     public List<int> SkillMoveLst;
+    public List<int> SkillActionLst;
+    public List<int> SkillDamageLst;
+
+
 }
 
 public class SKillMoveCfg : BaseData<SKillMoveCfg>
@@ -80,7 +93,21 @@ public class SKillMoveCfg : BaseData<SKillMoveCfg>
     public int MoveTime;
     public float MoveDis;
 }
+
 public class BaseData<T>
 {
     public int ID;
+}
+
+public class BattleProps
+{
+    public int HP;
+    public int pd;
+    public int sd;
+    public int pa;
+    public int sa;
+    public int dodge;
+    public int pierce;
+    public int critical;
+
 }

@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<item ID="101">
-		<skillName>奔袭</skillName>
+		<skillName>突袭</skillName>
 		<duration>900</duration>
 		<aniAction>1</aniAction>
 		<fx>dagger_skill1</fx>
+		<dmgType>1</dmgType>
 		<skillMoveLst>1011</skillMoveLst>
+		<skillActionLst>1011|1011</skillActionLst>
+		<skillDamageLst>26|36</skillDamageLst>
 	</item>
 </root>
