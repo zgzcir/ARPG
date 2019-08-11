@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<item ID="1001">
+		<mName>铁甲战士</mName>
+		<resPath>PrefabNPC/MonsterSoldier_1</resPath>
+	</item>
+	<item ID="2001">
+		<mName>地狱魔卫</mName>
+		<resPath>PrefabNPC/MonsterBoss_1</resPath>
+	</item>
+</root>

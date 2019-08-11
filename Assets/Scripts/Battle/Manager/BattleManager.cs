@@ -42,8 +42,8 @@ public class BattleManager : MonoBehaviour
 
                 LoadPlayer(mapCfg);
                 entitySelfplayer.Idle();
-            GameRoot.AddTips("四风试炼场");
-        BattleSys.Instance.    SetBattlePanelState();
+                GameRoot.AddTips("四风试炼场");
+                BattleSys.Instance.SetBattlePanelState();
 
 
                 //       audioSvc.PlayBgAudio(Constans.BGCityHappy,true);bgm
@@ -63,19 +63,24 @@ public class BattleManager : MonoBehaviour
         //todo 2019.7.30 18:28
         playerController = player.GetComponent<PlayerController>();
         playerController.Init();
-         entitySelfplayer=new Entityplayer();
-        entitySelfplayer.StateManager = stateManager;
-        entitySelfplayer.Controller = playerController;
-        entitySelfplayer.SkillManager = skillManager;
-        entitySelfplayer.BattleManager = this;
-        
+
+        entitySelfplayer = new Entityplayer()
+        {
+            StateManager = stateManager,
+            Controller = playerController,
+            SkillManager = skillManager,
+            BattleManager = this
+        };
+
+        //ttt   
         cameraController.Target = playerController.CameraPivot.transform;
         cameraController.enabled = true;
-        //
+        // 
     }
 
     public void SetSelfPlayerMoveDir(Vector2 dir)
-    {if(!entitySelfplayer.canControl)return;
+    {
+        if (!entitySelfplayer.canControl) return;
         if (dir == Vector2.zero)
         {
             entitySelfplayer.Idle();
@@ -106,33 +111,30 @@ public class BattleManager : MonoBehaviour
                 break;
         }
     }
-    
+
     private void ReleaseNormalAtk()
     {
         Debug.Log("Normal Atk");
     }
-    
+
     private void ReleaseSkill1()
     {
         entitySelfplayer.Attack(101);
-        
     }
 
-   private void ReleaseSkill2()
+    private void ReleaseSkill2()
     {
         Debug.Log("2 Atk");
     }
-    
-   private void ReleaseSkill3()
-   {
-       Debug.Log("3 Atk");
-   }
+
+    private void ReleaseSkill3()
+    {
+        Debug.Log("3 Atk");
+    }
 
 
-   public Vector2 GetDirInput()
-   {
-       return BattleSys.Instance.GetDirInput();
-   }
-
-    
+    public Vector2 GetDirInput()
+    {
+        return BattleSys.Instance.GetDirInput();
+    }
 }

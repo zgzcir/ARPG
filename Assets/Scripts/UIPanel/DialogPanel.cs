@@ -63,7 +63,7 @@ public class DialogPanel : HandleablePanel
                     cmd = (int) CMD.ReqGuide,
                     ReqGuide = new ReqGuide()
                     {
-                        id = curTaskData.id
+                        id = curTaskData.ID
                     }
                 };
                 netSvc.SendMsg(msg);

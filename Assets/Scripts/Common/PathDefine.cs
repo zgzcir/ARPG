@@ -11,6 +11,7 @@
         public const string TaskRewardCfg="ResCfgs/taskreward";
         public const string SkillCfg="ResCfgs/Skill";
         public const string SkillMoveCfg="ResCfgs/SkillMove";
+        public const string MonsterCfg = "ResCfgs/Monster";
 
 
         /// <summary>

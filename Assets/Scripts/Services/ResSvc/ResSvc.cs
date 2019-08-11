@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Xml;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Reflection;
+using System.Text;
 using Random = System.Random;
 
 public class ResSvc : MonoBehaviour
@@ -17,6 +19,7 @@ public class ResSvc : MonoBehaviour
     {
         Instance = this;
         InitRDNameCfg(PathDefine.RDNameCfg);
+        InitMonsterCfg(PathDefine.MonsterCfg);
         InitMapCfg(PathDefine.MapCfg);
         InitGuideCfg(PathDefine.GuideCfg);
         InitStrengthenCfg(PathDefine.StrenghtenCfg);
@@ -100,6 +103,68 @@ public class ResSvc : MonoBehaviour
         return au;
     }
 
+
+    #region monster
+
+    private Dictionary<int, MonsterCfg> monsterCfgDataDic = new Dictionary<int, MonsterCfg>();
+
+    private void InitMonsterCfg(string path)
+    {
+        TextAsset xml = Resources.Load<TextAsset>(path);
+        if (!xml)
+        {
+            CommonTool.Log("xml file:" + path + "not exits", LogType.Error);
+        }
+        else
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xml.text);
+
+            XmlNodeList nodLst = doc.SelectSingleNode("root").ChildNodes;
+
+            for (int i = 0; i < nodLst.Count; i++)
+            {
+                XmlElement ele = nodLst[i] as XmlElement;
+                if (ele.GetAttributeNode("ID") == null)
+                {
+                    continue;
+                }
+
+                int id = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
+                MonsterCfg mc = new MonsterCfg()
+                {
+                    ID = id
+                };
+                foreach (XmlElement e in ele.ChildNodes)
+                {
+                    switch (e.Name)
+                    {
+                        case "mName":
+                            mc.MName = e.InnerText;
+                            break;
+                        case "resPath":
+                            mc.ResPath = e.InnerText;
+                            break;
+                    }
+                }
+
+                monsterCfgDataDic.Add(id, mc);
+            }
+        }
+    }
+
+    public MonsterCfg GetMonsterCfg(int id)
+    {
+        MonsterCfg data;
+        if (monsterCfgDataDic.TryGetValue(id, out data))
+        {
+            return data;
+        }
+
+        return null;
+    }
+
+    #endregion
 
     #region InitCfgs
 
@@ -199,7 +264,8 @@ public class ResSvc : MonoBehaviour
                 int id = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
                 MapCfg mc = new MapCfg
                 {
-                    id = id
+                    ID = id,
+                    Monsters = new List<MonsterData>()
                 };
                 foreach (XmlElement e in ele.ChildNodes)
                 {
@@ -242,6 +308,35 @@ public class ResSvc : MonoBehaviour
                                 float.Parse(varArr[2]));
                         }
                             break;
+                        case
+                            "monsterLst":
+                            string[] valArr = e.InnerText.Split('#');
+                            for (int waveIndex = 0; waveIndex < valArr.Length; waveIndex++)
+                            {
+                                if (waveIndex == 0) continue;
+
+                                string[] tempArr = valArr[waveIndex].Split('|');
+                                for (int j = 0; j < tempArr.Length; j++)
+                                {
+                                    if (j == 0) continue;
+                                    string[] arr = tempArr[j].Split(',');
+                                    MonsterData md = new MonsterData()
+                                    {
+                                        ID = int.Parse(arr[0]),
+                                        MWave = waveIndex,
+                                        MIndex= j,
+                                        MCfg = GetMonsterCfg(id),
+                                        MBornPos = new Vector3(
+                                            float.Parse(arr[1]),
+                                            float.Parse(arr[2]),
+                                            float.Parse(arr[3])
+                                        ),
+                                        MBornRote = new Vector3(0, float.Parse(arr[4]), 0)
+                                    };
+                                    mc.Monsters.Add(md);
+                                }
+                            }
+                            break;
                     }
                 }
 
@@ -262,7 +357,6 @@ public class ResSvc : MonoBehaviour
     }
 
     #endregion
-
 
     #region tasks
 
@@ -291,7 +385,7 @@ public class ResSvc : MonoBehaviour
                 int id = Convert.ToInt32(ele.GetAttributeNode("ID")?.InnerText);
                 GuideCfg guideCfg = new GuideCfg()
                 {
-                    id = id
+                    ID = id
                 };
                 foreach (XmlElement e in ele.ChildNodes)
                 {
@@ -400,7 +494,7 @@ public class ResSvc : MonoBehaviour
                 int id = Convert.ToInt32(ele.GetAttributeNode("ID")?.InnerText);
                 StrengthenCfg sd = new StrengthenCfg()
                 {
-                    id = id
+                    ID = id
                 };
                 foreach (XmlElement e in ele.ChildNodes)
                 {
@@ -479,7 +573,6 @@ public class ResSvc : MonoBehaviour
                     {
                         case 1:
                             val += sc.AddHP;
-
                             break;
                         case 2:
                             val += sc.AddHurt;
@@ -524,7 +617,7 @@ public class ResSvc : MonoBehaviour
                 int id = Convert.ToInt32(ele.GetAttributeNode("ID")?.InnerText);
                 TaskRewardCfg taskRewardCfg = new TaskRewardCfg()
                 {
-                    id = id
+                    ID = id
                 };
                 foreach (XmlElement e in ele.ChildNodes)
                 {
@@ -592,7 +685,7 @@ public class ResSvc : MonoBehaviour
                 int id = Convert.ToInt32(ele.GetAttributeNode("ID")?.InnerText);
                 SkillCfg skillCfg = new SkillCfg()
                 {
-                    id = id
+                    ID = id
                 };
                 foreach (XmlElement e in ele.ChildNodes)
                 {
@@ -611,7 +704,7 @@ public class ResSvc : MonoBehaviour
                             skillCfg.FX = e.InnerText;
                             break;
                         case "skillMoveLst":
-                            skillCfg.SkillMoveLst=new  List<int>();
+                            skillCfg.SkillMoveLst = new List<int>();
                             string[] skMoveArr = e.InnerText.Split('|');
                             for (int j = 0; j < skMoveArr.Length; j++)
                             {
@@ -670,14 +763,13 @@ public class ResSvc : MonoBehaviour
                 int id = Convert.ToInt32(ele.GetAttributeNode("ID")?.InnerText);
                 SKillMoveCfg skillMoveCfg = new SKillMoveCfg()
                 {
-                    id = id
+                    ID = id
                 };
                 foreach (XmlElement e in ele.ChildNodes)
                 {
                     switch (e.Name)
                     {
                         case "delayTime":
-
                             skillMoveCfg.DelayTime =
                                 int.Parse(e.InnerText);
                             break;
@@ -696,6 +788,7 @@ public class ResSvc : MonoBehaviour
             CommonTool.Log("SkillMoveCfgDic Done");
         }
     }
+
     public SKillMoveCfg GetSkillMoveCfg(int id)
     {
         SKillMoveCfg data;

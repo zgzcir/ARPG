@@ -2,6 +2,22 @@
 using System.Text;
 using UnityEngine;
 
+public class MonsterData:BaseData<MonsterData>
+{
+    public int MWave;
+    public int MIndex;
+    public MonsterCfg MCfg;
+    public Vector3 MBornPos;
+    public Vector3 MBornRote;
+}
+
+public class MonsterCfg : BaseData<MonsterCfg>
+{
+    public string MName;
+    public string ResPath;
+}
+
+
 public class MapCfg : BaseData<MapCfg>
 {
     public string MapName;
@@ -11,6 +27,7 @@ public class MapCfg : BaseData<MapCfg>
     public Vector3 MainCamRote;
     public Vector3 PlayerBornPos;
     public Vector3 PlayerBornRote;
+    public List<MonsterData> Monsters;
 }
 
 public class GuideCfg : BaseData<GuideCfg>
@@ -65,5 +82,5 @@ public class SKillMoveCfg : BaseData<SKillMoveCfg>
 }
 public class BaseData<T>
 {
-    public int id;
+    public int ID;
 }

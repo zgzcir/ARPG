@@ -37,7 +37,7 @@ public class TasksPanel : HandleablePanel
             string[] taskInfoArr = pd.TaskRewardArr[i].Split('|');
             TaskRewardData trd = new TaskRewardData()
             {
-                id = int.Parse(taskInfoArr[0]),
+                ID = int.Parse(taskInfoArr[0]),
                 Prgs = int.Parse(taskInfoArr[1]),
                 IsTaked = taskInfoArr[2].Equals("1")
             };
@@ -74,7 +74,7 @@ public class TasksPanel : HandleablePanel
             go.name = "taskItem_" + i;
 
             TaskRewardData trd = trdList[i];
-            TaskRewardCfg trf = resSvc.GetTaskRewardCfg(trd.id);
+            TaskRewardCfg trf = resSvc.GetTaskRewardCfg(trd.ID);
 
 
             SetText(GetTrans(go.transform, "txtName"), trf.TaskName);
@@ -103,7 +103,7 @@ public class TasksPanel : HandleablePanel
                     cmd = (int) CMD.ReqTakeTaskReward,
                     ReqTakeTaskReward = new ReqTakeTaskReward()
                     {
-                        ID = trdList[i1].id
+                        ID = trdList[i1].ID
                     }
                 });
 //                TaskRewardCfg trc = resSvc.GetTaskRewardCfg(trdList[index].id);

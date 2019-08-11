@@ -16,7 +16,6 @@ public class StateIdle : IState
               entity.SetDir(entity.GetDirInput());
          }         
          
-         
          entity.SetBlend(Constans.BlendIdle);
          CommonTool.Log("pr idle");
 

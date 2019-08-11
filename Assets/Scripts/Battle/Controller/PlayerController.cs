@@ -16,7 +16,6 @@ public class PlayerController : Controller
 
     public Transform RayCastPoint;
 
-
     public GameObject CameraPivot; //改成transform
     public Transform ChaCameraRotatePivot;
 
@@ -53,7 +52,6 @@ public class PlayerController : Controller
     {
         isGrounded = true;
     }
-
     private void FixedUpdate()
     {
     }
