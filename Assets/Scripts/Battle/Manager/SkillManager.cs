@@ -77,11 +77,21 @@ public class SkillManager : MonoBehaviour
         {
            
         }
-        if (damageSum < 0)
+        if (damageSum <= 0)
         {
-            damageSum = 0;
+            return;
         }
-        
+
+        if (target.HP < damageSum)
+        {
+            target.HP = 0;
+            target.Die();
+        }
+        else
+        {
+            target.HP -= damageSum;
+            target.Hit();
+        }
     }
 
     private bool IsInRange(Vector3 from, Vector3 to, float range)

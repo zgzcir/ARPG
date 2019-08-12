@@ -28,7 +28,6 @@ public abstract class Controller:MonoBehaviour
     }
     public Vector2 InputDir
     {
-        
         protected get => inputDir;
         set
         {

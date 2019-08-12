@@ -22,7 +22,10 @@ public abstract class EntityBase
     public int HP
     {
         get => hp;
-        set => hp = value;
+        set
+        {CommonTool.Log(Controller.name+" hp:"+hp+"--->>"+value);
+            hp = value;
+        }
     }
 
     public void Move()
@@ -45,6 +48,15 @@ public abstract class EntityBase
         StateManager.ChangeState(this, AniState.Born);
     }
 
+    public void Die()
+    {
+        StateManager.ChangeState(this,AniState.Die);
+    }
+
+    public void Hit()
+    {
+        StateManager.ChangeState(this,AniState.Hit);
+    }
     public virtual void SetBattleProps(BattleProps battleProps)
     {
 

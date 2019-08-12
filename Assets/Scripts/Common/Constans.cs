@@ -59,8 +59,10 @@ public const string BGCityHappy = "bgCityHappy";
  public const int ActionDefault = -1;
  public const int ActionBorn = 0;
  public const int ActionDie =100;
+ public const int ActionHit =101;
+
  
- 
+ public const int DieAniLength = 5000;
 
  /// <summary>
  /// Cam

@@ -13,5 +13,7 @@ public enum AniState
     Idle,
     Move,
     Attack,
-    Born,Die
+    Born,
+    Die,
+    Hit
 }
