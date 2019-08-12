@@ -57,6 +57,9 @@ public const string BGCityHappy = "bgCityHappy";
  public const float BlendIdle = 0;
  public const float  BlendMove = 1;
  public const int ActionDefault = -1;
+ public const int ActionBorn = 0;
+ public const int ActionDie =100;
+ 
  
 
  /// <summary>

@@ -33,18 +33,55 @@ public class SkillManager : MonoBehaviour
         });
     }
 
+    System.Random rd = new System.Random();
+
     private void CalcDamage(EntityBase caster, EntityBase target, int damage, DamageType dt)
     {
         int damageSum = damage;
         if (dt == DamageType.AD)
         {
-            
-            
-            
+            {
+                //闪避
+                int dodgeNum = ZCTools.RDInt(1, 100, rd);
+                if (dodgeNum <= target.BattleProps.Dodge)
+                {
+                    //     GameRoot.AddTips(target.Controller.name + "闪避了你的攻击"); //todo转移到聊天窗口
+                    CommonTool.Log("闪避Rate:" + dodgeNum + "/" + target.BattleProps.Dodge);
+                    return;
+                }
+            }
+            damageSum += caster.BattleProps.PA;
+            {
+                //暴击
+                int criticalNum = ZCTools.RDInt(1, 100, rd);
+                if (criticalNum <= caster.BattleProps.Critical)
+                {
+                    float criticalIncRate = 1 + ZCTools.RDInt(1, 100, rd) / 100.0f;
+                    CommonTool.Log("暴击ratr"+criticalIncRate);
+                    damageSum = (int) (criticalIncRate * damageSum);
+                }
+            }
+            {
+                //穿甲
+                int pd = (int) ((1 - caster.BattleProps.Pierce / 100.0f)*target.BattleProps.PD);
+                damageSum -= pd;
+                CommonTool.Log("对"+target.Controller.name+"造成了"+damageSum+"点物理伤害");
+            }
         }
         else if (dt == DamageType.AP)
         {
+            damageSum += caster.BattleProps.SA;
+            damageSum -= target.BattleProps.SD;
         }
+        else
+        {
+           
+        }
+        if (damageSum < 0)
+        {
+            damageSum = 0;
+        }
+        
     }
 
     private bool IsInRange(Vector3 from, Vector3 to, float range)
@@ -73,7 +110,8 @@ public class SkillManager : MonoBehaviour
             sum += sac.DelayTime;
             if (sum > 0)
             {
-                timerSvc.AddTimeTask(tid => { SkillAction(entity, skillCfg, sac, i); }, sum);
+                var i1 = i;
+                timerSvc.AddTimeTask(tid => { SkillAction(entity, skillCfg, sac, i1); }, sum);
             }
             else
             {

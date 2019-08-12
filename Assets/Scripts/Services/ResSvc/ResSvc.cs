@@ -37,6 +37,7 @@ public class ResSvc : MonoBehaviour
         SkillMoveCfgDic.Clear();
         InitSkillCfgDic(PathDefine.SkillCfg);
         InitSkillMoveCfgDic(PathDefine.SkillMoveCfg);
+        InitSkillActionCfgDic(PathDefine.SkillActionCfg);
         CommonTool.Log("ResSvc ReConnected");
     }
 
@@ -134,7 +135,8 @@ public class ResSvc : MonoBehaviour
                 int id = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
                 MonsterCfg mc = new MonsterCfg()
                 {
-                    ID = id
+                    ID = id,
+                    MBattleProps = new BattleProps()
                 };
                 foreach (XmlElement e in ele.ChildNodes)
                 {
@@ -145,6 +147,30 @@ public class ResSvc : MonoBehaviour
                             break;
                         case "resPath":
                             mc.ResPath = e.InnerText;
+                            break;
+                        case "hp":
+                            mc.MBattleProps.HP = int.Parse(e.InnerText);
+                            break;
+                        case "pa":
+                            mc.MBattleProps.PA = int.Parse(e.InnerText);
+                            break;
+                        case "sa":
+                            mc.MBattleProps.SA = int.Parse(e.InnerText);
+                            break;
+                        case "pd":
+                            mc.MBattleProps.PD = int.Parse(e.InnerText);
+                            break;
+                        case "sd":
+                            mc.MBattleProps.SD = int.Parse(e.InnerText);
+                            break;
+                        case "dodge":
+                            mc.MBattleProps.Dodge = int.Parse(e.InnerText);
+                            break;
+                        case "pierce":
+                            mc.MBattleProps.Pierce = int.Parse(e.InnerText);
+                            break;
+                        case "critical":
+                            mc.MBattleProps.Critical = int.Parse(e.InnerText);
                             break;
                     }
                 }
@@ -266,7 +292,7 @@ public class ResSvc : MonoBehaviour
                 MapCfg mc = new MapCfg
                 {
                     ID = id,
-                    Monsters = new List<MonsterData>()
+                    Monsters = new List<MonsterMapData>()
                 };
                 foreach (XmlElement e in ele.ChildNodes)
                 {
@@ -321,7 +347,7 @@ public class ResSvc : MonoBehaviour
                                 {
                                     if (j == 0) continue;
                                     string[] arr = tempArr[j].Split(',');
-                                    MonsterData md = new MonsterData()
+                                    MonsterMapData md = new MonsterMapData()
                                     {
                                         ID = int.Parse(arr[0]),
                                         MWave = waveIndex,
@@ -332,7 +358,8 @@ public class ResSvc : MonoBehaviour
                                             float.Parse(arr[2]),
                                             float.Parse(arr[3])
                                         ),
-                                        MBornRote = new Vector3(0, float.Parse(arr[4]), 0)
+                                        MBornRote = new Vector3(0, float.Parse(arr[4]), 0),
+                                        MLevel = int.Parse(arr[5])
                                     };
                                     mc.Monsters.Add(md);
                                 }
@@ -721,6 +748,7 @@ public class ResSvc : MonoBehaviour
                             {
                                 Debug.LogError("wrong dmgType");
                             }
+
                             break;
                         case "skillMoveLst":
                             string[] skMoveArr = e.InnerText.Split('|');
@@ -812,7 +840,7 @@ public class ResSvc : MonoBehaviour
                         case "radius":
                             sac.Radius = float.Parse(e.InnerText);
                             break;
-                        case "angel":
+                        case "angle":
                             sac.Angel = int.Parse(e.InnerText);
                             break;
                     }

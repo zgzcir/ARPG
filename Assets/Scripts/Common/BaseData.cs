@@ -10,19 +10,21 @@ public class SkillActionCfg : BaseData<SkillActionCfg>
     public int Angel;
 }
 
-public class MonsterData:BaseData<MonsterData>
+public class MonsterMapData:BaseData<MonsterMapData>
 {
     public int MWave;
     public int MIndex;
     public MonsterCfg MCfg;
     public Vector3 MBornPos;
     public Vector3 MBornRote;
+    public int MLevel;
 }
 
 public class MonsterCfg : BaseData<MonsterCfg>
 {
     public string MName;
     public string ResPath;
+    public BattleProps MBattleProps;
 }
 
 
@@ -35,7 +37,8 @@ public class MapCfg : BaseData<MapCfg>
     public Vector3 MainCamRote;
     public Vector3 PlayerBornPos;
     public Vector3 PlayerBornRote;
-    public List<MonsterData> Monsters;
+    public List<MonsterMapData> Monsters;
+    
 }
 
 public class GuideCfg : BaseData<GuideCfg>
@@ -102,12 +105,12 @@ public class BaseData<T>
 public class BattleProps
 {
     public int HP;
-    public int pd;
-    public int sd;
-    public int pa;
-    public int sa;
-    public int dodge;
-    public int pierce;
-    public int critical;
+    public int PD;
+    public int SD;
+    public int PA;
+    public int SA;
+    public int Dodge;
+    public int Pierce;
+    public int Critical;
 
 }

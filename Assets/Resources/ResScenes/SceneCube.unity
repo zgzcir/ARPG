@@ -1936,7 +1936,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MouseMoveSpeed: 0
   Target: {fileID: 0}
-  camLen: 2
+  camLen: 4
 --- !u!114 &1011577073
 MonoBehaviour:
   m_ObjectHideFlags: 0

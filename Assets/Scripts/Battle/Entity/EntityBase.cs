@@ -40,6 +40,11 @@ public abstract class EntityBase
         StateManager.ChangeState(this, AniState.Attack, skillId);
     }
 
+    public void Born()
+    {
+        StateManager.ChangeState(this, AniState.Born);
+    }
+
     public virtual void SetBattleProps(BattleProps battleProps)
     {
 

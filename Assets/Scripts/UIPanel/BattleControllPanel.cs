@@ -132,8 +132,7 @@ public class BattleControllPanel : BasePanel
     public void ClickResetCfgs()
     {
         resSvc.Reset();
-            TextAsset xml = Resources.Load<TextAsset>(PathDefine.SkillMoveCfg);
-            Debug.Log(xml.text);
+          
     }
 
 

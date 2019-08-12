@@ -53,18 +53,17 @@ public class BattleManager : MonoBehaviour
                 entitySelfplayer.SetBattleProps(new BattleProps()
                 {
                     HP = pd.HP,
-                    pa = pd.PA,
-                    pd = pd.PD,
-                    sa = pd.SA,
-                    sd = pd.SD,
-                    pierce = pd.Pierce,
-                    dodge = pd.Dodge,
-                    critical = pd.Critical
+                    PA = pd.PA,
+                    PD = pd.PD,
+                    SA = pd.SA,
+                    SD = pd.SD,
+                    Pierce = pd.Pierce,
+                    Dodge = pd.Dodge,
+                    Critical = pd.Critical
                 });
                 GameRoot.AddTips("四风试炼场");
                 BattleSys.Instance.SetBattlePanelState();
-
-
+                ActiveCurrentMonsters(); 
                 //       audioSvc.PlayBgAudio(Constans.BGCityHappy,true);bgm
             }
         );
@@ -161,7 +160,7 @@ public class BattleManager : MonoBehaviour
     {
         for (int i = 0; i < mapCfg.Monsters.Count; i++)
         {
-            MonsterData md = mapCfg.Monsters[i];
+            MonsterMapData md = mapCfg.Monsters[i];
             if (md.MWave == wave)
             {
                 GameObject go = resSvc.LoadPrefab(md.MCfg.ResPath);
@@ -182,8 +181,10 @@ public class BattleManager : MonoBehaviour
                     BattleManager = this
                 };
 
-
+                em.MonsterMapData = md;
+                em.SetBattleProps(md.MCfg.MBattleProps);
                 go.SetActive(false);
+                monstersDic.Add(go.name, em);
             }
         }
     }
@@ -197,5 +198,18 @@ public class BattleManager : MonoBehaviour
         }
 
         return monsters;
+    }
+
+    private void ActiveCurrentMonsters()
+    {
+        TimerSvc.Instance.AddTimeTask(tid =>
+        {
+            GetEntityMonsters().ForEach(m =>
+            {
+                m.Controller.gameObject.SetActive(true);
+                m.Born();
+                TimerSvc.Instance.AddTimeTask(id => { m.Idle(); }, 1000);
+            });
+        }, 0);
     }
 }

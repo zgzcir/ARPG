@@ -144,7 +144,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100008}
-  m_LocalRotation: {x: 0.053918086, y: 0.6647345, z: 0.021138255, w: 0.74483156}
+  m_LocalRotation: {x: 0.05391809, y: 0.6647345, z: 0.021138256, w: 0.74483156}
   m_LocalPosition: {x: -0.10779607, y: 0.06493133, z: -0.2571594}
   m_LocalScale: {x: 0.99999976, y: 0.99999994, z: 1.0000001}
   m_Children:
@@ -391,7 +391,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100024}
-  m_LocalRotation: {x: -0.5890064, y: -0.09840934, z: 0.79281145, w: -0.12180726}
+  m_LocalRotation: {x: -0.5890064, y: -0.09840935, z: 0.79281145, w: -0.12180727}
   m_LocalPosition: {x: 0.13760361, y: 0.037746962, z: 0.11554434}
   m_LocalScale: {x: 1, y: 0.99999994, z: 0.9999999}
   m_Children:
@@ -1014,7 +1014,7 @@ Animator:
   m_GameObject: {fileID: 100058}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 4307fa705c2d53244b27e98c1b9eee0f, type: 3}
-  m_Controller: {fileID: 9100000, guid: ad6aba2a7cd4d8240aef39ab9c38ba20, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7b38c1ee5d2735348b104e9cb73dad5c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

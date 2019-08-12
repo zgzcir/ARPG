@@ -7811,11 +7811,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ani: {fileID: 95724331183731322}
-  FX1: {fileID: 4134181826584585411}
   CharacterController: {fileID: 673557112475330652}
   RayCastPoint: {fileID: 1641884592}
   CameraPivot: {fileID: 341923658818206780}
   ChaCameraRotatePivot: {fileID: 8616183266579442406}
+  FX1: {fileID: 4134181826584585411}
 --- !u!1 &1996218035339970
 GameObject:
   m_ObjectHideFlags: 0
