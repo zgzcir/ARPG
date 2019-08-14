@@ -1053,5 +1053,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9fe5007b0042bb8839ebb33491b542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HpRoot: {fileID: 400052}
   Ani: {fileID: 9500000}
   CharacterController: {fileID: 80300353575269854}

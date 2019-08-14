@@ -14,7 +14,7 @@ public abstract class EntityBase
     public BattleProps BattleProps
     {
         get => battleProps;
-        protected set => battleProps=value;
+        protected set => battleProps = value;
     }
 
     private int hp;
@@ -23,8 +23,14 @@ public abstract class EntityBase
     {
         get => hp;
         set
-        {CommonTool.Log(Controller.name+" hp:"+hp+"--->>"+value);
+        {
+            CommonTool.Log(Controller.name + " hp:" + hp + "--->>" + value);
+            SetHpVal(hp, value);
             hp = value;
+            if (hp==0)
+            {
+             Die();   
+            }
         }
     }
 
@@ -50,20 +56,20 @@ public abstract class EntityBase
 
     public void Die()
     {
-        StateManager.ChangeState(this,AniState.Die);
+        StateManager.ChangeState(this, AniState.Die);
     }
 
     public void Hit()
     {
-        StateManager.ChangeState(this,AniState.Hit);
+        StateManager.ChangeState(this, AniState.Hit);
     }
+
     public virtual void SetBattleProps(BattleProps battleProps)
     {
-
         this.battleProps = battleProps;
         HP = battleProps.HP;
     }
-    
+
     public virtual void SetBlend(float blend)
     {
         if (Controller != null)
@@ -87,6 +93,7 @@ public abstract class EntityBase
             Controller.SetAction(act);
         }
     }
+
     public virtual void SetFX(string name, float duration)
     {
         if (Controller != null)
@@ -94,6 +101,7 @@ public abstract class EntityBase
             Controller.SetFX(name, duration);
         }
     }
+
     public virtual void SetSkillMove(bool move, float speed = 0f)
     {
         if (Controller != null)
@@ -101,6 +109,7 @@ public abstract class EntityBase
             Controller.SetSkillMoveState(move, speed);
         }
     }
+
     public virtual void SkillAttack(int skillID)
     {
         SkillManager.SkillAttack(this, skillID);
@@ -122,4 +131,23 @@ public abstract class EntityBase
     }
 
 
+    public void SetDodge()
+    {
+        GameRoot.Instance.DynamicPanel.SetDodge(Controller.name);
+    }
+
+    public void SetCritical(int critical)
+    {
+        GameRoot.Instance.DynamicPanel.SetCritical(Controller.name, critical);
+    }
+
+    public void SetHurt(int hurt)
+    {
+        GameRoot.Instance.DynamicPanel.SetHurt(Controller.name, hurt);
+    }
+
+    public void SetHpVal(int oldVal, int newVal)
+    {
+        GameRoot.Instance.DynamicPanel.SetHpVal(Controller.name, oldVal, newVal);
+    }
 }

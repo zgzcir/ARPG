@@ -748,8 +748,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a2e413a1bca794399c0f5f39d8cbcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BattlePanel: {fileID: 272073291}
   BattleManager: {fileID: 0}
+  battleControllPanel: {fileID: 272073291}
 --- !u!1 &1299647296
 GameObject:
   m_ObjectHideFlags: 0
@@ -3219,6 +3219,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2811930479078386792, guid: 7ef52e50d4539224b9b2a859decee133,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.87000275
+      objectReference: {fileID: 0}
+    - target: {fileID: 9118296384293794312, guid: 7ef52e50d4539224b9b2a859decee133,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.000015258789
+      objectReference: {fileID: 0}
+    - target: {fileID: 1181501159163778241, guid: 7ef52e50d4539224b9b2a859decee133,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.000009536743
+      objectReference: {fileID: 0}
+    - target: {fileID: 1181501159163778241, guid: 7ef52e50d4539224b9b2a859decee133,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.000061035156
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ef52e50d4539224b9b2a859decee133, type: 3}

@@ -23,6 +23,7 @@
     
 
         public const string TaskRewardItem = "PrefabUI/Item/taItem";
+        public const string EntityHpItem = "PrefabUI/Item/EntityHPItem";
 
         /// <summary>
         /// StrengthenPanel

@@ -33,7 +33,7 @@ public const string BGCityHappy = "bgCityHappy";
 
 
  
- public static float GloableScreenRate=> 1.0f * Constans.ScreenStandardHeight / Screen.height;
+ public static float GloableScreenRate=> 1.0f * ScreenStandardHeight / Screen.height;
  
  public const int ScreenOPDis = 140;
 
@@ -49,6 +49,7 @@ public const string BGCityHappy = "bgCityHappy";
  /// 角色运动平滑
  /// </summary>
  public const float AccelerSpeed = 5;
+ public const float AccelerHPSpeed = 0.35f;
  public const float RotateSmooth = 0.05f;
  
 /// <summary>
@@ -61,7 +62,9 @@ public const string BGCityHappy = "bgCityHappy";
  public const int ActionDie =100;
  public const int ActionHit =101;
 
- 
+ /// <summary>
+ /// 动画时长
+ /// </summary>
  public const int DieAniLength = 5000;
 
  /// <summary>

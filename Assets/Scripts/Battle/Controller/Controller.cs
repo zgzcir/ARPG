@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class Controller:MonoBehaviour
 {    protected Transform camTrans;
     protected CameraController cameraController;
-
+    public Transform HpRoot;
     
     public Animator Ani;
     public CharacterController CharacterController;

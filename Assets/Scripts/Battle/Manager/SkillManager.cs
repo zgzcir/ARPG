@@ -47,6 +47,7 @@ public class SkillManager : MonoBehaviour
                 {
                     //     GameRoot.AddTips(target.Controller.name + "闪避了你的攻击"); //todo转移到聊天窗口
                     CommonTool.Log("闪避Rate:" + dodgeNum + "/" + target.BattleProps.Dodge);
+                    target.SetDodge();
                     return;
                 }
             }
@@ -56,9 +57,10 @@ public class SkillManager : MonoBehaviour
                 int criticalNum = ZCTools.RDInt(1, 100, rd);
                 if (criticalNum <= caster.BattleProps.Critical)
                 {
-                    float criticalIncRate = 1 + ZCTools.RDInt(1, 100, rd) / 100.0f;
+                    float criticalIncRate =(1 + ZCTools.RDInt(1, 100, rd) / 100.0f);
                     CommonTool.Log("暴击ratr"+criticalIncRate);
-                    damageSum = (int) (criticalIncRate * damageSum);
+                    damageSum =  (int)(criticalIncRate * damageSum);
+                    target.SetCritical(damageSum);
                 }
             }
             {
@@ -73,25 +75,20 @@ public class SkillManager : MonoBehaviour
             damageSum += caster.BattleProps.SA;
             damageSum -= target.BattleProps.SD;
         }
-        else
-        {
-           
-        }
         if (damageSum <= 0)
         {
             return;
         }
-
-        if (target.HP < damageSum)
+        if (target.HP <= damageSum)
         {
             target.HP = 0;
-            target.Die();
         }
         else
         {
             target.HP -= damageSum;
             target.Hit();
         }
+        target.SetHurt(damageSum);
     }
 
     private bool IsInRange(Vector3 from, Vector3 to, float range)

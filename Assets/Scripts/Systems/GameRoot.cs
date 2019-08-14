@@ -57,7 +57,7 @@ public class GameRoot : MonoBehaviour
             var basePanel = canvas.GetChild(i).GetComponent<BasePanel>();
             basePanel.gameObject.SetActive(false);
             basePanel.IsOpen = false;
-            basePanel.Init();
+            basePanel.Init(); 
         }
         DynamicPanel.SetPanelState();
     }

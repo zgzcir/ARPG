@@ -7,7 +7,6 @@
             CommonTool.Log("en Born");
 
         }
-
         public void Process(EntityBase entity, params object[] args)
         {
 

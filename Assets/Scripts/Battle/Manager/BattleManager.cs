@@ -185,6 +185,7 @@ public class BattleManager : MonoBehaviour
                 em.SetBattleProps(md.MCfg.MBattleProps);
                 go.SetActive(false);
                 monstersDic.Add(go.name, em);
+                GameRoot.Instance.DynamicPanel.AddHpItemInfo(go.name,em.Controller.HpRoot,em.HP);
             }
         }
     }
