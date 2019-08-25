@@ -14,7 +14,7 @@ public class StateDie:IState
         {
             
                 entity.SetAciton(Constans.ActionDie);
-                TimerSvc.Instance.AddTimeTask(tid => { entity.Controller.gameObject.SetActive(false); },
+                TimerSvc.Instance.AddTimeTask(tid => { entity.SetActive(false); },
                     Constans.DieAniLength);
             CommonTool.Log("pr Die");
 

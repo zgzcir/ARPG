@@ -8,7 +8,8 @@ public class BattleManager : MonoBehaviour
 {
     private ResSvc resSvc;
     private AudioSvc audioSvc;
-
+    private int loadCount = 0;
+    
     private MapCfg mapCfg;
 
     private StateManager stateManager;
@@ -85,11 +86,10 @@ public class BattleManager : MonoBehaviour
         entitySelfplayer = new EntityPlayer()
         {
             StateManager = stateManager,
-            Controller = playerController,
             SkillManager = skillManager,
             BattleManager = this
         };
-
+entitySelfplayer.SetCtrl(playerController);
         //ttt   
         cameraController.Target = playerController.CameraPivot.transform;
         cameraController.enabled = true;
@@ -158,6 +158,7 @@ public class BattleManager : MonoBehaviour
 
     public void LoadMonsterByWave(int wave)
     {
+        
         for (int i = 0; i < mapCfg.Monsters.Count; i++)
         {
             MonsterMapData md = mapCfg.Monsters[i];
@@ -168,7 +169,7 @@ public class BattleManager : MonoBehaviour
                 go.transform.localEulerAngles = md.MBornRote;
                 go.transform.localScale = Vector3.one;
 
-                go.name = "Wave" + wave + "_monster" + md.MIndex;
+                go.name = "Wave" + wave + "_monster" + md.MIndex;    
 
                 MonsterController monsterController = go.GetComponent<MonsterController>();
                 monsterController.Init();
@@ -176,16 +177,17 @@ public class BattleManager : MonoBehaviour
                 EntityMonster em = new EntityMonster()
                 {
                     StateManager = stateManager,
-                    Controller = monsterController,
                     SkillManager = skillManager,
-                    BattleManager = this
+                    BattleManager = this,
+                    Name = go.name
                 };
+                em.SetCtrl(monsterController);
 
                 em.MonsterMapData = md;
                 em.SetBattleProps(md.MCfg.MBattleProps);
+                GameRoot.Instance.DynamicPanel.AddHpItemInfo(go.name,monsterController.HpRoot,em.HP);
                 go.SetActive(false);
                 monstersDic.Add(go.name, em);
-                GameRoot.Instance.DynamicPanel.AddHpItemInfo(go.name,em.Controller.HpRoot,em.HP);
             }
         }
     }
@@ -207,7 +209,7 @@ public class BattleManager : MonoBehaviour
         {
             GetEntityMonsters().ForEach(m =>
             {
-                m.Controller.gameObject.SetActive(true);
+m.SetActive();
                 m.Born();
                 TimerSvc.Instance.AddTimeTask(id => { m.Idle(); }, 1000);
             });

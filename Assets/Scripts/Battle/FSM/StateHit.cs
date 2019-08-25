@@ -28,7 +28,7 @@ public class StateHit : IState
 
     private float GetHitLen(EntityBase entity)
     {
-        List<AnimationClip> clips = entity.Controller.Ani.runtimeAnimatorController.animationClips.ToList();
+        List<AnimationClip> clips = entity.GetAnimationClips();
         var clipsF = clips.Where(c =>
         {
             return c.name.Contains("hit") || c.name.Contains("Hit") || c.name.Contains("HIT");

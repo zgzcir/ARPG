@@ -67,7 +67,7 @@ public class SkillManager : MonoBehaviour
                 //穿甲
                 int pd = (int) ((1 - caster.BattleProps.Pierce / 100.0f)*target.BattleProps.PD);
                 damageSum -= pd;
-                CommonTool.Log("对"+target.Controller.name+"造成了"+damageSum+"点物理伤害");
+                CommonTool.Log("对"+target.Name+"造成了"+damageSum+"点物理伤害");
             }
         }
         else if (dt == DamageType.AP)
@@ -82,7 +82,7 @@ public class SkillManager : MonoBehaviour
         if (target.HP <= damageSum)
         {
             target.HP = 0;
-            target.BattleManager.RemoveMonster(target.Controller.name);
+            target.BattleManager.RemoveMonster(target.Name);
         }
         else
         {

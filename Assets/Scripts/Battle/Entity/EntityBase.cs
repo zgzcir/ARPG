@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.Analytics;
 
 public abstract class EntityBase
 {
     public AniState currentAniState = AniState.None;
     public StateManager StateManager;
-    public Controller Controller;
+    protected Controller Controller;
     public SkillManager SkillManager;
     public BattleManager BattleManager;
     public bool canControl = true;
@@ -18,6 +21,14 @@ public abstract class EntityBase
     }
 
     private int hp;
+
+    private string name;
+
+    public string Name
+    {
+        get { return name; }
+        set { name = value; }
+    }
 
     public int HP
     {
@@ -150,4 +161,28 @@ public abstract class EntityBase
     {
         GameRoot.Instance.DynamicPanel.SetHpVal(Controller.name, oldVal, newVal);
     }
+
+    public void SetActive(bool active = true)
+    {
+        if (Controller != null)
+        {
+            Controller.gameObject.SetActive(active);
+        }
+}
+
+    public void SetCtrl(Controller ctrl)
+    {
+        Controller = ctrl;
+    }
+
+    public List<AnimationClip> GetAnimationClips()
+    {
+        if (Controller != null)
+        {
+            return Controller.Ani.runtimeAnimatorController.animationClips.ToList();
+        }
+
+        return null;
+    }
+    
 }
