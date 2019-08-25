@@ -79,6 +79,7 @@ public class TaskRewardData : BaseData<TaskRewardData>
 public class SkillCfg : BaseData<SkillCfg>
 {
     public string Name;
+    public int CDTime;
     public int Duration;
     public int AniAction;
     public string FX;

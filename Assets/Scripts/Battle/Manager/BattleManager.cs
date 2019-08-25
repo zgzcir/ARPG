@@ -142,12 +142,14 @@ entitySelfplayer.SetCtrl(playerController);
 
     private void ReleaseSkill2()
     {
-        Debug.Log("2 Atk");
+        entitySelfplayer.Attack(102);
+
     }
 
     private void ReleaseSkill3()
     {
-        Debug.Log("3 Atk");
+        entitySelfplayer.Attack(103);
+
     }
 
 

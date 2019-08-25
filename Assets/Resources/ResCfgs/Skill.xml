@@ -2,6 +2,7 @@
 <root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<item ID="101">
 		<skillName>突袭</skillName>
+		<cdTime>6000</cdTime>
 		<duration>900</duration>
 		<aniAction>1</aniAction>
 		<fx>dagger_skill1</fx>
@@ -9,5 +10,27 @@
 		<skillMoveLst>1011</skillMoveLst>
 		<skillActionLst>1011|1011</skillActionLst>
 		<skillDamageLst>26|36</skillDamageLst>
+	</item>
+	<item ID="102">
+		<skillName>穿刺</skillName>
+		<cdTime>8000</cdTime>
+		<duration>1400</duration>
+		<aniAction>2</aniAction>
+		<fx>dagger_skill2</fx>
+		<dmgType>2</dmgType>
+		<skillMoveLst>1021|1022</skillMoveLst>
+		<skillActionLst>1021|1021|1021</skillActionLst>
+		<skillDamageLst>14|15|16</skillDamageLst>
+	</item>
+	<item ID="103">
+		<skillName>旋风</skillName>
+		<cdTime>10000</cdTime>
+		<duration>1600</duration>
+		<aniAction>3</aniAction>
+		<fx>dagger_skill3</fx>
+		<dmgType>2</dmgType>
+		<skillMoveLst>1031|1032</skillMoveLst>
+		<skillActionLst>1031|1031|1031|1031</skillActionLst>
+		<skillDamageLst>17|18|19|20</skillDamageLst>
 	</item>
 </root>

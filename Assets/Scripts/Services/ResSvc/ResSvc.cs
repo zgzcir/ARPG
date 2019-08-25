@@ -729,6 +729,9 @@ public class ResSvc : MonoBehaviour
                         case "duration":
                             skillCfg.Duration = int.Parse(e.InnerText);
                             break;
+                        case "cdTime":
+                            skillCfg.CDTime = int.Parse(e.InnerText);
+                            break;
                         case "aniAction":
                             skillCfg.AniAction = int.Parse(e.InnerText);
                             break;
@@ -754,10 +757,9 @@ public class ResSvc : MonoBehaviour
                             string[] skMoveArr = e.InnerText.Split('|');
                             for (int j = 0; j < skMoveArr.Length; j++)
                             {
-                                if (skMoveArr[i] != "")
-                                    skillCfg.SkillMoveLst.Add(int.Parse(skMoveArr[i]));
+                                if (skMoveArr[j] != "")
+                                    skillCfg.SkillMoveLst.Add(int.Parse(skMoveArr[j]));
                             }
-
                             break;
                         case "skillActionLst":
                             string[] skActionArr = e.InnerText.Split('|');
