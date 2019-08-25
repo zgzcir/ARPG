@@ -78,6 +78,18 @@ public class DynamicPanel : BasePanel
             entityHpItemDic.Add(mName,ehi);
     }
 
+    public void  RemoveHpItem(string mName)
+    {
+        
+        EntityHPItem item = null;
+        if (entityHpItemDic.TryGetValue(mName, out item))
+        {
+            entityHpItemDic.Remove(mName);
+            Destroy(item.gameObject);
+        }
+     
+    }
+
     public void SetDodge(string mName)
     {
         EntityHPItem item = null;
@@ -108,6 +120,6 @@ public class DynamicPanel : BasePanel
         }
     }
     
-    
-    
+
+
 }

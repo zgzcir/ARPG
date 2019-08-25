@@ -82,6 +82,7 @@ public class SkillManager : MonoBehaviour
         if (target.HP <= damageSum)
         {
             target.HP = 0;
+            target.BattleManager.RemoveMonster(target.Controller.name);
         }
         else
         {

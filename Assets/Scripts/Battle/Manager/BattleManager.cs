@@ -213,4 +213,14 @@ public class BattleManager : MonoBehaviour
             });
         }, 0);
     }
+
+    public void RemoveMonster(string key)
+    {
+        EntityMonster entityMonster;
+        if (monstersDic.TryGetValue(key, out entityMonster))
+        {
+            monstersDic.Remove(key);
+        }
+        GameRoot.Instance.DynamicPanel.RemoveHpItem(key);
+    }
 }
