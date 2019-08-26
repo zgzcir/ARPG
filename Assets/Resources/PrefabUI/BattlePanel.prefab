@@ -695,7 +695,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -237.87, y: 208.88}
+  m_AnchoredPosition: {x: -237.8711, y: 208.88}
   m_SizeDelta: {x: 475.74, y: 381.77}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2399808656714709022
@@ -733,7 +733,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.15002441, y: 0.05000305}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -317.69, y: -125.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2581830289204375380
@@ -809,7 +809,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.000015258789, y: 0.000015258789}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7640758743411696274
@@ -3014,7 +3014,7 @@ MonoBehaviour:
   txtPower: {fileID: 7320704281300407409}
   imgSk1CD: {fileID: 2503555603735274536}
   txtSk1CD: {fileID: 1977842659560171241}
-  imgSk2CD: {fileID: 2503555603735274536}
+  imgSk2CD: {fileID: 3909742284715452112}
   txtSk2CD: {fileID: 9056519873824643687}
   imgSk3CD: {fileID: 6646544461551228014}
   txtSk3CD: {fileID: 6076574869794375082}

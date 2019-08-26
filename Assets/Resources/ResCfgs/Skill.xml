@@ -25,7 +25,7 @@
 	<item ID="103">
 		<skillName>旋风</skillName>
 		<cdTime>10000</cdTime>
-		<duration>1600</duration>
+		<duration>700</duration>
 		<aniAction>3</aniAction>
 		<fx>dagger_skill3</fx>
 		<dmgType>2</dmgType>

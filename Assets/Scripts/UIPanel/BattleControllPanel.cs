@@ -38,6 +38,8 @@ public class BattleControllPanel : BasePanel
         base.Init();
         RegisterUIEvents();
         sk1CDTime = resSvc.GetSkillCfg(101).CDTime / 1000.0f;
+        sk2CDTime = resSvc.GetSkillCfg(102).CDTime / 1000.0f;
+        sk3CDTime = resSvc.GetSkillCfg(103).CDTime / 1000.0f;
     }
 
     protected override void OnOpen()
@@ -140,14 +142,35 @@ public class BattleControllPanel : BasePanel
         sk1RunCDTime = (int) sk1CDTime;
         SetText(txtSk1CD, sk1RunCDTime);
     }
-
+    
+    private bool isSk2CD;
+    private float sk2CDTime;
+    private float sk2RunCDTime;
+    private float sk2FillCount;
     public void OnClickSkill2()
     {
+        if (isSk2CD) return;
+        BattleSys.Instance.ReqReleaseSkill(2);
+        isSk2CD = true;
+        SetActive(imgSk2CD);
+        imgSk2CD.fillAmount = 1;
+        sk2RunCDTime = (int) sk2CDTime;
+        SetText(txtSk2CD, sk2RunCDTime);
     }
 
-
+    private bool isSk3CD;
+    private float sk3CDTime;
+    private float sk3RunCDTime;
+    private float sk3FillCount;
     public void OnClickSkill3()
     {
+        if (isSk3CD) return;
+        BattleSys.Instance.ReqReleaseSkill(3);
+        isSk3CD = true;
+        SetActive(imgSk3CD);
+        imgSk3CD.fillAmount = 1;
+        sk3RunCDTime = (int) sk3CDTime;
+        SetText(txtSk3CD, sk3RunCDTime);
     }
 
     //Test
@@ -157,19 +180,27 @@ public class BattleControllPanel : BasePanel
     }
 
     private float secondOneCountSk1;
+    private float secondOneCountSk2;
+    private float secondOneCountSk3;
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             OnClickSkill1();
+        }    if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            OnClickSkill2();
+        }    if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            OnClickSkill3();
         }
 
         float deltaTime = Time.deltaTime;
-        if (isSk1CD)
-        {
+     
             #region sk1
-
+            if (isSk1CD)
+            {
             sk1FillCount += deltaTime;
             if (sk1FillCount >= sk1CDTime)
             {
@@ -191,6 +222,68 @@ public class BattleControllPanel : BasePanel
                 SetText(txtSk1CD, sk1RunCDTime);
             }
         }
+
+        #endregion
+
+        #region sk2
+        if (isSk2CD)
+        {
+            {
+                sk2FillCount += deltaTime;
+                if (sk2FillCount >= sk2CDTime)
+                {
+                    isSk2CD = false;
+                    sk2FillCount = 0;
+                    SetActive(imgSk2CD, false);
+                }
+                else
+                {
+                    imgSk2CD.fillAmount = 1 - sk2FillCount / sk2CDTime;
+                }
+
+                secondOneCountSk2 += deltaTime;
+                if (secondOneCountSk2 >= 1)
+                {
+                    secondOneCountSk2 -= 1;
+                    sk2RunCDTime -= 1;
+
+                    SetText(txtSk2CD, sk2RunCDTime);
+                }
+            }
+        }
+
+
+
+        #endregion
+
+        #region sk3
+
+        if (isSk3CD)
+        {
+            {
+                sk3FillCount += deltaTime;
+                if (sk3FillCount >= sk3CDTime)
+                {
+                    isSk3CD = false;
+                    sk3FillCount = 0;
+                    SetActive(imgSk3CD, false);
+                }
+                else
+                {
+                    imgSk3CD.fillAmount = 1 - sk3FillCount / sk3CDTime;
+                }
+
+                secondOneCountSk3 += deltaTime;
+                if (secondOneCountSk3 >= 1)
+                {
+                    secondOneCountSk3 -= 1;
+                    sk3RunCDTime -= 1;
+
+                    SetText(txtSk3CD, sk3RunCDTime);
+                }
+            }
+        }
+
 
         #endregion
     }

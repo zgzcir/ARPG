@@ -17,8 +17,15 @@ public class PlayerController : Controller
 
     public GameObject CameraPivot; //改成transform
     public Transform ChaCameraRotatePivot;
-    public GameObject FX1;
+    [FormerlySerializedAs("FX1")] public GameObject Sk1FX;
+    public GameObject Sk2FX;
+    public GameObject Sk3FX;
 
+    public GameObject NormalAtkFx1;
+    public GameObject NormalAtkFx2;
+    public GameObject NormalAtkFx3;
+    public GameObject NormalAtkFx4;
+    public GameObject NormalAtkFx5;
 
 //    private Vector2 inputDir;
 //    public Vector2 InputDir
@@ -53,6 +60,7 @@ public class PlayerController : Controller
     {
         isGrounded = true;
     }
+
     private void FixedUpdate()
     {
     }
@@ -63,21 +71,56 @@ public class PlayerController : Controller
         timerSvc = TimerSvc.Instance;
         if (Camera.main != null) camTrans = Camera.main.transform;
         cameraController = camTrans.GetComponent<CameraController>();
-        if (FX1 != null)
+        if (Sk1FX != null)
         {
-            fxDic.Add(FX1.name,FX1);
+            fxDic.Add(Sk1FX.name, Sk1FX);
+        }
+
+        if (Sk2FX != null)
+        {
+            fxDic.Add(Sk2FX.name, Sk2FX);
+        }
+
+
+        if (Sk3FX != null)
+        {
+            fxDic.Add(Sk3FX.name, Sk3FX);
+        }
+
+        if (NormalAtkFx1 != null)
+        {
+            fxDic.Add(NormalAtkFx1.name, NormalAtkFx1);
+        }
+
+        if (NormalAtkFx2 != null)
+        {
+            fxDic.Add(NormalAtkFx2.name, NormalAtkFx2);
+        }
+
+        if (NormalAtkFx3 != null)
+        {
+            fxDic.Add(NormalAtkFx3.name, NormalAtkFx3);
+        }
+
+        if (NormalAtkFx4 != null)
+        {
+            fxDic.Add(NormalAtkFx4.name, NormalAtkFx4);
+        }
+
+        if (NormalAtkFx5 != null)
+        {
+            fxDic.Add(NormalAtkFx5.name, NormalAtkFx5);
         }
     }
 
-        private void Update()
+    private void Update()
     {
-
         #region kb input
 
         /*
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
-        //******************************************///////////////////////////////////////////
+        //******************************************/ //////////////////////////////////////////
 ////        float u = 0;
 ////      
 ////
@@ -98,29 +141,31 @@ public class PlayerController : Controller
 ////        
 ////        u -= Constans.Gravity * Time.deltaTime;
         //******************************************///////////////////////////////////////////
-        
+
         //todo
-     //   Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-     //   InputDir = input.normalized;
-     
-     
+        //   Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        //   InputDir = input.normalized;
+
+
         if (isMove)
         {
             if (MainCitySys.Instance.IsNavigate)
             {
                 MainCitySys.Instance.CancelNavGuide();
             }
-           SetBlend(Constans.BlendMove);
-           SetDir();
+
+            SetBlend(Constans.BlendMove);
+            SetDir();
             SetMove();
         }
         else
         {
             SetBlend(Constans.BlendIdle);
         }
+
         #endregion
 
-        if (MainCitySys.Instance!=null&&MainCitySys.Instance.IsNavigate)
+        if (MainCitySys.Instance != null && MainCitySys.Instance.IsNavigate)
         {
             SetBlend(Constans.BlendMove);
         }
@@ -130,18 +175,18 @@ public class PlayerController : Controller
         {
             UpdateMixBlend();
         }
+
         if (SkillMove)
         {
             SetSkillMove();
         }
-        
     }
 
-    private  void SetSkillMove()
+    private void SetSkillMove()
     {
         CharacterController.Move(Time.deltaTime * SkillMoveSpeed * transform.forward);
-
     }
+
     private void SetDir()
     {
         targetRotation = Mathf.Atan2(InputDir.x, InputDir.y) * Mathf.Rad2Deg + camTrans.eulerAngles.y;
@@ -170,10 +215,7 @@ public class PlayerController : Controller
         if (fxDic.TryGetValue(name, out go))
         {
             go.SetActive(true);
-            timerSvc.AddTimeTask(tid =>
-            {
-                go.SetActive(false);
-            }, duration);
+            timerSvc.AddTimeTask(tid => { go.SetActive(false); }, duration);
         }
     }
 
