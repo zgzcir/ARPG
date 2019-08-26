@@ -83,6 +83,7 @@ public class SkillCfg : BaseData<SkillCfg>
     public int Duration;
     public int AniAction;
     public string FX;
+    public bool IsCombo;
     public DamageType DmgType;
     public List<int> SkillMoveLst;
     public List<int> SkillActionLst;

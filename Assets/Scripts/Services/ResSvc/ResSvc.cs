@@ -738,6 +738,9 @@ public class ResSvc : MonoBehaviour
                         case "fx":
                             skillCfg.FX = e.InnerText;
                             break;
+                        case "isCombo":
+                            skillCfg.IsCombo = e.InnerText.Equals("1");
+                            break;
                         case "dmgType":
                             if (e.InnerText.Equals("1"))
                             {
@@ -760,13 +763,14 @@ public class ResSvc : MonoBehaviour
                                 if (skMoveArr[j] != "")
                                     skillCfg.SkillMoveLst.Add(int.Parse(skMoveArr[j]));
                             }
+
                             break;
                         case "skillActionLst":
                             string[] skActionArr = e.InnerText.Split('|');
                             for (int j = 0; j < skActionArr.Length; j++)
                             {
-                                if (skActionArr[i] != "")
-                                    skillCfg.SkillActionLst.Add(int.Parse(skActionArr[i]));
+                                if (skActionArr[j] != "")
+                                    skillCfg.SkillActionLst.Add(int.Parse(skActionArr[j]));
                             }
 
                             break;
@@ -774,8 +778,8 @@ public class ResSvc : MonoBehaviour
                             string[] skDamageArr = e.InnerText.Split('|');
                             for (int j = 0; j < skDamageArr.Length; j++)
                             {
-                                if (skDamageArr[i] != "")
-                                    skillCfg.SkillDamageLst.Add(int.Parse(skDamageArr[i]));
+                                if (skDamageArr[j] != "")
+                                    skillCfg.SkillDamageLst.Add(int.Parse(skDamageArr[j]));
                             }
 
                             break;

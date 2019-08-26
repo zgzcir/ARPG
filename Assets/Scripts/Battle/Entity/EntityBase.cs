@@ -14,6 +14,10 @@ public abstract class EntityBase
 
     private BattleProps battleProps;
 
+    
+    public Queue<int> ComboQue=new Queue<int>();
+    public int NextSkillID;
+    public SkillCfg CurSkillCfg;
     public BattleProps BattleProps
     {
         get => battleProps;
@@ -184,5 +188,24 @@ public abstract class EntityBase
 
         return null;
     }
-    
+
+    public void ExitCurSkill()
+    {
+        
+        canControl = true;
+
+        if (CurSkillCfg.IsCombo)
+        {
+            if (ComboQue.Count > 0)
+            {
+                NextSkillID = ComboQue.Dequeue();
+            }
+            else
+            {
+                NextSkillID = 0;
+            }   
+        }
+ 
+        SetAciton(Constans.ActionDefault);
+    }
 }

@@ -3,18 +3,19 @@
     public void Enter(EntityBase entity, params object[] args)
     {
         entity.currentAniState = AniState.Attack;
+        entity.CurSkillCfg = ResSvc.Instance.GetSkillCfg((int) args[0]);
         CommonTool.Log("en atk");
     }
 
     public void Process(EntityBase entity, params object[] args)
     {
         CommonTool.Log("pr atk");
-        entity.SkillAttack((int)args[0]);
+        entity.SkillAttack((int) args[0]);
     }
+
     public void Exit(EntityBase entity, params object[] args)
     {
-        entity.SetAciton(Constans.ActionDefault);
-        entity.canControl = true;
+        entity.ExitCurSkill();
         CommonTool.Log("ex atk");
     }
 }

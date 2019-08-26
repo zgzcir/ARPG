@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour
     private float pitch;
     public float MouseMoveSpeed;
     public Transform Target;
-    public float camLen = 2;
+    public float camLen = 10000;
     private Vector3 targetEuler;
     private bool canRotate = true;
     private Vector3 camMovePos;

@@ -100,6 +100,11 @@ private const string ColorBlue = "<color=#76b9ed>";
 private const string ColorGreen = "<color=#59DE3E>";
 private const string ColorEnd = "</color>";
 
+/// <summary>
+/// ComboSpace
+/// </summary>
+public const int ComboSpace = 500; 
+
 public static string Color(string str, TxtColor c)
 {
  string result = "";

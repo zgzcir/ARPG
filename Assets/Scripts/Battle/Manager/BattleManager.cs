@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Protocol;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BattleManager : MonoBehaviour
 {
@@ -130,9 +131,37 @@ entitySelfplayer.SetCtrl(playerController);
         }
     }
 
+    private double lastAtkTime = 0;
+    private int[] comboArr = {111, 112, 113, 114, 115};
+    public int comboIndex = 0;
     private void ReleaseNormalAtk()
-    {
-        Debug.Log("Normal Atk");
+    {//Combo
+        if (entitySelfplayer.currentAniState == AniState.Attack)
+        {
+            double nowAtkTime = TimerSvc.Instance.GetNowTime();
+            if (nowAtkTime - lastAtkTime < Constans.ComboSpace&&lastAtkTime!=0)
+            {
+                if (comboIndex!=comboArr.Length-1)
+                {
+                    comboIndex++;
+                    entitySelfplayer.ComboQue.Enqueue(comboArr[comboIndex]);
+                    lastAtkTime = nowAtkTime;
+                }
+                else
+                {
+                    lastAtkTime = 0;
+                    comboIndex = 0;
+                }
+
+             
+            }
+        }
+        else if(entitySelfplayer.currentAniState == AniState.Idle||entitySelfplayer.currentAniState == AniState.Move)
+        {
+            comboIndex = 0;
+            lastAtkTime=TimerSvc.Instance.GetNowTime();
+            entitySelfplayer.Attack(comboArr[comboIndex]);
+        }
     }
 
     private void ReleaseSkill1()

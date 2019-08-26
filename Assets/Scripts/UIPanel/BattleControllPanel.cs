@@ -195,7 +195,10 @@ public class BattleControllPanel : BasePanel
         {
             OnClickSkill3();
         }
-
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            OnClickNormalAtk();
+        }
         float deltaTime = Time.deltaTime;
      
             #region sk1

@@ -12,7 +12,7 @@
 		<pierce>5</pierce>
 		<critical>2</critical>
 	</item>
-	<item ID="1002">
+	<item ID="2001">
 		<mName>地狱魔卫</mName>
 		<resPath>PrefabNPC/MonsterBoss_1</resPath>
 		<hp>800</hp>

@@ -6,6 +6,7 @@
 		<duration>900</duration>
 		<aniAction>1</aniAction>
 		<fx>dagger_skill1</fx>
+		<isCombo>0</isCombo>
 		<dmgType>1</dmgType>
 		<skillMoveLst>1011</skillMoveLst>
 		<skillActionLst>1011|1011</skillActionLst>
@@ -17,6 +18,7 @@
 		<duration>1400</duration>
 		<aniAction>2</aniAction>
 		<fx>dagger_skill2</fx>
+		<isCombo>0</isCombo>
 		<dmgType>2</dmgType>
 		<skillMoveLst>1021|1022</skillMoveLst>
 		<skillActionLst>1021|1021|1021</skillActionLst>
@@ -25,12 +27,93 @@
 	<item ID="103">
 		<skillName>旋风</skillName>
 		<cdTime>10000</cdTime>
-		<duration>700</duration>
+		<duration>800</duration>
 		<aniAction>3</aniAction>
 		<fx>dagger_skill3</fx>
+		<isCombo>0</isCombo>
 		<dmgType>2</dmgType>
 		<skillMoveLst>1031|1032</skillMoveLst>
 		<skillActionLst>1031|1031|1031|1031</skillActionLst>
 		<skillDamageLst>17|18|19|20</skillDamageLst>
+	</item>
+	<item ID="111">
+		<skillName>普攻1</skillName>
+		<cdTime>0</cdTime>
+		<duration>660</duration>
+		<aniAction>11</aniAction>
+		<fx>dagger_atk1</fx>
+		<isCombo>1</isCombo>
+		<dmgType>1</dmgType>
+		<skillMoveLst>1111</skillMoveLst>
+		<skillActionLst>1111</skillActionLst>
+		<skillDamageLst>18</skillDamageLst>
+	</item>
+	<item ID="112">
+		<skillName>普攻2</skillName>
+		<cdTime>0</cdTime>
+		<duration>860</duration>
+		<aniAction>12</aniAction>
+		<fx>dagger_atk2</fx>
+		<isCombo>1</isCombo>
+		<dmgType>1</dmgType>
+		<skillMoveLst>1111</skillMoveLst>
+		<skillActionLst>1121</skillActionLst>
+		<skillDamageLst>21</skillDamageLst>
+	</item>
+	<item ID="113">
+		<skillName>普攻3</skillName>
+		<cdTime>0</cdTime>
+		<duration>730</duration>
+		<aniAction>13</aniAction>
+		<fx>dagger_atk3</fx>
+		<isCombo>1</isCombo>
+		<dmgType>1</dmgType>
+		<skillMoveLst>1111</skillMoveLst>
+		<skillActionLst>1131</skillActionLst>
+		<skillDamageLst>23</skillDamageLst>
+	</item>
+	<item ID="114">
+		<skillName>普攻4</skillName>
+		<cdTime>0</cdTime>
+		<duration>860</duration>
+		<aniAction>14</aniAction>
+		<fx>dagger_atk4</fx>
+		<isCombo>1</isCombo>
+		<dmgType>1</dmgType>
+		<skillMoveLst>1111</skillMoveLst>
+		<skillActionLst>1141</skillActionLst>
+		<skillDamageLst>27</skillDamageLst>
+	</item>
+	<item ID="115">
+		<skillName>普攻5</skillName>
+		<cdTime>0</cdTime>
+		<duration>800</duration>
+		<aniAction>15</aniAction>
+		<fx>dagger_atk5</fx>
+		<isCombo>1</isCombo>
+		<dmgType>1</dmgType>
+		<skillMoveLst>1111</skillMoveLst>
+		<skillActionLst>1151</skillActionLst>
+		<skillDamageLst>34</skillDamageLst>
+	</item>
+	<item ID="201">
+		<skillName>普通怪物普攻1</skillName>
+		<cdTime>0</cdTime>
+		<duration>800</duration>
+		<aniAction>11</aniAction>
+		<isCombo>0</isCombo>
+		<dmgType>1</dmgType>
+		<skillActionLst>2111</skillActionLst>
+		<skillDamageLst>26</skillDamageLst>
+	</item>
+	<item ID="301">
+		<skillName>精英怪物普攻1</skillName>
+		<cdTime>0</cdTime>
+		<duration>800</duration>
+		<aniAction>11</aniAction>
+		<isCombo>0</isCombo>
+		<dmgType>2</dmgType>
+		<skillActionLst>2211</skillActionLst>
+		<skillDamageLst>65</skillDamageLst>
 	</item>
 </root>

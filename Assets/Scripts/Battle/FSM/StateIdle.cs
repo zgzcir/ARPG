@@ -10,6 +10,13 @@ public class StateIdle : IState
      }
      public void Process(EntityBase entity, params object[] args)
      {
+         if (entity.NextSkillID != 0)
+         {
+             entity.Attack(entity.NextSkillID);
+         }
+         else
+         {
+             
          if (entity.GetDirInput() != Vector2.zero)
          {
              entity.Move();
@@ -17,6 +24,8 @@ public class StateIdle : IState
          }         
          
          entity.SetBlend(Constans.BlendIdle);
+         }
+
          CommonTool.Log("pr idle");
 
      }
