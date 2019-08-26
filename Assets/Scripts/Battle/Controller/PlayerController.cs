@@ -11,7 +11,6 @@ public class PlayerController : Controller
     private float targetBlend;
     private float currentBlend;
 
-    private float currentVelocity;
 
     public Transform RayCastPoint;
 
@@ -39,7 +38,6 @@ public class PlayerController : Controller
 //        
 //    }
 
-    private float targetRotation;
 
 
     private bool isJump = false;
@@ -189,9 +187,14 @@ public class PlayerController : Controller
 
     private void SetDir()
     {
-        targetRotation = Mathf.Atan2(InputDir.x, InputDir.y) * Mathf.Rad2Deg + camTrans.eulerAngles.y;
-        transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation,
-                                    ref currentVelocity, Constans.RotateSmooth);
+        
+        float angle = Vector2.SignedAngle(InputDir, new Vector2(0, 1)) + camTrans.eulerAngles.y;
+        Vector3 eulerAngles = new Vector3(0, angle, 0);
+        transform.localEulerAngles = eulerAngles;
+        
+//        targetRotation = Mathf.Atan2(InputDir.x, InputDir.y) * Mathf.Rad2Deg + camTrans.eulerAngles.y;
+//        transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation,
+//                                    ref currentVelocity, Constans.RotateSmooth);
     }
 
     private void SetMove()

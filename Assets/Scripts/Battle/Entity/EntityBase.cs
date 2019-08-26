@@ -125,7 +125,14 @@ public abstract class EntityBase
         }
     }
 
-    public virtual void SkillAttack(int skillID)
+    public virtual void SerAtkRotation(Vector2 dir)
+    {
+        if (Controller != null)
+        {
+            Controller.SetAtkRotation(dir);
+        }
+    }
+public virtual void SkillAttack(int skillID)
     {
         SkillManager.SkillAttack(this, skillID);
     }

@@ -131,6 +131,16 @@ public class SkillManager : MonoBehaviour
     private void AttackEffect(EntityBase entity, int skillID)
     {
         SkillCfg skillCfg = resSvc.GetSkillCfg(skillID);
+        
+        
+        if (entity.GetDirInput()==Vector2.zero)
+        {
+            
+        }
+        else
+        {
+            entity.SerAtkRotation(entity.GetDirInput());
+        }
 
         entity.SetAciton(skillCfg.AniAction);
         entity.SetFX(skillCfg.FX, skillCfg.Duration);

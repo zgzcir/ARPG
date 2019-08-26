@@ -3,6 +3,10 @@ using UnityEngine;
 
 public abstract class Controller:MonoBehaviour
 {    protected Transform camTrans;
+    
+    protected float targetRotation;
+    protected float currentVelocity;
+
     protected CameraController cameraController;
     public Transform HpRoot;
     
@@ -55,7 +59,18 @@ public abstract class Controller:MonoBehaviour
         SkillMove = move;
         SkillMoveSpeed = skillSpeed;
     }
-    
+
+    public virtual void SetAtkRotation(Vector2 atkDir)
+    {
+        
+        float angle = Vector2.SignedAngle(atkDir, new Vector2(0, 1)) + camTrans.eulerAngles.y;
+        Vector3 eulerAngles = new Vector3(0, angle, 0);
+        transform.localEulerAngles = eulerAngles;
+        
+//        targetRotation = Mathf.Atan2(atkDir.x, atkDir.y) * Mathf.Rad2Deg + camTrans.eulerAngles.y;
+//        transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation,
+//                                    ref currentVelocity, Constans.RotateSmooth);
+    }
     
     
     
