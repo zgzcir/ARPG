@@ -225,4 +225,13 @@ public abstract class EntityBase
 
         SetAciton(Constans.ActionDefault);
     }
+
+
+    public virtual void TickAILogic()
+    {
+    }
+    public virtual bool IsInAtkRange()
+    {
+        return false;
+    }
 }

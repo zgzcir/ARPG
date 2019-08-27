@@ -148,6 +148,12 @@ public class ResSvc : MonoBehaviour
                         case "resPath":
                             mc.ResPath = e.InnerText;
                             break;
+                        case "skillID":
+                            mc.SkillID = int.Parse(e.InnerText);
+                            break;
+                        case "atkDis":
+                            mc.AtkDis = float.Parse(e.InnerText);
+                            break;
                         case "hp":
                             mc.MBattleProps.HP = int.Parse(e.InnerText);
                             break;

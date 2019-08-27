@@ -46,7 +46,7 @@ public class SkillManager : MonoBehaviour
                 if (dodgeNum <= target.BattleProps.Dodge)
                 {
                     //     GameRoot.AddTips(target.Controller.name + "闪避了你的攻击"); //todo转移到聊天窗口
-                    CommonTool.Log("闪避Rate:" + dodgeNum + "/" + target.BattleProps.Dodge);
+                 //   CommonTool.Log("闪避Rate:" + dodgeNum + "/" + target.BattleProps.Dodge);
                     target.SetDodge();
                     return;
                 }
@@ -58,7 +58,7 @@ public class SkillManager : MonoBehaviour
                 if (criticalNum <= caster.BattleProps.Critical)
                 {
                     float criticalIncRate =(1 + ZCTools.RDInt(1, 100, rd) / 100.0f);
-                    CommonTool.Log("暴击ratr"+criticalIncRate);
+             //       CommonTool.Log("暴击ratr"+criticalIncRate);
                     damageSum =  (int)(criticalIncRate * damageSum);
                     target.SetCritical(damageSum);
                 }
@@ -145,13 +145,12 @@ public class SkillManager : MonoBehaviour
         {
             entity.SetAtkRotation(entity.GetDirInput(),true);
         }
-
         entity.SetAciton(skillCfg.AniAction);
         entity.SetFX(skillCfg.FX, skillCfg.Duration);
         skillCfg.SkillMoveLst.ForEach(sid => { CalcSkillMove(entity, sid); });
         entity.canControl = false;
         entity.SetDir(Vector2.zero);
-        timerSvc.AddTimeTask(tid => entity.Idle(), skillCfg.Duration);
+        timerSvc.AddTimeTask(tid => entity.Idle(), skillCfg.Duration);//<<
     }
 
     private void CalcSkillMove(EntityBase entity, int sid)

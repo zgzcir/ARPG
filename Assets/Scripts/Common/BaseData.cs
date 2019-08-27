@@ -24,6 +24,8 @@ public class MonsterCfg : BaseData<MonsterCfg>
 {
     public string MName;
     public string ResPath;
+    public int SkillID;
+    public float AtkDis;
     public BattleProps MBattleProps;
 }
 

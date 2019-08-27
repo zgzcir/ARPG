@@ -20,7 +20,7 @@ public class BattleManager : MonoBehaviour
 
     private PlayerController playerController;
     private CameraController cameraController;
-    private EntityPlayer entitySelfplayer;
+    [FormerlySerializedAs("entitySelfplayer")] public EntityPlayer EntitySelfplayer;
 
 
     private Dictionary<string, EntityMonster> monstersDic = new Dictionary<string, EntityMonster>();
@@ -50,9 +50,9 @@ public class BattleManager : MonoBehaviour
                 cameraController.transform.localEulerAngles = mapCfg.MainCamRote;
 
                 LoadPlayer(mapCfg);
-                entitySelfplayer.Idle();
+                EntitySelfplayer.Idle();
                 PlayerData pd = GameRoot.Instance.PlayerData;
-                entitySelfplayer.SetBattleProps(new BattleProps()
+                EntitySelfplayer.SetBattleProps(new BattleProps()
                 {
                     HP = pd.HP,
                     PA = pd.PA,
@@ -84,13 +84,13 @@ public class BattleManager : MonoBehaviour
         playerController = player.GetComponent<PlayerController>();
         playerController.Init();
 
-        entitySelfplayer = new EntityPlayer()
+        EntitySelfplayer = new EntityPlayer()
         {
             StateManager = stateManager,
             SkillManager = skillManager,
             BattleManager = this
         };
-entitySelfplayer.SetCtrl(playerController);
+EntitySelfplayer.SetCtrl(playerController);
         //ttt   
         cameraController.Target = playerController.CameraPivot.transform;
         cameraController.enabled = true;
@@ -99,16 +99,16 @@ entitySelfplayer.SetCtrl(playerController);
 
     public void SetSelfPlayerMoveDir(Vector2 dir)
     {
-        if (!entitySelfplayer.canControl) return;
+        if (!EntitySelfplayer.canControl) return;
         if (dir == Vector2.zero)
         {
-            entitySelfplayer.Idle();
+            EntitySelfplayer.Idle();
         }
         else
         {
-            entitySelfplayer.Move();
+            EntitySelfplayer.Move();
             //
-            entitySelfplayer.SetDir(dir);
+            EntitySelfplayer.SetDir(dir);
         }
     }
 
@@ -136,7 +136,7 @@ entitySelfplayer.SetCtrl(playerController);
     public int comboIndex = 0;
     private void ReleaseNormalAtk()
     {//Combo
-        if (entitySelfplayer.currentAniState == AniState.Attack)
+        if (EntitySelfplayer.currentAniState == AniState.Attack)
         {
             double nowAtkTime = TimerSvc.Instance.GetNowTime();
             if (nowAtkTime - lastAtkTime < Constans.ComboSpace&&lastAtkTime!=0)
@@ -144,7 +144,7 @@ entitySelfplayer.SetCtrl(playerController);
                 if (comboIndex!=comboArr.Length-1)
                 {
                     comboIndex++;
-                    entitySelfplayer.ComboQue.Enqueue(comboArr[comboIndex]);
+                    EntitySelfplayer.ComboQue.Enqueue(comboArr[comboIndex]);
                     lastAtkTime = nowAtkTime;
                 }
                 else
@@ -156,28 +156,28 @@ entitySelfplayer.SetCtrl(playerController);
              
             }
         }
-        else if(entitySelfplayer.currentAniState == AniState.Idle||entitySelfplayer.currentAniState == AniState.Move)
+        else if(EntitySelfplayer.currentAniState == AniState.Idle||EntitySelfplayer.currentAniState == AniState.Move)
         {
             comboIndex = 0;
             lastAtkTime=TimerSvc.Instance.GetNowTime();
-            entitySelfplayer.Attack(comboArr[comboIndex]);
+            EntitySelfplayer.Attack(comboArr[comboIndex]);
         }
     }
 
     private void ReleaseSkill1()
     {
-        entitySelfplayer.Attack(101);
+        EntitySelfplayer.Attack(101);
     }
 
     private void ReleaseSkill2()
     {
-        entitySelfplayer.Attack(102);
+        EntitySelfplayer.Attack(102);
 
     }
 
     private void ReleaseSkill3()
     {
-        entitySelfplayer.Attack(103);
+        EntitySelfplayer.Attack(103);
 
     }
 
@@ -256,4 +256,6 @@ m.SetActive();
         }
         GameRoot.Instance.DynamicPanel.RemoveHpItem(key);
     }
+
+
 }

@@ -16,7 +16,6 @@ public class StateIdle : IState
          }
          else
          {
-             
          if (entity.GetDirInput() != Vector2.zero)
          {
              entity.Move();
@@ -25,9 +24,7 @@ public class StateIdle : IState
          
          entity.SetBlend(Constans.BlendIdle);
          }
-
          CommonTool.Log("pr idle");
-
      }
  
      public void Exit(EntityBase entity, params object[] args)
