@@ -2,6 +2,12 @@ using UnityEngine;
 
 public class EntityMonster : EntityBase
 {
+
+    public EntityMonster()
+    {
+        EntityType = EntityType.Monster;
+    }
+    
     public MonsterMapData MonsterMapData;
 
     public override void SetBattleProps(BattleProps battleProps)
@@ -26,33 +32,51 @@ public class EntityMonster : EntityBase
     private float checkCount = 0;
     private bool runAi = true;
 
-    
-    
-    
-    
-    
-    
-    
-    
+    private float atkTime = 2;
+    private float atkCount;
+
     public override void TickAILogic()
     {
-        float deltaTime = Time.deltaTime;
-        checkCount += deltaTime;
-        if (checkCount < checkTime)
-        {
+        if (!runAi)
             return;
-        }
-        else
+        if (currentAniState == AniState.Idle || currentAniState == AniState.Move)
         {
-            Vector2 dir = CalcTargetDir();
-
-            if (!IsInAtkRange())
+            float deltaTime = Time.deltaTime;
+            checkCount += deltaTime;
+            if (checkTime < checkCount)
             {
-                SetDir(dir);
-                Move();
+                return;
             }
+     
+                Vector2 dir = CalcTargetDir();
+
+                if (!IsInAtkRange())
+                {
+                    SetDir(dir);
+                    Move();
+                }
+                else
+                {
+                    SetDir(Vector2.zero);
+                    atkCount += deltaTime;
+                    if (atkTime<atkCount)
+                    {
+                        SetAtkRotation(dir);
+                        Attack(MonsterMapData.MCfg.SkillID);
+                        atkCount = 0;
+                    }
+                    else
+                    {
+                        Idle();
+                    }
+                }
+
+                checkCount = 0;
+                checkTime = ZCTools.RDInt(1, 5) * 1.0f /10;
+
         }
     }
+
     public override bool IsInAtkRange()
     {
         EntityPlayer entityPlayer = BattleManager.EntitySelfplayer;
@@ -61,6 +85,7 @@ public class EntityMonster : EntityBase
             runAi = false;
             return false;
         }
+
         Vector3 target = entityPlayer.GetPos();
         Vector3 self = GetPos();
         target.y = 0;
@@ -70,9 +95,10 @@ public class EntityMonster : EntityBase
         {
             return true;
         }
-        return false;
 
+        return false;
     }
+
     public override Vector2 CalcTargetDir()
     {
         EntityPlayer entityPlayer = BattleManager.EntitySelfplayer;
@@ -81,6 +107,7 @@ public class EntityMonster : EntityBase
             runAi = false;
             return Vector2.zero;
         }
+
         Vector3 target = entityPlayer.GetPos();
         Vector3 self = GetPos();
         return new Vector2(target.x - self.x, target.z - self.z).normalized;

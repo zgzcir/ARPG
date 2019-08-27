@@ -5,6 +5,9 @@ using UnityEngine.Analytics;
 
 public abstract class EntityBase
 {
+    public EntityType EntityType = EntityType.None;
+        
+    
     public AniState currentAniState = AniState.None;
     public StateManager StateManager;
     protected Controller Controller;
@@ -210,7 +213,6 @@ public abstract class EntityBase
     public void ExitCurSkill()
     {
         canControl = true;
-
         if (CurSkillCfg.IsCombo)
         {
             if (ComboQue.Count > 0)

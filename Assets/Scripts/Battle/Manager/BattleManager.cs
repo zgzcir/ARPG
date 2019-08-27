@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Protocol;
 using UnityEditor;
@@ -72,7 +73,15 @@ public class BattleManager : MonoBehaviour
 
         Debug.Log("Init BattleManager Done");
     }
+    private void Update()
+    {
 
+        foreach (var item in monstersDic)
+        {
+            EntityMonster em = item.Value;
+            em.TickAILogic();
+        }
+    }
     private void LoadPlayer(MapCfg mapCfg)
     {
         GameObject player = resSvc.LoadPrefab(PathDefine.PlayerBattle);
@@ -152,8 +161,6 @@ EntitySelfplayer.SetCtrl(playerController);
                     lastAtkTime = 0;
                     comboIndex = 0;
                 }
-
-             
             }
         }
         else if(EntitySelfplayer.currentAniState == AniState.Idle||EntitySelfplayer.currentAniState == AniState.Move)
@@ -240,7 +247,7 @@ EntitySelfplayer.SetCtrl(playerController);
         {
             GetEntityMonsters().ForEach(m =>
             {
-m.SetActive();
+            m.SetActive();
                 m.Born();
                 TimerSvc.Instance.AddTimeTask(id => { m.Idle(); }, 1000);
             });

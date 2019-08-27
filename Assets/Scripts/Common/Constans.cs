@@ -103,7 +103,7 @@ private const string ColorEnd = "</color>";
 /// <summary>
 /// ComboSpace
 /// </summary>
-public const int ComboSpace = 500; 
+public const int ComboSpace = 2000; 
 
 public static string Color(string str, TxtColor c)
 {
@@ -144,3 +144,9 @@ public enum DamageType
  AP=2
 }
 
+public enum EntityType
+{
+ None,
+ Player,
+ Monster
+}

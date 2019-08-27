@@ -128,19 +128,25 @@ public class SkillManager : MonoBehaviour
         }
     }
 
+    
     private void AttackEffect(EntityBase entity, int skillID)
     {
         SkillCfg skillCfg = resSvc.GetSkillCfg(skillID);
+
         
-        
-        if (entity.GetDirInput()==Vector2.zero)
+        if (entity.EntityType==EntityType.Player)
         {
-            Vector2 dir = entity.CalcTargetDir();
-            if (dir != Vector2.zero)
+            if (entity.GetDirInput()==Vector2.zero)
             {
-                entity.SetAtkRotation(dir);
+                Vector2 dir = entity.CalcTargetDir();
+                if (dir != Vector2.zero)
+                {
+                    entity.SetAtkRotation(dir);
+                }
             }
         }
+        
+  
         else
         {
             entity.SetAtkRotation(entity.GetDirInput(),true);

@@ -3,6 +3,11 @@ using UnityEngine;
 
 public class EntityPlayer : EntityBase
 {
+
+    public EntityPlayer()
+    {
+        EntityType = EntityType.Player;
+    }
     public override Vector2 GetDirInput()
     {
         return BattleManager.GetDirInput();
