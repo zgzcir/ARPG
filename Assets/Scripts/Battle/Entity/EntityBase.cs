@@ -14,10 +14,11 @@ public abstract class EntityBase
 
     private BattleProps battleProps;
 
-    
-    public Queue<int> ComboQue=new Queue<int>();
+
+    public Queue<int> ComboQue = new Queue<int>();
     public int NextSkillID;
     public SkillCfg CurSkillCfg;
+
     public BattleProps BattleProps
     {
         get => battleProps;
@@ -42,9 +43,9 @@ public abstract class EntityBase
             CommonTool.Log(Controller.name + " hp:" + hp + "--->>" + value);
             SetHpVal(hp, value);
             hp = value;
-            if (hp==0)
+            if (hp == 0)
             {
-             Die();   
+                Die();
             }
         }
     }
@@ -125,14 +126,18 @@ public abstract class EntityBase
         }
     }
 
-    public virtual void SerAtkRotation(Vector2 dir)
+    public virtual void SetAtkRotation(Vector2 dir, bool offset = false)
     {
         if (Controller != null)
         {
-            Controller.SetAtkRotation(dir);
+            if (offset)
+                Controller.SetAtkRotationCamera(dir);
+            else
+                Controller.SetAtkRotationLocal(dir);
         }
     }
-public virtual void SkillAttack(int skillID)
+
+    public virtual void SkillAttack(int skillID)
     {
         SkillManager.SkillAttack(this, skillID);
     }
@@ -179,7 +184,7 @@ public virtual void SkillAttack(int skillID)
         {
             Controller.gameObject.SetActive(active);
         }
-}
+    }
 
     public void SetCtrl(Controller ctrl)
     {
@@ -196,9 +201,14 @@ public virtual void SkillAttack(int skillID)
         return null;
     }
 
+    public virtual Vector2 CalcTargetDir()
+    {
+        return Vector2.zero;
+    }
+
+
     public void ExitCurSkill()
     {
-        
         canControl = true;
 
         if (CurSkillCfg.IsCombo)
@@ -210,9 +220,9 @@ public virtual void SkillAttack(int skillID)
             else
             {
                 NextSkillID = 0;
-            }   
+            }
         }
- 
+
         SetAciton(Constans.ActionDefault);
     }
 }

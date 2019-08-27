@@ -499,7 +499,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4724027785898422, guid: 08ac33a91367ed54993f285bf882b4a1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.004
       objectReference: {fileID: 0}
     - target: {fileID: 4724027785898422, guid: 08ac33a91367ed54993f285bf882b4a1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -507,23 +507,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4724027785898422, guid: 08ac33a91367ed54993f285bf882b4a1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.003
       objectReference: {fileID: 0}
     - target: {fileID: 4724027785898422, guid: 08ac33a91367ed54993f285bf882b4a1, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4724027785898422, guid: 08ac33a91367ed54993f285bf882b4a1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.44489822
       objectReference: {fileID: 0}
     - target: {fileID: 4724027785898422, guid: 08ac33a91367ed54993f285bf882b4a1, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4724027785898422, guid: 08ac33a91367ed54993f285bf882b4a1, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.8955812
       objectReference: {fileID: 0}
     - target: {fileID: 4724027785898422, guid: 08ac33a91367ed54993f285bf882b4a1, type: 3}
       propertyPath: m_RootOrder
@@ -535,7 +535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4724027785898422, guid: 08ac33a91367ed54993f285bf882b4a1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 52.834003
       objectReference: {fileID: 0}
     - target: {fileID: 4724027785898422, guid: 08ac33a91367ed54993f285bf882b4a1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -574,6 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81511ea27616b934cb20116b2834b07e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HpRoot: {fileID: 0}
   Ani: {fileID: 1145981486}
   CharacterController: {fileID: 1145981484}
   CharacterController: {fileID: 1145981484}

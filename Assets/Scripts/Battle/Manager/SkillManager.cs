@@ -135,11 +135,15 @@ public class SkillManager : MonoBehaviour
         
         if (entity.GetDirInput()==Vector2.zero)
         {
-            
+            Vector2 dir = entity.CalcTargetDir();
+            if (dir != Vector2.zero)
+            {
+                entity.SetAtkRotation(dir);
+            }
         }
         else
         {
-            entity.SerAtkRotation(entity.GetDirInput());
+            entity.SetAtkRotation(entity.GetDirInput(),true);
         }
 
         entity.SetAciton(skillCfg.AniAction);
@@ -165,7 +169,6 @@ public class SkillManager : MonoBehaviour
         {
             entity.SetSkillMove(true, speed);
         }
-
         sum += sKillMoveCfg.MoveTime;
         timerSvc.AddTimeTask(tid => { entity.SetSkillMove(false); }, sum);
     }
