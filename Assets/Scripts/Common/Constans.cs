@@ -65,7 +65,7 @@ public const string BGCityHappy = "bgCityHappy";
  /// <summary>
  /// 动画时长
  /// </summary>
- public const int DieAniLength = 5000;
+ public const int DieAniLength = 2300;
 
  /// <summary>
  /// Cam

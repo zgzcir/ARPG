@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class DynamicPanel : BasePanel
 {
     public Animation tipsAni;
+    public Animation selfMissAni;
     public Text txtTips;
     public Transform hpItemRoot;
 
@@ -119,7 +120,12 @@ public class DynamicPanel : BasePanel
             item.SetHpVal(oldVal,newVal );
         }
     }
-    
+
+    public void SetSelfDodge()
+    {
+        selfMissAni.Stop();
+        selfMissAni.Play();
+    }
 
 
 }

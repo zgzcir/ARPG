@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class EntityMonster : EntityBase
 {
-
     public EntityMonster()
     {
         EntityType = EntityType.Monster;
     }
-    
+
     public MonsterMapData MonsterMapData;
 
     public override void SetBattleProps(BattleProps battleProps)
@@ -38,7 +37,11 @@ public class EntityMonster : EntityBase
     public override void TickAILogic()
     {
         if (!runAi)
+        {
+            Idle();
             return;
+        }
+      
         if (currentAniState == AniState.Idle || currentAniState == AniState.Move)
         {
             float deltaTime = Time.deltaTime;
@@ -47,33 +50,31 @@ public class EntityMonster : EntityBase
             {
                 return;
             }
-     
-                Vector2 dir = CalcTargetDir();
-
-                if (!IsInAtkRange())
+            Vector2 dir = CalcTargetDir();
+   
+            if (!IsInAtkRange())
+            {
+                SetDir(dir);
+                Move();
+            }
+            else
+            {
+                SetDir(Vector2.zero);
+                atkCount += deltaTime;
+                if (atkTime < atkCount)
                 {
-                    SetDir(dir);
-                    Move();
+                    SetAtkRotation(dir);
+                    Attack(MonsterMapData.MCfg.SkillID);
+                    atkCount = 0;
                 }
                 else
                 {
-                    SetDir(Vector2.zero);
-                    atkCount += deltaTime;
-                    if (atkTime<atkCount)
-                    {
-                        SetAtkRotation(dir);
-                        Attack(MonsterMapData.MCfg.SkillID);
-                        atkCount = 0;
-                    }
-                    else
-                    {
-                        Idle();
-                    }
+                    Idle();
                 }
+            }
 
-                checkCount = 0;
-                checkTime = ZCTools.RDInt(1, 5) * 1.0f /10;
-
+            checkCount = 0;
+            checkTime = ZCTools.RDInt(1, 5) * 1.0f / 10;
         }
     }
 

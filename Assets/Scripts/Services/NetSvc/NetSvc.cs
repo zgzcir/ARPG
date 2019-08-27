@@ -23,7 +23,7 @@ public class NetSvc : MonoBehaviour
                 {
                     case 0:
                         msg = "log:" + msg;
-                        Debug.Log(msg);
+                         Debug.Log(msg);
                         break;
                     case 1:
                         msg = "warn:" + msg;

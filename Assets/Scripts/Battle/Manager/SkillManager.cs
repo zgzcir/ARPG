@@ -23,14 +23,31 @@ public class SkillManager : MonoBehaviour
     {
         var monsters = caster.BattleManager.GetEntityMonsters();
         int damage = skillCfg.SkillDamageLst[index];
-        monsters.ForEach(target =>
+
+        if (caster.EntityType==EntityType.Monster)
         {
-            if (IsInRange(caster.GetPos(), target.GetPos(), sac.Radius) &&
-                IsInAngle(caster.GetTrans(), target.GetPos(), sac.Angel))
+            EntityPlayer targetPlayer = caster.BattleManager.EntitySelfplayer;
+            if (IsInRange(caster.GetPos(), targetPlayer.GetPos(), sac.Radius) &&
+                IsInAngle(caster.GetTrans(), targetPlayer.GetPos(), sac.Angel))
             {
-                CalcDamage(caster, target, damage, skillCfg.DmgType);
+                CalcDamage(caster, targetPlayer, damage, skillCfg.DmgType);
             }
-        });
+
+        }
+        else if (caster.EntityType==EntityType.Player)
+        {
+            monsters.ForEach(targetMonster =>
+            {
+                if (IsInRange(caster.GetPos(), targetMonster.GetPos(), sac.Radius) &&
+                    IsInAngle(caster.GetTrans(), targetMonster.GetPos(), sac.Angel))
+                {
+                    CalcDamage(caster, targetMonster, damage, skillCfg.DmgType);
+                }
+            });
+        }
+        
+        
+    
     }
 
     System.Random rd = new System.Random();
@@ -144,12 +161,10 @@ public class SkillManager : MonoBehaviour
                     entity.SetAtkRotation(dir);
                 }
             }
-        }
-        
-  
-        else
-        {
-            entity.SetAtkRotation(entity.GetDirInput(),true);
+            else
+            {
+                entity.SetAtkRotation(entity.GetDirInput(),true);
+            }
         }
         entity.SetAciton(skillCfg.AniAction);
         entity.SetFX(skillCfg.FX, skillCfg.Duration);
