@@ -86,6 +86,8 @@ public class SkillCfg : BaseData<SkillCfg>
     public int AniAction;
     public string FX;
     public bool IsCombo;
+    public bool IsCollide;
+    public bool IsBreak;
     public DamageType DmgType;
     public List<int> SkillMoveLst;
     public List<int> SkillActionLst;

@@ -2,12 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class DynamicPanel : BasePanel
 {
     public Animation tipsAni;
-    public Animation selfMissAni;
+ public Animation playerMissAni;
     public Text txtTips;
     public Transform hpItemRoot;
 
@@ -123,8 +124,8 @@ public class DynamicPanel : BasePanel
 
     public void SetSelfDodge()
     {
-        selfMissAni.Stop();
-        selfMissAni.Play();
+        playerMissAni.Stop();
+        playerMissAni.Play();
     }
 
 

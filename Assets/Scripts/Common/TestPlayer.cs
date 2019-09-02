@@ -19,7 +19,7 @@ public class TestPlayer : Controller
 
     public Transform RayCastPoint;
 
- 
+
     public GameObject CameraPivot; //改成transform
     public Transform ChaCameraRotatePivot;
 
@@ -57,10 +57,8 @@ public class TestPlayer : Controller
 
     private void Update()
     {
-
         #region kb input
 
-        
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
         //******************************************///////////////////////////////////////////
@@ -84,29 +82,31 @@ public class TestPlayer : Controller
 ////        
 ////        u -= Constans.Gravity * Time.deltaTime;
         //******************************************///////////////////////////////////////////
-        
+
         //todo
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         InputDir = input.normalized;
-     
-     
+
+
         if (isMove)
         {
-            if (MainCitySys.Instance!=null&&MainCitySys.Instance.IsNavigate)
+            if (MainCitySys.Instance != null && MainCitySys.Instance.IsNavigate)
             {
                 MainCitySys.Instance.CancelNavGuide();
             }
-           SetBlend(Constans.BlendMove);
-           SetDir();
+
+            SetBlend(Constans.BlendMove);
+            SetDir();
             SetMove();
         }
         else
         {
             SetBlend(Constans.BlendIdle);
         }
+
         #endregion
 
-        if (MainCitySys.Instance!=null&&MainCitySys.Instance.IsNavigate)
+        if (MainCitySys.Instance != null && MainCitySys.Instance.IsNavigate)
         {
             SetBlend(Constans.BlendMove);
         }
@@ -157,18 +157,18 @@ public class TestPlayer : Controller
 
         Ani.SetFloat(Blend, currentBlend);
     }
-    
+
     public void CLickSkill1Button()
     {
-        Ani.SetInteger(Action,1);
+        Ani.SetInteger(Action, 1);
         EffectSkill1.gameObject.SetActive(true);
         StartCoroutine(Delay());
     }
 
     IEnumerator Delay()
-    {yield return new WaitForSeconds(0.9f);
-        Ani.SetInteger(Action,-1);
+    {
+        yield return new WaitForSeconds(0.9f);
+        Ani.SetInteger(Action, -1);
         EffectSkill1.gameObject.SetActive(false);
-
     }
 }

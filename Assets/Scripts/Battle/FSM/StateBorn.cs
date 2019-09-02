@@ -4,7 +4,7 @@
         public void Enter(EntityBase entity, params object[] args)
         {
             entity.currentAniState = AniState.Born;
-            CommonTool.Log("en Born");
+            CommonTool.Log("en Born"+entity.EntityType);
 
         }
         public void Process(EntityBase entity, params object[] args)

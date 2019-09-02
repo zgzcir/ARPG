@@ -243,15 +243,13 @@ EntitySelfplayer.SetCtrl(playerController);
 
     private void ActiveCurrentMonsters()
     {
-        TimerSvc.Instance.AddTimeTask(tid =>
-        {
+      
             GetEntityMonsters().ForEach(m =>
             {
-            m.SetActive();
+                m.SetActive();
                 m.Born();
-                TimerSvc.Instance.AddTimeTask(id => { m.Idle(); }, 1000);
+                TimerSvc.Instance.AddTimeTask(id => { m.Idle(); }, 1500);
             });
-        }, 0);
     }
 
     public void RemoveMonster(string key)
@@ -263,6 +261,5 @@ EntitySelfplayer.SetCtrl(playerController);
         }
         GameRoot.Instance.DynamicPanel.RemoveHpItem(key);
     }
-
 
 }

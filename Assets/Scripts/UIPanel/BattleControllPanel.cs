@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Permissions;
 using Protocol;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,8 +12,10 @@ public class BattleControllPanel : BasePanel
     public Image imgDirBg;
     public Image imgDirHandle;
     public Text txtLv;
+    
     public Image imgHp;
     public Text txtHp;
+    
     public Text txtName;
     public Transform expPrgsTrans;
     public Image impPower;
@@ -54,17 +57,21 @@ public class BattleControllPanel : BasePanel
     public void FreshPanel()
     {
         PlayerData playerData = GameRoot.Instance.PlayerData;
-        float totalHp = 800;
+       HPSum = playerData.HP;
+        
+        
+        SetText(txtHp,HPSum+"/"+HPSum);
+        imgHp.fillAmount = 1;
+        
+        
         int nowHp = playerData.HP;
 //        SetText(txtHp, (nowHp / totalHp));
-        SetText(txtHp, nowHp + "/" + totalHp);
-        imgHp.fillAmount = nowHp / totalHp;
+        
         var maxPower = CommonTool.GetPowerLimit(playerData.Level);
         impPower.fillAmount = 1.0f * playerData.Power / maxPower;
         SetText(txtPower, playerData.Power + "/" + maxPower);
-        float posX = imgHp.fillAmount * imgHp.GetComponent<RectTransform>().sizeDelta.x;
-
-        txtHp.GetComponent<RectTransform>().anchoredPosition = new Vector2(posX, 0);
+//        float posX = imgHp.fillAmount * imgHp.GetComponent<RectTransform>().sizeDelta.x;
+//        txtHp.GetComponent<RectTransform>().anchoredPosition = new Vector2(posX, 0);
         SetText(txtLv, "Lv:" + playerData.Level);
         SetText(txtName, playerData.Name);
         //exp
@@ -289,5 +296,13 @@ public class BattleControllPanel : BasePanel
 
 
         #endregion
+        
+    }
+
+    private int HPSum;
+    public void SetHpBarVal(int val)
+    {
+        SetText(txtHp,val+"/"+HPSum);
+        imgHp.fillAmount = val * 1.0f / HPSum;
     }
 }

@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class EntityPlayer : EntityBase
 {
-
     public EntityPlayer()
     {
         EntityType = EntityType.Player;
     }
+
     public override Vector2 GetDirInput()
     {
         return BattleManager.GetDirInput();
@@ -23,10 +23,10 @@ public class EntityPlayer : EntityBase
             Vector2 dir = new Vector2(target.x - self.x, target.z - self.z);
             return dir.normalized;
         }
+
         return Vector2.zero;
-        
-        
     }
+
     private EntityMonster FindClosedTarget()
     {
         List<EntityMonster> lst = BattleManager.GetEntityMonsters();
@@ -58,5 +58,15 @@ public class EntityPlayer : EntityBase
         }
 
         return targetMonster;
+    }
+
+    public override void SetHpVal(int oldVal, int newVal)
+    {
+        BattleSys.Instance.battleControllPanel.SetHpBarVal(newVal);
+    }
+
+    public override void SetDodge()
+    {
+        GameRoot.Instance.DynamicPanel.SetSelfDodge();
     }
 }

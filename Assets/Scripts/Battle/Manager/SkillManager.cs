@@ -64,7 +64,10 @@ public class SkillManager : MonoBehaviour
                 {
                     //     GameRoot.AddTips(target.Controller.name + "闪避了你的攻击"); //todo转移到聊天窗口
                  //   CommonTool.Log("闪避Rate:" + dodgeNum + "/" + target.BattleProps.Dodge);
-                    target.SetDodge();
+                 if (target.EntityType == EntityType.Player)
+                 {
+                     target.SetDodge();
+                 }
                     return;
                 }
             }
@@ -150,6 +153,15 @@ public class SkillManager : MonoBehaviour
     {
         SkillCfg skillCfg = resSvc.GetSkillCfg(skillID);
 
+
+        if (!skillCfg.IsCollide)
+        {
+            Physics.IgnoreLayerCollision(9,10);
+            timerSvc.AddTimeTask(tid =>
+            {
+                Physics.IgnoreLayerCollision(9,10,false);
+            }, skillCfg.Duration);
+        }
         
         if (entity.EntityType==EntityType.Player)
         {

@@ -13,7 +13,7 @@ public class EntityMonster : EntityBase
     {
         var level = MonsterMapData.MLevel;
 
-        this.BattleProps = new BattleProps()
+        BattleProps = new BattleProps()
         {
             HP = battleProps.HP * level,
             SA = battleProps.SA * level,
@@ -27,7 +27,7 @@ public class EntityMonster : EntityBase
         HP = BattleProps.HP;
     }
 
-    private float checkTime = 2;
+    private float checkTime = 2f;
     private float checkCount = 0;
     private bool runAi = true;
 
@@ -41,17 +41,14 @@ public class EntityMonster : EntityBase
             Idle();
             return;
         }
-      
         if (currentAniState == AniState.Idle || currentAniState == AniState.Move)
         {
             float deltaTime = Time.deltaTime;
             checkCount += deltaTime;
-            if (checkTime < checkCount)
-            {
+            atkCount += deltaTime;
+            if ( checkCount< checkTime)
                 return;
-            }
             Vector2 dir = CalcTargetDir();
-   
             if (!IsInAtkRange())
             {
                 SetDir(dir);
@@ -60,8 +57,7 @@ public class EntityMonster : EntityBase
             else
             {
                 SetDir(Vector2.zero);
-                atkCount += deltaTime;
-                if (atkTime < atkCount)
+                if (atkCount >=atkTime )
                 {
                     SetAtkRotation(dir);
                     Attack(MonsterMapData.MCfg.SkillID);

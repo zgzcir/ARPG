@@ -161,7 +161,7 @@ public abstract class EntityBase
     }
 
 
-    public void SetDodge()
+    public virtual void SetDodge()
     {
         GameRoot.Instance.DynamicPanel.SetDodge(Controller.name);
     }
@@ -176,7 +176,7 @@ public abstract class EntityBase
         GameRoot.Instance.DynamicPanel.SetHurt(Controller.name, hurt);
     }
 
-    public void SetHpVal(int oldVal, int newVal)
+    public  virtual void SetHpVal(int oldVal, int newVal)
     {
         GameRoot.Instance.DynamicPanel.SetHpVal(Controller.name, oldVal, newVal);
     }
