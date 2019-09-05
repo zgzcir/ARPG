@@ -43,4 +43,6 @@ public class BattleSys : BaseSystem
     {
         return battleControllPanel.currentDir;
     }
+    
+    
 }

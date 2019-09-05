@@ -10,20 +10,24 @@ public class StateIdle : IState
      }
      public void Process(EntityBase entity, params object[] args)
      {
+
+      
          if (entity.NextSkillID != 0)
          {
              entity.Attack(entity.NextSkillID);
          }
-         else
+
+         else if (entity.EntityType == EntityType.Player)
          {
+             entity.CanRlsSkill = true;
+         }
+         
          if (entity.GetDirInput() != Vector2.zero)
          {
              entity.Move();
               entity.SetDir(entity.GetDirInput());
          }         
-         
          entity.SetBlend(Constans.BlendIdle);
-         }
          CommonTool.Log("pr idle");
      }
  

@@ -3123,7 +3123,7 @@ PrefabInstance:
     - target: {fileID: 2251295147475065900, guid: 7ef52e50d4539224b9b2a859decee133,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6370841545808494554, guid: 7ef52e50d4539224b9b2a859decee133,
         type: 3}
@@ -3263,7 +3263,7 @@ PrefabInstance:
     - target: {fileID: 3754564431929768363, guid: 7ef52e50d4539224b9b2a859decee133,
         type: 3}
       propertyPath: m_Animations.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3754564431929768363, guid: 7ef52e50d4539224b9b2a859decee133,
         type: 3}

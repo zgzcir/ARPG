@@ -13,10 +13,12 @@ public abstract class EntityBase
     protected Controller Controller;
     public SkillManager SkillManager;
     public BattleManager BattleManager;
-    public bool canControl = true;
+    public bool CanControl = true;
+    public bool CanRlsSkill = true;
+
+
 
     private BattleProps battleProps;
-
 
     public Queue<int> ComboQue = new Queue<int>();
     public int NextSkillID;
@@ -27,7 +29,7 @@ public abstract class EntityBase
         get => battleProps;
         protected set => battleProps = value;
     }
-
+    
     private int hp;
 
     private string name;
@@ -160,7 +162,6 @@ public abstract class EntityBase
         return Controller.transform;
     }
 
-
     public virtual void SetDodge()
     {
         GameRoot.Instance.DynamicPanel.SetDodge(Controller.name);
@@ -200,7 +201,6 @@ public abstract class EntityBase
         {
             return Controller.Ani.runtimeAnimatorController.animationClips.ToList();
         }
-
         return null;
     }
 
@@ -212,7 +212,7 @@ public abstract class EntityBase
 
     public void ExitCurSkill()
     {
-        canControl = true;
+        CanControl = true;
         if (CurSkillCfg.IsCombo)
         {
             if (ComboQue.Count > 0)

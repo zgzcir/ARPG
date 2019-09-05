@@ -45,9 +45,6 @@ public class SkillManager : MonoBehaviour
                 }
             });
         }
-        
-        
-    
     }
 
     System.Random rd = new System.Random();
@@ -153,13 +150,12 @@ public class SkillManager : MonoBehaviour
     {
         SkillCfg skillCfg = resSvc.GetSkillCfg(skillID);
 
-
         if (!skillCfg.IsCollide)
         {
             Physics.IgnoreLayerCollision(9,10);
             timerSvc.AddTimeTask(tid =>
             {
-                Physics.IgnoreLayerCollision(9,10,false);
+                Physics.IgnoreLayerCollision(9,10,false );
             }, skillCfg.Duration);
         }
         
@@ -181,11 +177,10 @@ public class SkillManager : MonoBehaviour
         entity.SetAciton(skillCfg.AniAction);
         entity.SetFX(skillCfg.FX, skillCfg.Duration);
         skillCfg.SkillMoveLst.ForEach(sid => { CalcSkillMove(entity, sid); });
-        entity.canControl = false;
+        entity.CanControl = false;
         entity.SetDir(Vector2.zero);
         timerSvc.AddTimeTask(tid => entity.Idle(), skillCfg.Duration);//<<
     }
-
     private void CalcSkillMove(EntityBase entity, int sid)
     {
         int sum = 0;

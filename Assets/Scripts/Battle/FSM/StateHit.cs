@@ -11,6 +11,10 @@ public class StateHit : IState
 
     public void Process(EntityBase entity, params object[] args)
     {
+        if (entity.EntityType == EntityType.Player)
+        {
+            entity.CanRlsSkill = false;
+        }    
         entity.SetDir(Vector2.zero);
         entity.SetAciton(Constans.ActionHit);
         TimerSvc.Instance.AddTimeTask(tid =>

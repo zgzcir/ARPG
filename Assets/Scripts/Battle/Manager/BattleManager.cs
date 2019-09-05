@@ -108,7 +108,7 @@ EntitySelfplayer.SetCtrl(playerController);
 
     public void SetSelfPlayerMoveDir(Vector2 dir)
     {
-        if (!EntitySelfplayer.canControl) return;
+        if (!EntitySelfplayer.CanControl) return;
         if (dir == Vector2.zero)
         {
             EntitySelfplayer.Idle();
@@ -260,6 +260,11 @@ EntitySelfplayer.SetCtrl(playerController);
             monstersDic.Remove(key);
         }
         GameRoot.Instance.DynamicPanel.RemoveHpItem(key);
+    }
+
+    public bool CanRlsSkill()
+    {
+        return EntitySelfplayer.CanRlsSkill;
     }
 
 }

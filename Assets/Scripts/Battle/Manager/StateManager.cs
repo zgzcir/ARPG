@@ -16,8 +16,7 @@ public class StateManager : MonoBehaviour
         fsm.Add(AniState.Die,new StateDie());
         fsm.Add(AniState.Hit,new StateHit());
     }
-
-
+    
     public void ChangeState(EntityBase entity, AniState targetState,params object[]args)
     {
         if (entity.currentAniState == targetState) return;

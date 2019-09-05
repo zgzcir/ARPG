@@ -12,10 +12,10 @@ public class BattleControllPanel : BasePanel
     public Image imgDirBg;
     public Image imgDirHandle;
     public Text txtLv;
-    
+
     public Image imgHp;
     public Text txtHp;
-    
+
     public Text txtName;
     public Transform expPrgsTrans;
     public Image impPower;
@@ -38,11 +38,11 @@ public class BattleControllPanel : BasePanel
 
     public override void Init()
     {
-        base.Init();
-        RegisterUIEvents();
-        sk1CDTime = resSvc.GetSkillCfg(101).CDTime / 1000.0f;
-        sk2CDTime = resSvc.GetSkillCfg(102).CDTime / 1000.0f;
-        sk3CDTime = resSvc.GetSkillCfg(103).CDTime / 1000.0f;
+            base.Init();
+            RegisterUIEvents();
+            sk1CDTime = resSvc.GetSkillCfg(101).CDTime / 1000.0f;
+            sk2CDTime = resSvc.GetSkillCfg(102).CDTime / 1000.0f;
+            sk3CDTime = resSvc.GetSkillCfg(103).CDTime / 1000.0f;
     }
 
     protected override void OnOpen()
@@ -57,16 +57,16 @@ public class BattleControllPanel : BasePanel
     public void FreshPanel()
     {
         PlayerData playerData = GameRoot.Instance.PlayerData;
-       HPSum = playerData.HP;
-        
-        
-        SetText(txtHp,HPSum+"/"+HPSum);
+        HPSum = playerData.HP;
+
+
+        SetText(txtHp, HPSum + "/" + HPSum);
         imgHp.fillAmount = 1;
-        
-        
+
+
         int nowHp = playerData.HP;
 //        SetText(txtHp, (nowHp / totalHp));
-        
+
         var maxPower = CommonTool.GetPowerLimit(playerData.Level);
         impPower.fillAmount = 1.0f * playerData.Power / maxPower;
         SetText(txtPower, playerData.Power + "/" + maxPower);
@@ -93,7 +93,6 @@ public class BattleControllPanel : BasePanel
                 img.fillAmount = 0.01f;
             }
         }
-
 //        float globalRate = 1.0f * Constans.ScreenStandardHeight / Screen.height;
         float width = Screen.width * Constans.GloableScreenRate;
         GridLayoutGroup gridLayoutGroup = expPrgsTrans.GetComponent<GridLayoutGroup>();
@@ -141,43 +140,51 @@ public class BattleControllPanel : BasePanel
 
     public void OnClickSkill1()
     {
-        if (isSk1CD) return;
-        BattleSys.Instance.ReqReleaseSkill(1);
-        isSk1CD = true;
-        SetActive(imgSk1CD);
-        imgSk1CD.fillAmount = 1;
-        sk1RunCDTime = (int) sk1CDTime;
-        SetText(txtSk1CD, sk1RunCDTime);
+        if (isSk1CD == false && GetCanRlsSKill())
+        {
+            BattleSys.Instance.ReqReleaseSkill(1);
+            isSk1CD = true;
+            SetActive(imgSk1CD);
+            imgSk1CD.fillAmount = 1;
+            sk1RunCDTime = (int) sk1CDTime;
+            SetText(txtSk1CD, sk1RunCDTime);
+        }
     }
-    
+
     private bool isSk2CD;
     private float sk2CDTime;
     private float sk2RunCDTime;
     private float sk2FillCount;
+
     public void OnClickSkill2()
     {
-        if (isSk2CD) return;
-        BattleSys.Instance.ReqReleaseSkill(2);
-        isSk2CD = true;
-        SetActive(imgSk2CD);
-        imgSk2CD.fillAmount = 1;
-        sk2RunCDTime = (int) sk2CDTime;
-        SetText(txtSk2CD, sk2RunCDTime);
+        if (isSk2CD == false && GetCanRlsSKill())
+        {
+            BattleSys.Instance.ReqReleaseSkill(2);
+            isSk2CD = true;
+            SetActive(imgSk2CD);
+            imgSk2CD.fillAmount = 1;
+            sk2RunCDTime = (int) sk2CDTime;
+            SetText(txtSk2CD, sk2RunCDTime);
+        }
     }
 
     private bool isSk3CD;
     private float sk3CDTime;
     private float sk3RunCDTime;
     private float sk3FillCount;
+
     public void OnClickSkill3()
     {
-        if (isSk3CD) return;
-        BattleSys.Instance.ReqReleaseSkill(3);
-        isSk3CD = true;
-        SetActive(imgSk3CD);
-        imgSk3CD.fillAmount = 1;
-        sk3RunCDTime = (int) sk3CDTime;
-        SetText(txtSk3CD, sk3RunCDTime);
+        if (isSk3CD == false && GetCanRlsSKill())
+        {
+            BattleSys.Instance.ReqReleaseSkill(3);
+            isSk3CD = true;
+            SetActive(imgSk3CD);
+            imgSk3CD.fillAmount = 1;
+            sk3RunCDTime = (int) sk3CDTime;
+            SetText(txtSk3CD, sk3RunCDTime);
+        }
     }
 
     //Test
@@ -195,23 +202,36 @@ public class BattleControllPanel : BasePanel
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             OnClickSkill1();
-        }    if (Input.GetKeyDown(KeyCode.Alpha2))
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             OnClickSkill2();
-        }    if (Input.GetKeyDown(KeyCode.Alpha3))
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             OnClickSkill3();
         }
+
         if (Input.GetKeyDown(KeyCode.F))
         {
             OnClickNormalAtk();
         }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Debug.Break();
+        }
+
         float deltaTime = Time.deltaTime;
-     
-            #region sk1
-            if (isSk1CD)
-            {
+
+        #region sk1
+
+        if (isSk1CD)
+        {
             sk1FillCount += deltaTime;
+            if (sk1FillCount >= sk1CDTime)
             if (sk1FillCount >= sk1CDTime)
             {
                 isSk1CD = false;
@@ -236,6 +256,7 @@ public class BattleControllPanel : BasePanel
         #endregion
 
         #region sk2
+
         if (isSk2CD)
         {
             {
@@ -261,8 +282,6 @@ public class BattleControllPanel : BasePanel
                 }
             }
         }
-
-
 
         #endregion
 
@@ -294,15 +313,20 @@ public class BattleControllPanel : BasePanel
             }
         }
 
-
         #endregion
-        
     }
 
     private int HPSum;
+
     public void SetHpBarVal(int val)
     {
-        SetText(txtHp,val+"/"+HPSum);
+        SetText(txtHp, val + "/" + HPSum);
         imgHp.fillAmount = val * 1.0f / HPSum;
+    }
+
+
+    public bool GetCanRlsSKill()
+    {
+        return BattleSys.Instance.BattleManager.CanRlsSkill();
     }
 }
