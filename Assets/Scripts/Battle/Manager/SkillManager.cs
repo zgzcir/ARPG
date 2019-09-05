@@ -104,7 +104,10 @@ public class SkillManager : MonoBehaviour
         else
         {
             target.HP -= damageSum;
-            target.Hit();
+            if (target.EntityState!=EntityState.ButyState)
+            {
+                target.Hit();
+            }
         }
         target.SetHurt(damageSum);
     }
@@ -149,7 +152,6 @@ public class SkillManager : MonoBehaviour
     private void AttackEffect(EntityBase entity, int skillID)
     {
         SkillCfg skillCfg = resSvc.GetSkillCfg(skillID);
-
         if (!skillCfg.IsCollide)
         {
             Physics.IgnoreLayerCollision(9,10);
@@ -158,7 +160,6 @@ public class SkillManager : MonoBehaviour
                 Physics.IgnoreLayerCollision(9,10,false );
             }, skillCfg.Duration);
         }
-        
         if (entity.EntityType==EntityType.Player)
         {
             if (entity.GetDirInput()==Vector2.zero)
@@ -179,6 +180,10 @@ public class SkillManager : MonoBehaviour
         skillCfg.SkillMoveLst.ForEach(sid => { CalcSkillMove(entity, sid); });
         entity.CanControl = false;
         entity.SetDir(Vector2.zero);
+        if (!skillCfg.IsBreak)
+        {
+            entity.EntityState = EntityState.ButyState;
+        }
         timerSvc.AddTimeTask(tid => entity.Idle(), skillCfg.Duration);//<<
     }
     private void CalcSkillMove(EntityBase entity, int sid)

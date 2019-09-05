@@ -150,3 +150,10 @@ public enum EntityType
  Player,
  Monster
 }
+
+public enum EntityState
+{
+ None,
+ ButyState,
+   
+}

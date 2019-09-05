@@ -24,6 +24,7 @@ public abstract class EntityBase
     public int NextSkillID;
     public SkillCfg CurSkillCfg;
 
+    public EntityState EntityState = EntityState.None;
     public BattleProps BattleProps
     {
         get => battleProps;
@@ -213,6 +214,11 @@ public abstract class EntityBase
     public void ExitCurSkill()
     {
         CanControl = true;
+        if (!CurSkillCfg.IsBreak)
+        {
+            EntityState = EntityState.None;
+        }
+        
         if (CurSkillCfg.IsCombo)
         {
             if (ComboQue.Count > 0)
