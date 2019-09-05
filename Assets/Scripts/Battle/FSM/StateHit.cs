@@ -14,9 +14,18 @@ public class StateHit : IState
         if (entity.EntityType == EntityType.Player)
         {
             entity.CanRlsSkill = false;
-        }    
+        }
+
+
         entity.SetDir(Vector2.zero);
         entity.SetAciton(Constans.ActionHit);
+
+        if (entity.EntityType == EntityType.Player)
+        {
+            AudioSource audioSource = entity.GetAudioSource();
+            AudioSvc.Instance.PlayPlayerAudio(audioSource, Constans.PlayerHurtAss);
+        }
+
         TimerSvc.Instance.AddTimeTask(tid =>
             {
                 entity.SetAciton(Constans.ActionDefault);
@@ -37,7 +46,7 @@ public class StateHit : IState
         {
             return c.name.Contains("hit") || c.name.Contains("Hit") || c.name.Contains("HIT");
         }).ToList();
-        var r=clipsF.Count != 1 ? 1 : clipsF[0].length;
+        var r = clipsF.Count != 1 ? 1 : clipsF[0].length;
         return r;
     }
 }

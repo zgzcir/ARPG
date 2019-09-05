@@ -11,7 +11,6 @@ public class PlayerController : Controller
     private float targetBlend;
     private float currentBlend;
 
-
     public Transform RayCastPoint;
 
     public GameObject CameraPivot; //改成transform

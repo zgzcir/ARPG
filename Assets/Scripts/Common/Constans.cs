@@ -17,7 +17,6 @@ public class Constans
 /// </summary>
  public const string BGLogin = "bgLogin";
 public const string BGCityHappy = "bgCityHappy";
- 
  /// <summary>
  /// ui点击音效
  /// </summary>
@@ -25,6 +24,11 @@ public const string BGCityHappy = "bgCityHappy";
  public const string UIClickBtn = "uiClickBtn";
  public const string UISsuccess = "uiSuc";
 
+ /// <summary>
+ /// 人物音效
+ /// </summary>
+ public const string PlayerHurtAss = "hurtass";
+ 
  /// <summary>
  /// screen
  /// </summary>

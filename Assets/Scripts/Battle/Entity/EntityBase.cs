@@ -6,8 +6,8 @@ using UnityEngine.Analytics;
 public abstract class EntityBase
 {
     public EntityType EntityType = EntityType.None;
-        
-    
+
+
     public AniState currentAniState = AniState.None;
     public StateManager StateManager;
     protected Controller Controller;
@@ -25,12 +25,13 @@ public abstract class EntityBase
     public SkillCfg CurSkillCfg;
 
     public EntityState EntityState = EntityState.None;
+
     public BattleProps BattleProps
     {
         get => battleProps;
         protected set => battleProps = value;
     }
-    
+
     private int hp;
 
     private string name;
@@ -178,7 +179,7 @@ public abstract class EntityBase
         GameRoot.Instance.DynamicPanel.SetHurt(Controller.name, hurt);
     }
 
-    public  virtual void SetHpVal(int oldVal, int newVal)
+    public virtual void SetHpVal(int oldVal, int newVal)
     {
         GameRoot.Instance.DynamicPanel.SetHpVal(Controller.name, oldVal, newVal);
     }
@@ -202,6 +203,7 @@ public abstract class EntityBase
         {
             return Controller.Ani.runtimeAnimatorController.animationClips.ToList();
         }
+
         return null;
     }
 
@@ -218,7 +220,7 @@ public abstract class EntityBase
         {
             EntityState = EntityState.None;
         }
-        
+
         if (CurSkillCfg.IsCombo)
         {
             if (ComboQue.Count > 0)
@@ -234,12 +236,18 @@ public abstract class EntityBase
         SetAciton(Constans.ActionDefault);
     }
 
+    public AudioSource GetAudioSource()
+    {
+        return Controller.AudioSource;
+    }
 
-    public virtual void TickAILogic()
+
+public virtual void TickAILogic()
     {
     }
     public virtual bool IsInAtkRange()
     {
         return false;
     }
+    
 }

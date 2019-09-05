@@ -7,6 +7,8 @@ public abstract class Controller:MonoBehaviour
     protected float targetRotation;
     protected float currentVelocity;
 
+    public AudioSource AudioSource;
+
     protected CameraController cameraController;
     public Transform HpRoot;
     
