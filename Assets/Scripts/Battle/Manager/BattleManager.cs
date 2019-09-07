@@ -109,15 +109,18 @@ EntitySelfplayer.SetCtrl(playerController);
     public void SetSelfPlayerMoveDir(Vector2 dir)
     {
         if (!EntitySelfplayer.CanControl) return;
-        if (dir == Vector2.zero)
+
+        if (EntitySelfplayer.currentAniState == AniState.Idle || EntitySelfplayer.currentAniState == AniState.Move)
         {
-            EntitySelfplayer.Idle();
-        }
-        else
-        {
-            EntitySelfplayer.Move();
-            //
-            EntitySelfplayer.SetDir(dir);
+            if (dir == Vector2.zero)
+            {
+                EntitySelfplayer.Idle();
+            }
+            else
+            {
+                EntitySelfplayer.Move();
+                EntitySelfplayer.SetDir(dir);
+            }
         }
     }
 
