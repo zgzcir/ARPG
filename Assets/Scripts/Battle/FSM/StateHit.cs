@@ -8,7 +8,8 @@ public class StateHit : IState
     {
         entity.currentAniState =AniState.Hit;
 
-        
+        entity.SetDir(Vector2.zero);
+        entity.SetSkillMove(false);
         for (int i = 0; i < entity.SKillMoveCbList.Count; i++)
         {
             int tid = entity.SKillMoveCbList[i];
@@ -21,7 +22,6 @@ public class StateHit : IState
             TimerSvc.Instance.DelTask(tid);
             entity.SKillActionCbList.Clear();
         }
-
         if (entity.SkillEndCb!=-1)
         {
             TimerSvc.Instance.DelTask(entity.SkillEndCb);
