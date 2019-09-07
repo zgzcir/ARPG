@@ -143,34 +143,34 @@ EntitySelfplayer.SetCtrl(playerController);
         }
     }
 
-    private double lastAtkTime = 0;
+    public double LastAtkTime = 0;
     private int[] comboArr = {111, 112, 113, 114, 115};
-    public int comboIndex = 0;
+    [FormerlySerializedAs("comboIndex")] public int ComboIndex = 0;
     private void ReleaseNormalAtk()
     {//Combo
         if (EntitySelfplayer.currentAniState == AniState.Attack)
         {
             double nowAtkTime = TimerSvc.Instance.GetNowTime();
-            if (nowAtkTime - lastAtkTime < Constans.ComboSpace&&lastAtkTime!=0)
+            if (nowAtkTime - LastAtkTime < Constans.ComboSpace&&LastAtkTime!=0)
             {
-                if (comboIndex!=comboArr.Length-1)
+                if (ComboIndex!=comboArr.Length-1)
                 {
-                    comboIndex++;
-                    EntitySelfplayer.ComboQue.Enqueue(comboArr[comboIndex]);
-                    lastAtkTime = nowAtkTime;
+                    ComboIndex++;
+                    EntitySelfplayer.ComboQue.Enqueue(comboArr[ComboIndex]);
+                    LastAtkTime = nowAtkTime;
                 }
                 else
                 {
-                    lastAtkTime = 0;
-                    comboIndex = 0;
+                    LastAtkTime = 0;
+                    ComboIndex = 0;
                 }
             }
         }
         else if(EntitySelfplayer.currentAniState == AniState.Idle||EntitySelfplayer.currentAniState == AniState.Move)
         {
-            comboIndex = 0;
-            lastAtkTime=TimerSvc.Instance.GetNowTime();
-            EntitySelfplayer.Attack(comboArr[comboIndex]);
+            ComboIndex = 0;
+            LastAtkTime=TimerSvc.Instance.GetNowTime();
+            EntitySelfplayer.Attack(comboArr[ComboIndex]);
         }
     }
 

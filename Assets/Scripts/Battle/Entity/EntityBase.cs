@@ -18,6 +18,8 @@ public abstract class EntityBase
 
     public List<int> SKillMoveCbList=new List<int>();
     public List<int> SKillActionCbList=new List<int>();
+    public int SkillEndCb = -1;
+    
     
 
     private BattleProps battleProps;

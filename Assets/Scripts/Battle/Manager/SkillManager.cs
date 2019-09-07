@@ -191,8 +191,7 @@ public class SkillManager : MonoBehaviour
         {
             entity.EntityState = EntityState.ButyState;
         }
-
-        timerSvc.AddTimeTask(tid => entity.Idle(), skillCfg.Duration); //<<
+    entity.SkillEndCb=    timerSvc.AddTimeTask(tid => entity.Idle(), skillCfg.Duration); //<<
     }
 
     private void CalcSkillMove(EntityBase entity, int sid)

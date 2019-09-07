@@ -8,16 +8,34 @@ public class StateHit : IState
     {
         entity.currentAniState =AniState.Hit;
 
+        
         for (int i = 0; i < entity.SKillMoveCbList.Count; i++)
         {
             int tid = entity.SKillMoveCbList[i];
             TimerSvc.Instance.DelTask(tid);
+            entity.SKillMoveCbList.Clear();
         }
         for (int i = 0; i < entity.SKillActionCbList.Count; i++)
         {
             int tid = entity.SKillActionCbList[i];
             TimerSvc.Instance.DelTask(tid);
+            entity.SKillActionCbList.Clear();
         }
+
+        if (entity.SkillEndCb!=-1)
+        {
+            TimerSvc.Instance.DelTask(entity.SkillEndCb);
+            entity.SkillEndCb = -1;
+        }
+        if (entity.NextSkillID!=0||entity.ComboQue.Count>0)
+        {
+            entity.NextSkillID = 0;
+            entity.ComboQue.Clear();
+
+            entity.BattleManager.LastAtkTime = 0;
+            entity.BattleManager.ComboIndex = 0;
+        }
+
         CommonTool.Log("en Hit");
     }
 
