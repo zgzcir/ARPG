@@ -35,6 +35,7 @@ public class ResSvc : MonoBehaviour
     {
         SkillCfgDic.Clear();
         SkillMoveCfgDic.Clear();
+        SkillActionCfgDic.Clear();
         InitSkillCfgDic(PathDefine.SkillCfg);
         InitSkillMoveCfgDic(PathDefine.SkillMoveCfg);
         InitSkillActionCfgDic(PathDefine.SkillActionCfg);
