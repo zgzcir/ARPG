@@ -218,23 +218,28 @@ public abstract class EntityBase
     public void ExitCurSkill()
     {
         CanControl = true;
-        if (!CurSkillCfg.IsBreak)
+        if (CurSkillCfg!=null)
         {
-            EntityState = EntityState.None;
-        }
-
-        if (CurSkillCfg.IsCombo)
-        {
-            if (ComboQue.Count > 0)
+            if (!CurSkillCfg.IsBreak)
             {
-                NextSkillID = ComboQue.Dequeue();
+                EntityState = EntityState.None;
             }
-            else
-            {
-                NextSkillID = 0;
-            }
-        }
 
+            if (CurSkillCfg.IsCombo)
+            {
+                if (ComboQue.Count > 0)
+                {
+                    NextSkillID = ComboQue.Dequeue();
+                }
+                else
+                {
+                    NextSkillID = 0;
+                }
+            }
+
+            CurSkillCfg = null; 
+        }
+     
         SetAciton(Constans.ActionDefault);
     }
 
