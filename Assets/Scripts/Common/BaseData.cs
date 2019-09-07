@@ -22,6 +22,8 @@ public class MonsterMapData:BaseData<MonsterMapData>
 
 public class MonsterCfg : BaseData<MonsterCfg>
 {
+    public MonsterType MType;
+    public bool IsStop;
     public string MName;
     public string ResPath;
     public int SkillID;

@@ -274,5 +274,9 @@ public virtual void TickAILogic()
             break;
         }
     }
-    
+
+    public virtual bool GetBreak()
+    {
+        return true;
+    }
 }

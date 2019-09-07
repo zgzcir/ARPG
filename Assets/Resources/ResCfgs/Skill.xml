@@ -119,7 +119,7 @@
 		<aniAction>11</aniAction>
 		<isCombo>0</isCombo>
 		<isCollide>1</isCollide>
-		<isBreak>1</isBreak>
+		<isBreak>0</isBreak>
 		<dmgType>1</dmgType>
 		<skillActionLst>2111</skillActionLst>
 		<skillDamageLst>26</skillDamageLst>

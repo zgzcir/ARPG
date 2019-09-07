@@ -108,12 +108,11 @@ public class SkillManager : MonoBehaviour
         else
         {
             target.HP -= damageSum;
-            if (target.EntityState != EntityState.ButyState)
+            if (target.EntityState==EntityState.None&&target.GetBreak())
             {
                 target.Hit();
             }
         }
-
         target.SetHurt(damageSum);
     }
 
@@ -158,8 +157,6 @@ public class SkillManager : MonoBehaviour
             }
         }
     }
-
-
     private void AttackEffect(EntityBase entity, int skillID)
     {
         SkillCfg skillCfg = resSvc.GetSkillCfg(skillID);

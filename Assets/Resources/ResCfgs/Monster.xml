@@ -2,24 +2,28 @@
 <root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<item ID="1001">
 		<mName>铁甲战士</mName>
+		<mType>0</mType>
+		<isStop>1</isStop>
 		<resPath>PrefabNPC/MonsterSoldier_1</resPath>
 		<skillID>201</skillID>
 		<atkDis>2</atkDis>
-		<hp>2000</hp>
+		<hp>20000</hp>
 		<pa>100</pa>
 		<sa>80</sa>
 		<pd>5</pd>
 		<sd>10</sd>
-		<dodge>40</dodge>
+		<dodge>0</dodge>
 		<pierce>5</pierce>
 		<critical>35</critical>
 	</item>
 	<item ID="2001">
 		<mName>地狱魔卫</mName>
+		<mType>2</mType>
+		<isStop>0</isStop>
 		<resPath>PrefabNPC/MonsterBoss_1</resPath>
 		<skillID>301</skillID>
 		<atkDis>4.5</atkDis>
-		<hp>8000</hp>
+		<hp>80000</hp>
 		<pa>250</pa>
 		<sa>180</sa>
 		<pd>55</pd>

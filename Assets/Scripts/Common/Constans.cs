@@ -159,5 +159,11 @@ public enum EntityState
 {
  None,
  ButyState,
-   
+}
+
+public enum MonsterType
+{
+ None,
+ Normal=1,
+ Boss=2
 }

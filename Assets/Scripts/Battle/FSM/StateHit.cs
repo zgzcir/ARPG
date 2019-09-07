@@ -41,7 +41,6 @@ public class StateHit : IState
             }, (int) GetHitLen(entity) * 1000);
         CommonTool.Log("pr Hit");
     }
-
     public void Exit(EntityBase entity, params object[] args)
     {
         CommonTool.Log("ex Hit");

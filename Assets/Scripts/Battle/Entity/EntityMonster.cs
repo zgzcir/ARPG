@@ -109,4 +109,17 @@ public class EntityMonster : EntityBase
         Vector3 self = GetPos();
         return new Vector2(target.x - self.x, target.z - self.z).normalized;
     }
+
+    public override bool GetBreak()
+    {
+        if (MonsterMapData.MCfg.IsStop)
+        {
+            if (CurSkillCfg != null)
+            {
+                return CurSkillCfg.IsBreak;
+            }
+                return MonsterMapData.MCfg.IsStop;
+        }
+        return false;
+    }
 }
