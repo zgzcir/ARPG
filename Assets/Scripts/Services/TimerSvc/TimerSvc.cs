@@ -2,6 +2,7 @@
  using System.Collections;
  using System.Collections.Generic;
  using UnityEngine;
+using UnityEngine.Experimental.PlayerLoop;
 
 public class TimerSvc : BaseSystem
 {
@@ -32,4 +33,9 @@ public class TimerSvc : BaseSystem
         return timer.GetMillisecondsTime();
     }
 
+
+    public void DelTask(int tid)
+    {
+        timer.DeleteTimeTask(tid);
+    }
 }

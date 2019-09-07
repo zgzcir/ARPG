@@ -6,6 +6,18 @@ public class StateHit : IState
 {
     public void Enter(EntityBase entity, params object[] args)
     {
+        entity.currentAniState =AniState.Hit;
+
+        for (int i = 0; i < entity.SKillMoveCbList.Count; i++)
+        {
+            int tid = entity.SKillMoveCbList[i];
+            TimerSvc.Instance.DelTask(tid);
+        }
+        for (int i = 0; i < entity.SKillActionCbList.Count; i++)
+        {
+            int tid = entity.SKillActionCbList[i];
+            TimerSvc.Instance.DelTask(tid);
+        }
         CommonTool.Log("en Hit");
     }
 
@@ -15,17 +27,13 @@ public class StateHit : IState
         {
             entity.CanRlsSkill = false;
         }
-
-
         entity.SetDir(Vector2.zero);
         entity.SetAciton(Constans.ActionHit);
-
         if (entity.EntityType == EntityType.Player)
         {
             AudioSource audioSource = entity.GetAudioSource();
             AudioSvc.Instance.PlayPlayerAudio(audioSource, Constans.PlayerHurtAss);
         }
-
         TimerSvc.Instance.AddTimeTask(tid =>
             {
                 entity.SetAciton(Constans.ActionDefault);

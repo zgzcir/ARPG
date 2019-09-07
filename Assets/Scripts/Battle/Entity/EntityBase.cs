@@ -16,7 +16,9 @@ public abstract class EntityBase
     public bool CanControl = true;
     public bool CanRlsSkill = true;
 
-
+    public List<int> SKillMoveCbList=new List<int>();
+    public List<int> SKillActionCbList=new List<int>();
+    
 
     private BattleProps battleProps;
 
@@ -248,6 +250,29 @@ public virtual void TickAILogic()
     public virtual bool IsInAtkRange()
     {
         return false;
+    }
+
+
+    public void RemoveMoveCB(int tid)
+    {
+        int index = -1;
+        for (int i = 0; i < SKillMoveCbList.Count; i++)
+        {
+            if (SKillMoveCbList[i] == tid)
+                SKillMoveCbList.RemoveAt(i);
+            break;
+        }
+    }
+
+    public void RemoveActionCB(int tid)
+    {
+        int index = -1;
+        for (int i = 0; i < SKillActionCbList.Count; i++)
+        {
+            if (SKillActionCbList[i] == tid)
+                SKillActionCbList.RemoveAt(i);
+            break;
+        }
     }
     
 }

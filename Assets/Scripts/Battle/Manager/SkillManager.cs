@@ -15,6 +15,8 @@ public class SkillManager : MonoBehaviour
 
     public void SkillAttack(EntityBase entity, int skillID)
     {
+        entity.SKillActionCbList.Clear();
+        entity.SKillMoveCbList.Clear();
         AttackDamage(entity, skillID);
         AttackEffect(entity, skillID);
     }
@@ -24,7 +26,7 @@ public class SkillManager : MonoBehaviour
         var monsters = caster.BattleManager.GetEntityMonsters();
         int damage = skillCfg.SkillDamageLst[index];
 
-        if (caster.EntityType==EntityType.Monster)
+        if (caster.EntityType == EntityType.Monster)
         {
             EntityPlayer targetPlayer = caster.BattleManager.EntitySelfplayer;
             if (IsInRange(caster.GetPos(), targetPlayer.GetPos(), sac.Radius) &&
@@ -32,9 +34,8 @@ public class SkillManager : MonoBehaviour
             {
                 CalcDamage(caster, targetPlayer, damage, skillCfg.DmgType);
             }
-
         }
-        else if (caster.EntityType==EntityType.Player)
+        else if (caster.EntityType == EntityType.Player)
         {
             monsters.ForEach(targetMonster =>
             {
@@ -60,11 +61,12 @@ public class SkillManager : MonoBehaviour
                 if (dodgeNum <= target.BattleProps.Dodge)
                 {
                     //     GameRoot.AddTips(target.Controller.name + "闪避了你的攻击"); //todo转移到聊天窗口
-                 //   CommonTool.Log("闪避Rate:" + dodgeNum + "/" + target.BattleProps.Dodge);
-                 if (target.EntityType == EntityType.Player)
-                 {
-                     target.SetDodge();
-                 }
+                    //   CommonTool.Log("闪避Rate:" + dodgeNum + "/" + target.BattleProps.Dodge);
+                    if (target.EntityType == EntityType.Player)
+                    {
+                        target.SetDodge();
+                    }
+
                     return;
                 }
             }
@@ -74,17 +76,17 @@ public class SkillManager : MonoBehaviour
                 int criticalNum = ZCTools.RDInt(1, 100, rd);
                 if (criticalNum <= caster.BattleProps.Critical)
                 {
-                    float criticalIncRate =(1 + ZCTools.RDInt(1, 100, rd) / 100.0f);
-             //       CommonTool.Log("暴击ratr"+criticalIncRate);
-                    damageSum =  (int)(criticalIncRate * damageSum);
+                    float criticalIncRate = (1 + ZCTools.RDInt(1, 100, rd) / 100.0f);
+                    //       CommonTool.Log("暴击ratr"+criticalIncRate);
+                    damageSum = (int) (criticalIncRate * damageSum);
                     target.SetCritical(damageSum);
                 }
             }
             {
                 //穿甲
-                int pd = (int) ((1 - caster.BattleProps.Pierce / 100.0f)*target.BattleProps.PD);
+                int pd = (int) ((1 - caster.BattleProps.Pierce / 100.0f) * target.BattleProps.PD);
                 damageSum -= pd;
-                CommonTool.Log("对"+target.Name+"造成了"+damageSum+"点物理伤害");
+                CommonTool.Log("对" + target.Name + "造成了" + damageSum + "点物理伤害");
             }
         }
         else if (dt == DamageType.AP)
@@ -92,10 +94,12 @@ public class SkillManager : MonoBehaviour
             damageSum += caster.BattleProps.SA;
             damageSum -= target.BattleProps.SD;
         }
+
         if (damageSum <= 0)
         {
             return;
         }
+
         if (target.HP <= damageSum)
         {
             target.HP = 0;
@@ -104,11 +108,12 @@ public class SkillManager : MonoBehaviour
         else
         {
             target.HP -= damageSum;
-            if (target.EntityState!=EntityState.ButyState)
+            if (target.EntityState != EntityState.ButyState)
             {
                 target.Hit();
             }
         }
+
         target.SetHurt(damageSum);
     }
 
@@ -139,7 +144,13 @@ public class SkillManager : MonoBehaviour
             if (sum > 0)
             {
                 var i1 = i;
-                timerSvc.AddTimeTask(tid => { SkillAction(entity, skillCfg, sac, i1); }, sum);
+                int actID =
+                    timerSvc.AddTimeTask(tid =>
+                    {
+                        SkillAction(entity, skillCfg, sac, i1);
+                        entity.RemoveActionCB(tid);
+                    }, sum);
+                entity.SKillActionCbList.Add(actID);
             }
             else
             {
@@ -148,21 +159,19 @@ public class SkillManager : MonoBehaviour
         }
     }
 
-    
+
     private void AttackEffect(EntityBase entity, int skillID)
     {
         SkillCfg skillCfg = resSvc.GetSkillCfg(skillID);
         if (!skillCfg.IsCollide)
         {
-            Physics.IgnoreLayerCollision(9,10);
-            timerSvc.AddTimeTask(tid =>
-            {
-                Physics.IgnoreLayerCollision(9,10,false );
-            }, skillCfg.Duration);
+            Physics.IgnoreLayerCollision(9, 10);
+            timerSvc.AddTimeTask(tid => { Physics.IgnoreLayerCollision(9, 10, false); }, skillCfg.Duration);
         }
-        if (entity.EntityType==EntityType.Player)
+
+        if (entity.EntityType == EntityType.Player)
         {
-            if (entity.GetDirInput()==Vector2.zero)
+            if (entity.GetDirInput() == Vector2.zero)
             {
                 Vector2 dir = entity.CalcTargetDir();
                 if (dir != Vector2.zero)
@@ -172,9 +181,10 @@ public class SkillManager : MonoBehaviour
             }
             else
             {
-                entity.SetAtkRotation(entity.GetDirInput(),true);
+                entity.SetAtkRotation(entity.GetDirInput(), true);
             }
         }
+
         entity.SetAciton(skillCfg.AniAction);
         entity.SetFX(skillCfg.FX, skillCfg.Duration);
         skillCfg.SkillMoveLst.ForEach(sid => { CalcSkillMove(entity, sid); });
@@ -184,8 +194,10 @@ public class SkillManager : MonoBehaviour
         {
             entity.EntityState = EntityState.ButyState;
         }
-        timerSvc.AddTimeTask(tid => entity.Idle(), skillCfg.Duration);//<<
+
+        timerSvc.AddTimeTask(tid => entity.Idle(), skillCfg.Duration); //<<
     }
+
     private void CalcSkillMove(EntityBase entity, int sid)
     {
         int sum = 0;
@@ -195,13 +207,25 @@ public class SkillManager : MonoBehaviour
         sum += sKillMoveCfg.DelayTime;
         if (sum > 0)
         {
-            timerSvc.AddTimeTask(tid => { entity.SetSkillMove(true, speed); }, sum);
+            int moveID = timerSvc.AddTimeTask(tid =>
+            {
+                entity.SetSkillMove(true, speed);
+                entity.RemoveMoveCB(tid);
+            }, sum);
+            entity.SKillMoveCbList.Add(moveID);
         }
         else
         {
             entity.SetSkillMove(true, speed);
         }
+
         sum += sKillMoveCfg.MoveTime;
-        timerSvc.AddTimeTask(tid => { entity.SetSkillMove(false); }, sum);
+        int stopID =
+            timerSvc.AddTimeTask(tid =>
+            {
+                entity.SetSkillMove(false);
+                entity.RemoveMoveCB(tid);
+            }, sum);
+        entity.SKillMoveCbList.Add(stopID);
     }
 }
