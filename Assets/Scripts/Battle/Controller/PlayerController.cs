@@ -11,7 +11,7 @@ public class PlayerController : Controller
     private float targetBlend;
     private float currentBlend;
 
-    public Transform RayCastPoint;
+//    public Transform RayCastPoint;
 
     public GameObject CameraPivot; //改成transform
     public Transform ChaCameraRotatePivot;
@@ -46,10 +46,10 @@ public class PlayerController : Controller
 
     private float margin = 0.1f;
 
-    private bool IsGrounded()
-    {
-        return Physics.Raycast(RayCastPoint.position, -Vector3.up, margin);
-    }
+//    private bool IsGrounded()
+//    {
+//        return Physics.Raycast(RayCastPoint.position, -Vector3.up, margin);
+//    }
 
     private bool isGrounded = true;
 

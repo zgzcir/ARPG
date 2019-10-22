@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Protocol;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Experimental.PlayerLoop;
 using UnityEngine.Serialization;
 
 public class MainCitySys : BaseSystem
@@ -36,7 +35,6 @@ public class MainCitySys : BaseSystem
 
     public void InjectPOSysThings(PlayerController pc, CameraController cc)
     {
-        
         playerController = pc;
         cameraController = cc;
         navMeshAgent = playerController.GetComponent<NavMeshAgent>();
@@ -47,7 +45,7 @@ public class MainCitySys : BaseSystem
     {
         base.InitSys();
         Instance = this;
-        nowOpenCursorPanels=new List<BasePanel>();
+        nowOpenCursorPanels = new List<BasePanel>();
         CommonTool.Log("MainCitySys Connected");
     }
 
@@ -125,13 +123,12 @@ public class MainCitySys : BaseSystem
 
         if (IsInMainCity)
         {
-            
             if (Input.GetKeyDown(PlayerCfg.EntoMission))
             {
                 SwitchMissionSystem();
             }
         }
-    
+
         if (isNavigate)
         {
             DetectIsArriveNavPos();
@@ -162,8 +159,7 @@ public class MainCitySys : BaseSystem
 
 
     public void InitController()
-    {
-        //playerctrl
+    {//playerctrl
         playerController.Init();
         if (Camera.main != null) cameraController = Camera.main.GetComponent<CameraController>();
         cameraController.Target = playerController.CameraPivot.transform;
@@ -181,7 +177,6 @@ public class MainCitySys : BaseSystem
     public void SetPlayerMoveMobile(Vector2 dir)
     {
         playerController.InputDir = dir;
-        
     }
 
     public void SetChaCameraRotate(float rotate)
@@ -267,6 +262,7 @@ public class MainCitySys : BaseSystem
 
     private void SwitchMissionSystem(int force = 0)
     {
+        print("awd");
         if (isNavigate)
         {
             CancelNavGuide();
@@ -282,8 +278,10 @@ public class MainCitySys : BaseSystem
         {
             return;
         }
+
         if (MissionSys.Instance.IsIn)
-        {Debug.Log("Ds");
+        {
+            Debug.Log("Ds");
             EnablePlayerControl();
             ViewSvc.Instance.SetCursorState(false);
             missionSys.ExitMission();
@@ -292,7 +290,7 @@ public class MainCitySys : BaseSystem
         {
             DisablePlayerControl();
             ViewSvc.Instance.SetCursorState(true);
-     
+
             missionSys.EnterMission();
         }
     }
@@ -357,7 +355,7 @@ public class MainCitySys : BaseSystem
         nowOpenCursorPanels.ForEach(p => p.SetPanelState(false));
         IsInMainCity = false;
     }
-    
+
     public void RspStrengthen(GameMsg msg)
     {
         int combatPowerPre = CommonTool.CalcuEvaluation(GameRoot.Instance.PlayerData);

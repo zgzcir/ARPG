@@ -18,28 +18,28 @@ public class NetSvc : MonoBehaviour
         Instance = this;
         client = new PESocket<ClientSession, GameMsg>();
         client.SetLog(true, (msg, level) =>
-            {
-                switch (level)
-                {
-                    case 0:
-                        msg = "log:" + msg;
-                         Debug.Log(msg);
-                        break;
-                    case 1:
-                        msg = "warn:" + msg;
-                        Debug.LogWarning(msg);
-                        break;
-                    case 2:
-                        msg = "error:" + msg;
-                        Debug.LogError(msg);
-                        break;
-                    case 3:
-                        msg = "info:" + msg;
-                        Debug.Log(msg);
-                        break;
-                }
-            }
-        );
+                      {
+                          switch (level)
+                          {
+                              case 0:
+                                  msg = "log:" + msg;
+                                   Debug.Log(msg);
+                                  break;
+                              case 1:
+                                  msg = "warn:" + msg;
+                                  Debug.LogWarning(msg);
+                                  break;
+                              case 2:
+                                  msg = "error:" + msg;
+                                  Debug.LogError(msg);
+                                  break;
+                              case 3:
+                                  msg = "info:" + msg;
+                                  Debug.Log(msg);
+                                  break;
+                          }
+                      }
+                  );
         CommonTool.Log("NetSvc Connected");
         client.StartAsClient(SrvCfg.srvIP, SrvCfg.srvPort);
     }
@@ -83,11 +83,11 @@ public class NetSvc : MonoBehaviour
                     GameRoot.AddTips("该名字已存在");
                     break;
                 case ErrCode.UpdateDbErr:
-                    CommonTool.Log("数据库更新异常", LogType.Error);
+                    CommonTool.Log("数据库更新异常", LogTypes.Error);
                     GameRoot.AddTips("网络不稳定，请重试");
                     break;
                 case ErrCode.ClientDataErr:
-                    CommonTool.Log("客户端数据异常", LogType.Error);
+                    CommonTool.Log("客户端数据异常", LogTypes.Error);
                     GameRoot.AddTips("网络不稳定，请重试");
                     break;
                 case ErrCode.LackCoin:

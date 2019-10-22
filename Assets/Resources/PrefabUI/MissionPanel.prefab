@@ -232,7 +232,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "<size=50>1001</size>\n\u56DB\u98CE\u8BD5\u70BC\u573A"
+  m_Text: '<size=50>1001</size>
+
+    Beach'
 --- !u!1 &3438440455996986964
 GameObject:
   m_ObjectHideFlags: 0

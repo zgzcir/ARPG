@@ -13,12 +13,13 @@
         public const string SkillMoveCfg="ResCfgs/SkillMove";
         public const string SkillActionCfg="ResCfgs/SkillAction";
         public const string MonsterCfg = "ResCfgs/Monster";
+        public const string ConversationCfg = "ResCfgs/Conversations";
 
 
         /// <summary>
         /// player
         /// </summary>
-        public const string PlayerCity = "PrefabPlayer/PlayerCity";
+        public const string PlayerCity = "PrefabPlayer/PlayerBattle";
         public const string PlayerBattle = "PrefabPlayer/PlayerBattle";
     
 

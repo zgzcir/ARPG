@@ -28,6 +28,8 @@ public class ResSvc : MonoBehaviour
         InitSkillCfgDic(PathDefine.SkillCfg);
         InitSkillMoveCfgDic(PathDefine.SkillMoveCfg);
         InitSkillActionCfgDic(PathDefine.SkillActionCfg);
+        
+        InitConversationCfgDic(PathDefine.ConversationCfg);
         CommonTool.Log("ResSvc Connected");
     }
 
@@ -116,7 +118,7 @@ public class ResSvc : MonoBehaviour
         TextAsset xml = Resources.Load<TextAsset>(path);
         if (!xml)
         {
-            CommonTool.Log("xml file:" + path + "not exits", LogType.Error);
+            CommonTool.Log("xml file:" + path + "not exits", LogTypes.Error);
         }
         else
         {
@@ -228,7 +230,7 @@ public class ResSvc : MonoBehaviour
         TextAsset xml = Resources.Load<TextAsset>(path);
         if (!xml)
         {
-            CommonTool.Log("xml file:" + path + "not exits", LogType.Error);
+            CommonTool.Log("xml file:" + path + "not exits", LogTypes.Error);
         }
         else
         {
@@ -293,7 +295,7 @@ public class ResSvc : MonoBehaviour
         TextAsset xml = Resources.Load<TextAsset>(path);
         if (!xml)
         {
-            CommonTool.Log("xml file:" + path + "not exits", LogType.Error);
+            CommonTool.Log("xml file:" + path + "not exits", LogTypes.Error);
         }
         else
         {
@@ -418,7 +420,7 @@ public class ResSvc : MonoBehaviour
         TextAsset xml = Resources.Load<TextAsset>(path);
         if (!xml)
         {
-            CommonTool.Log("xml file:" + path + "not exits", LogType.Error);
+            CommonTool.Log("xml file:" + path + "not exits", LogTypes.Error);
         }
         else
         {
@@ -527,7 +529,7 @@ public class ResSvc : MonoBehaviour
         TextAsset xml = Resources.Load<TextAsset>(path);
         if (!xml)
         {
-            CommonTool.Log("xml file:" + path + "not exits", LogType.Error);
+            CommonTool.Log("xml file:" + path + "not exits", LogTypes.Error);
         }
         else
         {
@@ -650,7 +652,7 @@ public class ResSvc : MonoBehaviour
         TextAsset xml = Resources.Load<TextAsset>(path);
         if (!xml)
         {
-            CommonTool.Log("xml file:" + path + "not exits", LogType.Error);
+            CommonTool.Log("xml file:" + path + "not exits", LogTypes.Error);
         }
         else
         {
@@ -718,7 +720,7 @@ public class ResSvc : MonoBehaviour
         TextAsset xml = Resources.Load<TextAsset>(path);
         if (!xml)
         {
-            CommonTool.Log("xml file:" + path + "not exits", LogType.Error);
+            CommonTool.Log("xml file:" + path + "not exits", LogTypes.Error);
         }
         else
         {
@@ -843,7 +845,7 @@ public class ResSvc : MonoBehaviour
         TextAsset xml = Resources.Load<TextAsset>(path);
         if (!xml)
         {
-            CommonTool.Log("xml file:" + path + "not exits", LogType.Error);
+            CommonTool.Log("xml file:" + path + "not exits", LogTypes.Error);
         }
         else
         {
@@ -909,7 +911,7 @@ public class ResSvc : MonoBehaviour
         TextAsset xml = Resources.Load<TextAsset>(path);
         if (!xml)
         {
-            CommonTool.Log("xml file:" + path + "not exits", LogType.Error);
+            CommonTool.Log("xml file:" + path + "not exits", LogTypes.Error);
         }
         else
         {
@@ -968,6 +970,75 @@ public class ResSvc : MonoBehaviour
 
     #endregion
 
+
+    #region conversation
+    private Dictionary<int,ConversationCfg> ConversationCfgDic=new Dictionary<int, ConversationCfg>();
+
+    public List<string> GetConversationContens(string belong, int step)
+    {
+        List<string> contents=new List<string>();
+        foreach (var cfg in ConversationCfgDic)
+        {
+            if(string.IsNullOrEmpty(cfg.Value.Content))
+                break;
+            if (cfg.Value.Belong.Equals(belong) && cfg.Value.Step.Equals(step))
+            {
+                contents.Add(cfg.Value.Content);
+            }
+        }
+        return contents;
+    }
+    public void InitConversationCfgDic(string path)
+    {
+        TextAsset xml = Resources.Load<TextAsset>(path);
+        if (!xml)
+        {
+            CommonTool.Log("xml file:" + path + "not exits", LogTypes.Error);
+        }
+        else
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xml.text);
+            XmlNodeList nodeLst = doc.SelectSingleNode("root")?.ChildNodes;
+            for (int i = 0; i < nodeLst?.Count; i++)
+            {
+                XmlElement ele = nodeLst[i] as XmlElement;
+                if (ele.GetAttributeNode("ID") == null)
+                {
+                    continue;
+                }
+
+                int id = Convert.ToInt32(ele.GetAttributeNode("ID")?.InnerText);
+                ConversationCfg conversationCfg= new  ConversationCfg()
+                {
+                    ID = id
+                };
+                foreach (XmlElement e in ele.ChildNodes)
+                {
+                    switch (e.Name)
+                    {
+                        case "belong":
+                            conversationCfg.Belong =
+                            e.InnerText;
+                            break;
+                        case "content":
+                            conversationCfg.Content = e.InnerText;
+                            break;
+                        case "step":
+                            conversationCfg.Step= int.Parse(e.InnerText);
+                            break;
+                    }
+                }
+
+                ConversationCfgDic.Add(id, conversationCfg);
+            }
+
+            CommonTool.Log("ConversationCfgDic Done");
+        }
+    }
+
+
+    #endregion
     private void Update()
     {
         if (prgCB != null)

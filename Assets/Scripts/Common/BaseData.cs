@@ -105,6 +105,13 @@ public class SKillMoveCfg : BaseData<SKillMoveCfg>
     public float MoveDis;
 }
 
+public class ConversationCfg : BaseData<ConversationCfg>
+{
+    public string Belong;
+    public string Content;
+    public int Step;
+}
+
 public class BaseData<T>
 {
     public int ID;

@@ -26,7 +26,7 @@ public class StateHit : IState
         {
             TimerSvc.Instance.DelTask(entity.SkillEndCb);
             entity.SkillEndCb = -1;
-        }
+        } 
         if (entity.NextSkillID!=0||entity.ComboQue.Count>0)
         {
             entity.NextSkillID = 0;

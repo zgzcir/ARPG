@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Protocol;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class MainPanel : BasePanel
 
@@ -18,10 +19,17 @@ public class MainPanel : BasePanel
     public Transform expPrgsTrans;
     public Image impPower;
     public Text txtPower;
+    public Text txtConversation;
 
     private Vector2 startPos;
     private Vector2 defaultPos;
     private float pointDis;
+
+
+    private int conversationIndex = 0;
+    private int conversationIndexMax = 0;
+    private List<string> conversations;
+
 
     public override void Init()
     {
@@ -35,6 +43,10 @@ public class MainPanel : BasePanel
         pointDis = Screen.height * 1.0f / Constans.ScreenStandardHeight * Constans.ScreenOPDis;
         defaultPos = imgDirBg.transform.position;
         SetActive(imgDirHandle, false);
+        //todo
+        conversations = resSvc.GetConversationContens("chen", 1);
+        conversationIndexMax = conversations.Count;
+        SetConversation();
         FreshPanel();
     }
 
@@ -45,13 +57,13 @@ public class MainPanel : BasePanel
         float totalHp = 800;
         int nowHp = playerData.HP;
 //        SetText(txtHp, (nowHp / totalHp));
-SetText(txtHp,nowHp+"/"+totalHp);
+        SetText(txtHp, nowHp + "/" + totalHp);
         imgHp.fillAmount = nowHp / totalHp;
         var maxPower = CommonTool.GetPowerLimit(playerData.Level);
         impPower.fillAmount = 1.0f * playerData.Power / maxPower;
         SetText(txtPower, playerData.Power + "/" + maxPower);
         float posX = imgHp.fillAmount * imgHp.GetComponent<RectTransform>().sizeDelta.x;
-     
+
         txtHp.GetComponent<RectTransform>().anchoredPosition = new Vector2(posX, 0);
         SetText(txtLv, "Lv:" + playerData.Level);
         SetText(txtName, playerData.Name);
@@ -104,5 +116,11 @@ SetText(txtHp,nowHp+"/"+totalHp);
             imgDirHandle.transform.position = startPos + clampDir;
             MainCitySys.Instance.SetPlayerMoveMobile(dir);
         });
+    }
+
+    public void SetConversation()
+    {
+        conversationIndex = Random.Range(0, conversationIndexMax );
+        SetText(txtConversation, conversations[conversationIndex]);
     }
 }
