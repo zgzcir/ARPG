@@ -35,6 +35,7 @@ public class MainPanel : BasePanel
     {
         base.Init();
         RegisterUIEvents();
+        transform.Find("lpart/btnConver").GetComponent<Button>().onClick.AddListener(SetConversation);
     }
 
     protected override void OnOpen()
@@ -120,7 +121,14 @@ public class MainPanel : BasePanel
 
     public void SetConversation()
     {
-        conversationIndex = Random.Range(0, conversationIndexMax );
+
+        int curIndex = conversationIndex;
+        do
+        {
+            conversationIndex = Random.Range(0, conversationIndexMax);
+        } 
+        while (curIndex==conversationIndex);
+        
         SetText(txtConversation, conversations[conversationIndex]);
     }
 }
