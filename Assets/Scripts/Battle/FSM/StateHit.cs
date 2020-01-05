@@ -6,7 +6,7 @@ public class StateHit : IState
 {
     public void Enter(EntityBase entity, params object[] args)
     {
-        entity.currentAniState =AniState.Hit;
+        entity.CurrentAniState =AniState.Hit;
 
         entity.SetDir(Vector2.zero);
         entity.SetSkillMove(false);

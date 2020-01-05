@@ -14,6 +14,34 @@ public class BaseSystem : MonoBehaviour
         resSvc = ResSvc.Instance;
         audioSvc = AudioSvc.Instance;
         netSvc = NetSvc.Instance;
-        timerSvc=TimerSvc.Instance;
+        timerSvc = TimerSvc.Instance;
+    }
+
+    protected virtual void UIRegisterSysEvents()
+    {
+    }
+
+    public virtual void SwitchPanel(BasePanel panel, int force = 0)
+    {
+        if (force == 1 && panel.IsOpen)
+        {
+            return;
+        }
+
+        if (force == 2 && !panel.IsOpen)
+        {
+            return;
+        }
+    }
+    protected void BaseSwitchPanel(BasePanel panel)
+    {
+        if (panel.IsOpen)
+        {
+            panel.SetPanelState(false);
+        }
+        else
+        {
+            panel.SetPanelState();
+        }
     }
 }

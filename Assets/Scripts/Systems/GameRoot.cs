@@ -32,7 +32,7 @@ public class GameRoot : MonoBehaviour
 
         LoginSys login = GetComponent<LoginSys>();
         login.InitSys();
-        MainCitySys playerOpratete = GetComponent<MainCitySys>();
+        MainSys playerOpratete = GetComponent<MainSys>();
         playerOpratete.InitSys();
         EntoSceneSys entoScene = GetComponent<EntoSceneSys>();
         entoScene.InitSys();

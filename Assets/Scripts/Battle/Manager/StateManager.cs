@@ -19,13 +19,13 @@ public class StateManager : MonoBehaviour
     
     public void ChangeState(EntityBase entity, AniState targetState,params object[]args)
     {
-        if (entity.currentAniState == targetState) return;
+        if (entity.CurrentAniState == targetState) return;
 
         if (fsm.ContainsKey(targetState))
         {
-            if (entity.currentAniState != AniState.None)
+            if (entity.CurrentAniState != AniState.None)
             {
-                fsm[entity.currentAniState].Exit(entity,args);
+                fsm[entity.CurrentAniState].Exit(entity,args);
             }
             fsm[targetState].Enter(entity,args);
             fsm[targetState].Process(entity,args);

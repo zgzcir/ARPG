@@ -41,7 +41,7 @@ public class NetSvc : MonoBehaviour
                       }
                   );
         CommonTool.Log("NetSvc Connected");
-        client.StartAsClient(SrvCfg.srvIP, SrvCfg.srvPort);
+        client.StartAsClient(SrvCfg.devIP, SrvCfg.srvPort);
     }
 
     public void AddNetMsg(GameMsg msg)
@@ -119,25 +119,25 @@ public class NetSvc : MonoBehaviour
                 LoginSys.Instance.RspReName(msg);
                 break;
             case CMD.RspGuide:
-                MainCitySys.Instance.RspGuide(msg);
+                MainSys.Instance.RspGuide(msg);
                 break;
             case CMD.RspStrengthen:
-                MainCitySys.Instance.RspStrengthen(msg);
+                MainSys.Instance.RspStrengthen(msg);
                 break;
             case CMD.PshChat:
-                MainCitySys.Instance.PshChat(msg);
+                MainSys.Instance.PshChat(msg);
                 break;
             case CMD.RspTranscation:
-                MainCitySys.Instance.RspTranscation(msg);
+                MainSys.Instance.RspTranscation(msg);
                 break;
             case CMD.PshPower:
-                MainCitySys.Instance.PshPower(msg);
+                MainSys.Instance.PshPower(msg);
                 break;
             case CMD.RspTakeTaskReward:
-                MainCitySys.Instance.RspTakeTaskReward(msg);
+                MainSys.Instance.RspTakeTaskReward(msg);
                 break;
             case CMD.PshTaskPrgs:
-                MainCitySys.Instance.PshTaskPrgs(msg);
+                MainSys.Instance.PshTaskPrgs(msg);
                 break;
             case CMD.RspMission:
                 MissionSys.Instance.RspMission(msg);

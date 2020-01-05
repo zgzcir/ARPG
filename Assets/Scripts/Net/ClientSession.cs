@@ -13,7 +13,6 @@ using PENet;
          CommonTool.Log(((CMD) msg.cmd).ToString());
          NetSvc.Instance.AddNetMsg(msg);
      }
- 
      protected override void OnDisConnected()
      {
          GameRoot.AddTips("已断开与服务器的连接");

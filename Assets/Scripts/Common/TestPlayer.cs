@@ -90,9 +90,9 @@ public class TestPlayer : Controller
 
         if (isMove)
         {
-            if (MainCitySys.Instance != null && MainCitySys.Instance.IsNavigate)
+            if (MainSys.Instance != null && MainSys.Instance.IsNavigate)
             {
-                MainCitySys.Instance.CancelNavGuide();
+                MainSys.Instance.CancelNavGuide();
             }
 
             SetBlend(Constans.BlendMove);
@@ -106,7 +106,7 @@ public class TestPlayer : Controller
 
         #endregion
 
-        if (MainCitySys.Instance != null && MainCitySys.Instance.IsNavigate)
+        if (MainSys.Instance != null && MainSys.Instance.IsNavigate)
         {
             SetBlend(Constans.BlendMove);
         }

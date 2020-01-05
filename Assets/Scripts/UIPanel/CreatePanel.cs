@@ -15,8 +15,6 @@ public class CreatePanel : BasePanel
     {
         base.OnOpen();
     }
-
-
     public void ClickBtnRd()
     {
         audioSvc.PlayUIAudio(Constans.UIClickBtn);

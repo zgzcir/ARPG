@@ -110,7 +110,7 @@ EntitySelfplayer.SetCtrl(playerController);
     {
         if (!EntitySelfplayer.CanControl) return;
 
-        if (EntitySelfplayer.currentAniState == AniState.Idle || EntitySelfplayer.currentAniState == AniState.Move)
+        if (EntitySelfplayer.CurrentAniState == AniState.Idle || EntitySelfplayer.CurrentAniState == AniState.Move)
         {
             if (dir == Vector2.zero)
             {
@@ -148,7 +148,7 @@ EntitySelfplayer.SetCtrl(playerController);
     [FormerlySerializedAs("comboIndex")] public int ComboIndex = 0;
     private void ReleaseNormalAtk()
     {//Combo
-        if (EntitySelfplayer.currentAniState == AniState.Attack)
+        if (EntitySelfplayer.CurrentAniState == AniState.Attack)
         {
             double nowAtkTime = TimerSvc.Instance.GetNowTime();
             if (nowAtkTime - LastAtkTime < Constans.ComboSpace&&LastAtkTime!=0)
@@ -166,7 +166,7 @@ EntitySelfplayer.SetCtrl(playerController);
                 }
             }
         }
-        else if(EntitySelfplayer.currentAniState == AniState.Idle||EntitySelfplayer.currentAniState == AniState.Move)
+        else if(EntitySelfplayer.CurrentAniState == AniState.Idle||EntitySelfplayer.CurrentAniState == AniState.Move)
         {
             ComboIndex = 0;
             LastAtkTime=TimerSvc.Instance.GetNowTime();

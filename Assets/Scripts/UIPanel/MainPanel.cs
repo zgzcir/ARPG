@@ -17,9 +17,15 @@ public class MainPanel : BasePanel
     public Text txtHp;
     public Text txtName;
     public Transform expPrgsTrans;
-    public Image impPower;
+    public Image imgPower;
     public Text txtPower;
+    public Text txtMaxPower;
     public Text txtConversation;
+
+    public Button btnFight;
+    public Button btnChainfo;
+    public Button btnTask;
+    public Button btnStrenthen;
 
     private Vector2 startPos;
     private Vector2 defaultPos;
@@ -61,8 +67,9 @@ public class MainPanel : BasePanel
         SetText(txtHp, nowHp + "/" + totalHp);
         imgHp.fillAmount = nowHp / totalHp;
         var maxPower = CommonTool.GetPowerLimit(playerData.Level);
-        impPower.fillAmount = 1.0f * playerData.Power / maxPower;
-        SetText(txtPower, playerData.Power + "/" + maxPower);
+        imgPower.fillAmount = 1.0f * playerData.Power / maxPower;
+        SetText(txtMaxPower, "/" + maxPower);
+        SetText(txtPower, playerData.Power);
         float posX = imgHp.fillAmount * imgHp.GetComponent<RectTransform>().sizeDelta.x;
 
         txtHp.GetComponent<RectTransform>().anchoredPosition = new Vector2(posX, 0);
@@ -107,7 +114,7 @@ public class MainPanel : BasePanel
             imgDirBg.transform.position = defaultPos;
             SetActive(imgDirHandle, false);
             imgDirHandle.transform.localPosition = Vector2.zero;
-            MainCitySys.Instance.SetPlayerMoveMobile(Vector2.zero);
+            MainSys.Instance.SetPlayerMoveMobile(Vector2.zero);
         });
         OnClickDrag(imgTouch.gameObject, eventData =>
         {
@@ -115,20 +122,18 @@ public class MainPanel : BasePanel
             float len = dir.magnitude;
             Vector2 clampDir = Vector2.ClampMagnitude(dir, pointDis);
             imgDirHandle.transform.position = startPos + clampDir;
-            MainCitySys.Instance.SetPlayerMoveMobile(dir);
+            MainSys.Instance.SetPlayerMoveMobile(dir);
         });
     }
 
     public void SetConversation()
     {
-
         int curIndex = conversationIndex;
         do
         {
             conversationIndex = Random.Range(0, conversationIndexMax);
-        } 
-        while (curIndex==conversationIndex);
-        
+        } while (curIndex == conversationIndex);
+
         SetText(txtConversation, conversations[conversationIndex]);
     }
 }

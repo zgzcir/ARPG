@@ -3,7 +3,7 @@
     {
         public void Enter(EntityBase entity, params object[] args)
         {
-            entity.currentAniState = AniState.Born;
+            entity.CurrentAniState = AniState.Born;
             CommonTool.Log("en Born"+entity.EntityType);
 
         }
