@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using LightFramework.UI;
 using Protocol;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class MainPanel : BasePanel
+public class MainPanel : Window
 
 {
     public Image imgTouch;
