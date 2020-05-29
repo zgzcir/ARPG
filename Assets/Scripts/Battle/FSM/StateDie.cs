@@ -4,7 +4,7 @@ public class StateDie:IState
     {
         public void Enter(EntityBase entity, params object[] args)
         {
-            entity.currentAniState = AniState.Die;
+            entity.CurrentAniState = AniState.Die;
             CommonTool.Log("en Die"+entity.EntityType);
 
             

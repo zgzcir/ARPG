@@ -2,7 +2,7 @@
 {
     public void Enter(EntityBase entity, params object[] args)
     {
-        entity.currentAniState = AniState.Attack;
+        entity.CurrentAniState = AniState.Attack;
         entity.CurSkillCfg = ResSvc.Instance.GetSkillCfg((int) args[0]);
        
         CommonTool.Log("en atk");

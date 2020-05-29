@@ -5,7 +5,7 @@ public class StateIdle : IState
      public void Enter(EntityBase entity, params object[] args)
      {
          CommonTool.Log("en idle"+entity.EntityType);
-         entity.currentAniState = AniState.Idle;
+         entity.CurrentAniState = AniState.Idle;
          entity.SetDir(Vector2.zero);
          entity.SkillEndCb = -1;
      }

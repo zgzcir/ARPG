@@ -32,7 +32,6 @@ public class BasePanel : MonoBehaviour
             OnClose();
         }
     }
-
     public virtual void Init()
     {
         resSvc = ResSvc.Instance;

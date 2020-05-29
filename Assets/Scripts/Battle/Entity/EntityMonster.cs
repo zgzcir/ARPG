@@ -41,7 +41,7 @@ public class EntityMonster : EntityBase
             Idle();
             return;
         }
-        if (currentAniState == AniState.Idle || currentAniState == AniState.Move)
+        if (CurrentAniState == AniState.Idle || CurrentAniState == AniState.Move)
         {
             float deltaTime = Time.deltaTime;
             checkCount += deltaTime;
@@ -77,7 +77,7 @@ public class EntityMonster : EntityBase
     public override bool IsInAtkRange()
     {
         EntityPlayer entityPlayer = BattleManager.EntitySelfplayer;
-        if (entityPlayer == null || entityPlayer.currentAniState == AniState.Die)
+        if (entityPlayer == null || entityPlayer.CurrentAniState == AniState.Die)
         {
             runAi = false;
             return false;
@@ -99,7 +99,7 @@ public class EntityMonster : EntityBase
     public override Vector2 CalcTargetDir()
     {
         EntityPlayer entityPlayer = BattleManager.EntitySelfplayer;
-        if (entityPlayer == null || entityPlayer.currentAniState == AniState.Die)
+        if (entityPlayer == null || entityPlayer.CurrentAniState == AniState.Die)
         {
             runAi = false;
             return Vector2.zero;

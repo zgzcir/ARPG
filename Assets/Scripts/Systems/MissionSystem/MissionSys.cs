@@ -19,14 +19,19 @@ public class MissionSys : BaseSystem
 
     public void EnterMission()
     {
-        
         IsIn = true;
         OpenMissionPanel();
     }
 
     public void OpenMissionPanel()
     {
-        MissionPanel.SetPanelState();
+        MissionPanel.SetPanelState(true);
+    }
+
+    public override void SwitchPanel(BasePanel panel, int force = 0)
+    {
+        base.SwitchPanel(panel, force);
+        BaseSwitchPanel(panel);
     }
 
     public void ExitMission()
@@ -41,7 +46,7 @@ public class MissionSys : BaseSystem
         GameRoot.Instance.SetPlayerDataByMissionStart(data);
 
         ExitMission();
-        MainCitySys.Instance.ExitMainCity();
+        MainSys.Instance.ExitMainCity();
         BattleSys.Instance.EntoBattle(data.MID);
     }
 }

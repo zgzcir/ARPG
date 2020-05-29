@@ -49,18 +49,17 @@ public class ResSvc : MonoBehaviour
     public void AsyncLoadScene(string sceneName, Action loaded)
     {
         GameRoot.Instance.LoadingPanel.SetPanelState();
-        AsyncOperation sceneAsync = SceneManager.LoadSceneAsync(sceneName);
+        AsyncOperation sceneAsync = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName);
         prgCB = () =>
         {
             float val = sceneAsync.progress;
-            GameRoot.Instance.LoadingPanel.SerProgress(val);
+            GameRoot.Instance.LoadingPanel.SetProgress(val);
             if (val == 1)
             {
                 if (loaded != null)
                 {
                     loaded();
                 }
-
                 prgCB = null;
                 sceneAsync = null;
                 GameRoot.Instance.LoadingPanel.SetPanelState(false);

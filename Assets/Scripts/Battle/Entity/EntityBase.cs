@@ -8,7 +8,7 @@ public abstract class EntityBase
     public EntityType EntityType = EntityType.None;
 
 
-    public AniState currentAniState = AniState.None;
+    public AniState CurrentAniState = AniState.None;
     public StateManager StateManager;
     protected Controller Controller;
     public SkillManager SkillManager;

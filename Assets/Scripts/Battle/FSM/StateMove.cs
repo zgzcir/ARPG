@@ -4,7 +4,7 @@
      {
          CommonTool.Log("en move");
          
-         entity.currentAniState = AniState.Move;
+         entity.CurrentAniState = AniState.Move;
 
 //         if (entity.NextSkillID != 0 || entity.ComboQue.Count > 0)
 //         {
